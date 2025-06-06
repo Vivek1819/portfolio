@@ -2,6 +2,7 @@ import { useState, useRef } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import Greeting from './components/Greeting'
+import SocialSidebar from './components/SocialSidebar'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -40,30 +41,10 @@ function App() {
           transitionTimingFunction: 'cubic-bezier(0.33, 1, 0.68, 1)' 
         }}
       >
-        <div>
-          <a href="https://vite.dev" target="_blank" className="inline-block">
-            <img src={viteLogo} className="h-24 p-6 hover:drop-shadow-[0_0_2em_rgba(100,108,255,0.67)] transition-all duration-300" alt="Vite logo" />
-          </a>
-          <a href="https://react.dev" target="_blank" className="inline-block">
-            <img src={reactLogo} className="h-24 p-6 hover:drop-shadow-[0_0_2em_rgba(97,218,251,0.67)] motion-safe:animate-[spin_20s_linear_infinite] transition-all duration-300" alt="React logo" />
-          </a>
-        </div>
-        <h1 className="text-5xl font-bold leading-tight mt-6">Vite + React</h1>
-        <div className="p-8">
-          <button 
-            onClick={() => setCount((count) => count + 1)}
-            className="rounded-lg border border-transparent px-5 py-2.5 text-base font-medium bg-gray-800 hover:border-indigo-400 transition-colors duration-300"
-          >
-            count is {count}
-          </button>
-          <p className="mt-4">
-            Edit <code className="font-mono bg-gray-800 p-1 rounded">src/App.jsx</code> and save to test HMR
-          </p>
-        </div>
-        <p className="text-gray-400">
-          Click on the Vite and React logos to learn more
-        </p>
+        
+        
       </div>
+      <SocialSidebar />
     </>
   )
 }

@@ -13,7 +13,7 @@ const firstWordAnimation = `
 }
 `;
 
-const MultilingualGreeting = ({ onComplete }) => {
+const Greeting = ({ onComplete }) => {
   const [currentIndex, setCurrentIndex] = useState(-1);
   const [isVisible, setIsVisible] = useState(true);
 
@@ -93,4 +93,4 @@ const MultilingualGreeting = ({ onComplete }) => {
   );
 };
 
-export default MultilingualGreeting;
+export default Greeting;
