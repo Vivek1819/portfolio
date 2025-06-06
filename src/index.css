@@ -1,5 +1,19 @@
 @import "tailwindcss";
 
+/* Custom shake animation */
+@keyframes navShake {
+  0% { transform: translate(0, 0); }
+  20% { transform: translate(-2px, -1px); }
+  40% { transform: translate(2px, 1px); }
+  60% { transform: translate(-1px, 0px); }
+  80% { transform: translate(1px, -1px); }
+  100% { transform: translate(0, 0); }
+}
+
+.nav-shake:hover {
+  animation: navShake 0.7s ease-in-out;
+}
+
 /* Import Neue Montreal font */
 @font-face {
   font-family: 'Neue Montreal';
@@ -72,7 +86,7 @@ html, body {
 }
 
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Neue Montreal', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
