@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import Greeting from './components/Greeting'
 import SocialSidebar from './components/SocialSidebar'
 import Navbar from './components/Navbar'
+import StarBackground from './components/StarBackground'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -27,9 +28,9 @@ function App() {
         mainContentRef.current.style.transform = 'translateY(0)'
       }, 100)    }
   }
-    return (
+  return (
     <>
-      
+      <StarBackground />
       {showGreeting && <Greeting onComplete={handleGreetingComplete} />}
         <div className={`fixed top-0 left-0 right-0 w-full px-12 py-6 z-50 transition-opacity duration-500 ${!showGreeting ? 'opacity-100' : 'opacity-0'}`}>
         <Navbar />
