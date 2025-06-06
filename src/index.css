@@ -1,6 +1,15 @@
 @import "tailwindcss";
 
-/* Custom shake animation */
+.text-custom-10xl {
+  font-size: 4.5rem !important;
+  line-height: 1;
+}
+
+.text-custom-12xl {
+  font-size: 10rem !important;
+  line-height: 1;
+}
+
 @keyframes navShake {
   0% { transform: translate(0, 0); }
   20% { transform: translate(-2px, -1px); }
@@ -14,6 +23,17 @@
   animation: navShake 0.7s ease-in-out;
 }
 
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.cursor {
+  animation: cursorBlink 1s infinite;
+  display: inline-block;
+  margin-left: 2px;
+}
+
 /* Import Neue Montreal font */
 @font-face {
   font-family: 'Neue Montreal';
@@ -21,6 +41,24 @@
   font-weight: normal;
   font-style: normal;
   font-display: swap;
+}
+
+/* Custom classes for custom fonts */
+.font-oooh-baby {
+  font-family: 'Oooh Baby', cursive;
+}
+
+.font-qwitcher {
+  font-family: 'Qwitcher Grypen', cursive;
+}
+
+.font-qwitcher-bold {
+  font-family: 'Qwitcher Grypen', cursive;
+  font-weight: 700;
+}
+
+.font-italiana {
+  font-family: 'Italiana', serif;
 }
 
 /* Add required keyframe animations for the greeting component */
@@ -80,7 +118,6 @@
   }
 }
 
-/* Add smooth scrolling */
 html, body {
   scroll-behavior: smooth;
 }
@@ -93,6 +130,9 @@ html, body {
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
+  
+  --navbar-height: 80px;
+  --sidebar-width: 100px;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

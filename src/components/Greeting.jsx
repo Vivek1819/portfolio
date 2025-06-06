@@ -24,6 +24,7 @@ const Greeting = ({ onComplete }) => {
     { text: "Ciao", id: 4 },
     { text: "你好", id: 5 },
     { text: "Olá", id: 6 },
+    { text: "Guten tag", id: 10},
     { text: "こんにちは", id: 7 },
     { text: "Hola", id: 8 },
   ];

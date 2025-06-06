@@ -217,7 +217,7 @@ const StarBackground = () => {
         } else {
           drawStar(ctx, star.x, star.y, star.size * 2);
         }
-      });      // No comet trail rendering
+      });      
       
       ctx.globalAlpha = 1;
       requestAnimationFrame(animate);
@@ -248,7 +248,7 @@ const StarBackground = () => {
       className="fixed top-0 left-0 w-full h-full z-0"
       style={{
         background: "linear-gradient(to bottom, #050505, #0c0c0c 40%, #111111)",
-        pointerEvents: "auto"
+        pointerEvents: "none"
       }}
     />
   );

@@ -17,7 +17,7 @@ const links = [
 ];
 
 const SocialSidebar = () => (
-  <div className="flex flex-col gap-7 mb-8 mr-8 items-center z-[100]">
+  <div className="flex flex-col gap-7 items-center z-[100] pointer-events-auto relative">
     {links.map((link) => (
       <div className="w-7 h-7 relative group" key={link.label}>
         <a 

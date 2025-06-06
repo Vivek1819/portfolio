@@ -2,15 +2,15 @@ import React from "react";
 
 const Navbar = () => {
   return (
-    <nav className="w-full flex items-center py-4">
+    <nav className="w-full flex items-center py-4 relative z-50 pointer-events-auto">
       <a
         href="/"
         className="text-xl font-semibold mr-auto !text-white hover:opacity-80 transition-opacity"
       >
         Vivek
-      </a>{" "}
+      </a>
       <div className="flex gap-8 mr-10 text-lg">
-        {" "}
+        
         <a
           href="#"
           className="!text-white transition-colors relative group px-2 hover:animate-shake nav-shake"
