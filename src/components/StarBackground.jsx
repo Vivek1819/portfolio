@@ -8,10 +8,9 @@ const StarBackground = () => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
     const handleResize = () => {
+      // Always cover the full viewport
       canvas.width = window.innerWidth;
-      const parent = canvas.parentElement;
-      canvas.height = parent ? parent.offsetHeight : window.innerHeight;
-
+      canvas.height = window.innerHeight;
       drawNebulaEffect(ctx, canvas.width, canvas.height);
     };
 
@@ -246,10 +245,17 @@ const StarBackground = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 w-full h-full z-0"
+      className="fixed top-0 left-0 w-screen h-screen z-0"
       style={{
         background: "linear-gradient(to bottom, #050505, #0c0c0c 40%, #111111)",
         pointerEvents: "none",
+        width: "100vw",
+        height: "100vh",
+        minHeight: 0,
+        minWidth: 0,
+        maxWidth: "100vw",
+        maxHeight: "100vh",
+        display: "block",
       }}
     />
   );
