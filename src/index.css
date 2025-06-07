@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+html {
+  scroll-behavior: smooth;
+}
+
 .text-custom-10xl {
   font-size: 4.5rem !important;
   line-height: 1;
@@ -27,9 +31,34 @@
   animation: navShake 0.7s ease-in-out;
 }
 
-/* Cosmic glow effect for highlighted text */
-.glow {
-  text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.icon-container {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Add staggered delays for natural floating effect */
+.icon-container:nth-child(2n) {
+  animation-delay: 0.5s;
+}
+
+.icon-container:nth-child(3n) {
+  animation-delay: 1s;
+}
+
+.icon-container:nth-child(4n) {
+  animation-delay: 1.5s;
+}
+
+.icon-container:nth-child(5n) {
+  animation-delay: 2s;
 }
 
 @keyframes cursorBlink {
@@ -125,10 +154,6 @@
   to {
     transform: rotate(360deg);
   }
-}
-
-html, body {
-  scroll-behavior: smooth;
 }
 
 :root {

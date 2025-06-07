@@ -9,7 +9,7 @@ const SubtleSpaceBackground = () => {
     const ctx = canvas.getContext("2d");
 
     const generateStars = () => {
-      const starCount = 500;
+      const starCount = 3000;
       const stars = [];
       for (let i = 0; i < starCount; i++) {
         stars.push({

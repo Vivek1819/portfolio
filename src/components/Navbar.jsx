@@ -10,9 +10,8 @@ const Navbar = () => {
         <img src="/logo.png" className="w-14 ml-10" />
       </a>
       <div className="flex gap-8 mr-10 text-xl">
-        {" "}
-        <a
-          href="#"
+        {" "}        <a
+          href="#about"
           className="!text-white transition-colors relative group px-2 nav-shake"
         >
           About
