@@ -13,7 +13,7 @@ const About = () => {
           <span className="bg-gradient-to-r from-cyan-300 via-blue-400 to-fuchsia-400 bg-clip-text text-transparent animate-gradient-x">
             About Me
           </span>
-          <span className="absolute left-1/2 -translate-x-1/2 bottom-0 w-2/3 h-1 bg-gradient-to-r from-cyan-400 via-blue-400 to-fuchsia-400 rounded-full blur-sm opacity-20" />
+          <span className="absolute left-1/2 -translate-x-1/2 bottom-0 w-2/3 h-1 bg-gradient-to-r from-cyan-400 via-blue-400 to-fuchsia-400 rounded-full blur-sm opacity-30" />
         </h1>{" "}
       </div>
       <div className="max-w-4xl mx-auto mb-16 text-center">
@@ -43,39 +43,42 @@ const About = () => {
           </p>
         </div>{" "}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-4xl mx-auto">
-          <div className="relative flex flex-col items-center text-center rounded-2xl bg-gradient-to-t from-black/80 via-cyan-800/30 to-black/80 border border-cyan-400/10 shadow-xl p-8 overflow-hidden group hover:scale-105 hover:shadow-cyan-400/30 transition-transform duration-300">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-24 bg-cyan-300/20 rounded-full blur-2xl group-hover:scale-110 transition-transform duration-300" />
-            <div className="text-5xl mb-2 z-10 transition-transform duration-300 group-hover:scale-125 group-hover:drop-shadow-[0_4px_24px_rgba(34,211,238,0.7)]">
+          {/* Student Card */}
+          <div className="relative flex flex-col items-center text-center rounded-3xl p-8 overflow-hidden group hover:scale-105 hover:shadow-cyan-300/30 transition-transform duration-300">
+            <div className="absolute top-4 left-1/2 -translate-x-1/2 w-28 h-28 bg-cyan-300/15 rounded-full blur-2xl group-hover:scale-110 transition-transform duration-300" />
+            <div className="text-6xl mb-3 z-10 transition-transform duration-300 group-hover:scale-125 group-hover:drop-shadow-[0_6px_32px_rgba(34,211,238,0.7)]">
               🎓
             </div>
-            <div className="text-cyan-100 font-bold text-lg mb-1 z-10 tracking-wide transition-colors duration-300 group-hover:text-cyan-300 group-hover:drop-shadow-[0_2px_12px_rgba(34,211,238,0.7)]">
+            <div className="text-cyan-100 font-extrabold text-xl mb-1 z-10 tracking-wide transition-colors duration-300 group-hover:text-cyan-300 group-hover:drop-shadow-[0_2px_16px_rgba(34,211,238,0.7)]">
               Student
             </div>
-            <div className="text-gray-300 text-md z-10 transition-colors duration-300 group-hover:text-cyan-100">
+            <div className="text-gray-200 text-base z-10 transition-colors duration-300 group-hover:text-cyan-100">
               IIIT Gwalior '26
             </div>
           </div>
-          <div className="relative flex flex-col items-center text-center rounded-2xl bg-gradient-to-t from-black/80 via-pink-800/30 to-black/80 border border-pink-400/10 shadow-xl p-8 overflow-hidden group hover:scale-105 hover:shadow-pink-400/30 transition-transform duration-300">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-24 bg-pink-300/20 rounded-full blur-2xl group-hover:scale-110 transition-transform duration-300" />
-            <div className="text-5xl mb-2 z-10 transition-transform duration-300 group-hover:scale-125 group-hover:drop-shadow-[0_4px_24px_rgba(244,114,182,0.7)]">
+          {/* Developer Card */}
+          <div className="relative flex flex-col items-center text-center rounded-3xl p-8 overflow-hidden group hover:scale-105 transition-transform duration-300">
+            <div className="absolute top-4 left-1/2 -translate-x-1/2 w-28 h-28 bg-pink-300/15 rounded-full blur-2xl group-hover:scale-110 transition-transform duration-300" />
+            <div className="text-6xl mb-3 z-10 transition-transform duration-300 group-hover:scale-125 group-hover:drop-shadow-[0_6px_32px_rgba(244,114,182,0.7)]">
               💻
             </div>
-            <div className="text-pink-100 font-bold text-lg mb-1 z-10 tracking-wide transition-colors duration-300 group-hover:text-pink-300 group-hover:drop-shadow-[0_2px_12px_rgba(244,114,182,0.7)]">
+            <div className="text-pink-100 font-extrabold text-xl mb-1 z-10 tracking-wide transition-colors duration-300 group-hover:text-pink-300 group-hover:drop-shadow-[0_2px_16px_rgba(244,114,182,0.7)]">
               Developer
             </div>
-            <div className="text-gray-300 text-md z-10 transition-colors duration-300 group-hover:text-pink-100">
+            <div className="text-gray-200 text-base z-10 transition-colors duration-300 group-hover:text-pink-100">
               Full Stack
             </div>
           </div>
-          <div className="relative flex flex-col items-center text-center rounded-2xl bg-gradient-to-t from-black/80 via-blue-800/30 to-black/80 border border-blue-400/10 shadow-xl p-8 overflow-hidden group hover:scale-105 hover:shadow-blue-400/30 transition-transform duration-300">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-24 bg-blue-300/20 rounded-full blur-2xl group-hover:scale-110 transition-transform duration-300" />
-            <div className="text-5xl mb-2 z-10 transition-transform duration-300 group-hover:scale-125 group-hover:drop-shadow-[0_4px_24px_rgba(96,165,250,0.7)]">
+          {/* Problem Solver Card */}
+          <div className="relative flex flex-col items-center text-center rounded-3xl p-8 overflow-hidden group hover:scale-105 hover:shadow-blue-400/30 transition-transform duration-300">
+            <div className="absolute top-4 left-1/2 -translate-x-1/2 w-28 h-28 bg-blue-300/15 rounded-full blur-2xl group-hover:scale-110 transition-transform duration-300" />
+            <div className="text-6xl mb-3 z-10 transition-transform duration-300 group-hover:scale-125 group-hover:drop-shadow-[0_6px_32px_rgba(96,165,250,0.7)]">
               🏆
             </div>
-            <div className="text-blue-100 font-bold text-lg mb-1 z-10 tracking-wide transition-colors duration-300 group-hover:text-blue-300 group-hover:drop-shadow-[0_2px_12px_rgba(96,165,250,0.7)]">
+            <div className="text-blue-100 font-extrabold text-xl mb-1 z-10 tracking-wide transition-colors duration-500 group-hover:text-blue-300 group-hover:drop-shadow-[0_2px_16px_rgba(96,165,250,0.7)]">
               Problem Solver
             </div>
-            <div className="text-gray-300 text-md z-10 transition-colors duration-300 group-hover:text-blue-100">
+            <div className="text-gray-200 text-base z-10 transition-colors duration-300 group-hover:text-blue-200">
               DSA & CP
             </div>
           </div>
