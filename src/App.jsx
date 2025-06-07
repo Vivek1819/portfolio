@@ -5,6 +5,9 @@ import Navbar from "./components/Navbar";
 import SubtleSpaceBackground from "./components/SubtleSpaceBackground";
 import Hero from "./components/Hero";
 import About from "./components/About";
+import Work from "./components/Work";
+import { motion } from "framer-motion";
+import TechStack from "./components/TechStack";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -27,26 +30,68 @@ function App() {
         mainContentRef.current.style.transform = "translateY(0)";
       }, 100);
     }
-  };  return (
+  };
+  return (
     <>
       <SubtleSpaceBackground />
-      {showGreeting && <Greeting onComplete={handleGreetingComplete} />}      <div
+      {showGreeting && <Greeting onComplete={handleGreetingComplete} />}{" "}
+      <div
         className={`fixed top-5 left-2 right-0 w-full px-12 py-4 z-50 transition-opacity duration-500 ${
           !showGreeting ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
       >
         <Navbar />
-      </div><div
+      </div>
+      <div
         ref={mainContentRef}
-        className={`w-full transition-opacity duration-500 ${
+        className={`w-screen flex flex-col items-center justify-center transition-opacity duration-500 ${
           !showGreeting ? "opacity-100" : "opacity-0"
         }`}
         style={{ marginRight: "calc(var(--sidebar-width, 100px))" }}
       >
-        <Hero />
-        <About />
+        <motion.div
+          key={showGreeting ? "greeting" : "hero"}
+          initial={showGreeting ? false : { opacity: 0, y: 40 }}
+          animate={showGreeting ? false : { opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 40 }}
+          transition={{
+            type: "spring",
+            stiffness: 60,
+            damping: 18,
+            duration: 1,
+          }}
+          style={{ width: "100%" }}
+        >
+          <Hero />
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.2 }}
+          style={{ width: "100%" }}
+        >
+          <About />
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8, y: 40 }}
+          whileInView={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: [0.6, -0.05, 0.01, 0.99] }}
+          viewport={{ once: true, amount: 0.2 }}
+          style={{ width: "100%" }}
+        >
+          <TechStack />
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, x: 50, scale: 0.95 }}
+          whileInView={{ opacity: 1, x: 0, scale: 1 }}
+          transition={{ type: "spring", stiffness: 70, damping: 14 }}
+          viewport={{ once: true, amount: 0.2 }}
+          style={{ width: "100%" }}
+        >
+          <Work />
+        </motion.div>
       </div>
-
       <div
         className={`fixed bottom-0 right-0 px-8 transition-all duration-700 ease-out z-50 pointer-events-auto
         ${

@@ -245,11 +245,11 @@ const StarBackground = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed top-0 left-0 w-screen h-screen z-0"
+      className="fixed top-0 left-0 w-full h-screen z-0"
       style={{
         background: "linear-gradient(to bottom, #050505, #0c0c0c 40%, #111111)",
         pointerEvents: "none",
-        width: "100vw",
+        width: "100%",
         height: "100vh",
         minHeight: 0,
         minWidth: 0,

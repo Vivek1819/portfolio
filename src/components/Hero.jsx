@@ -41,14 +41,15 @@ const Hero = () => {
     );
 
     return () => clearTimeout(timer);
-  }, [text, isDeleting, loopNum, roles, period]);  return (
+  }, [text, isDeleting, loopNum, roles, period]);
+  return (
     <div className="h-screen w-full flex justify-around items-center z-20 relative pt-64 overflow-hidden">
-      <div className="absolute inset-0 w-screen h-full z-0" style={{ left: "calc(-1 * (100vw - 100%)/2)" }}>
+      <div className="absolute inset-0 w-full h-full z-0">
         <StarBackground />
       </div>
-      <div className="container mx-auto px-8 flex items-center justify-around relative z-30">
+      <div className="w-full px-8 flex items-center justify-around relative z-30">
         <div className="ml-20 text-left mb-20 flex flex-col justify-center">
-          <h2 className="text-2xl py-3 tracking-wide text-white">
+          <h2 className="text-2xl tracking-wide text-white">
             Hello, I am
           </h2>
           <h1
@@ -58,8 +59,11 @@ const Hero = () => {
             Vivek Hipparkar
           </h1>
           <div className="min-h-16 mb-2">
-            <span className="text-3xl text-gray-400 font-semibold">{text}</span>
-            <span className="text-3xl cursor text-white">|</span>          </div>{" "}
+            <span className="text-3xl text-gray-400 font-semibold">
+              {text}
+            </span>
+            <span className="text-3xl cursor text-white">|</span>
+          </div>{" "}
         </div>
         <div className="relative z-30 flex items-end justify-center">
           <img src="/ghibli-1.png" className="w-11/20 pb-40" />

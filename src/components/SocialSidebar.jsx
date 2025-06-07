@@ -17,25 +17,25 @@ const links = [
 ];
 
 const SocialSidebar = () => (
-  <div className="flex flex-col gap-7 items-center z-[100] pointer-events-auto relative">
+  <div className="flex flex-col gap-9 items-center z-[100] pointer-events-auto relative">
     {links.map((link) => (
-      <div className="w-7 h-7 relative group" key={link.label}>
-        <a 
-          href={link.href} 
-          target="_blank" 
+      <div className="w-8 h-8 relative group" key={link.label}>
+        <a
+          href={link.href}
+          target="_blank"
           rel="noopener noreferrer"
           className="block transition-transform duration-300 ease-out transform hover:scale-125 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.6)]"
           aria-label={link.label}
         >
-          <img 
-            src={link.img} 
-            alt={link.label} 
+          <img
+            src={link.img}
+            alt={link.label}
             className="w-full h-full transform transition-all duration-300"
           />
         </a>
       </div>
     ))}
-    <div className="w-0.5 h-28 bg-white opacity-70"></div>
+    <div className="w-0.75 h-30 bg-white opacity-70"></div>
   </div>
 );
 
