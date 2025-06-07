@@ -7,10 +7,10 @@ const StarBackground = () => {
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
-
     const handleResize = () => {
       canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const parent = canvas.parentElement;
+      canvas.height = parent ? parent.offsetHeight : window.innerHeight;
 
       drawNebulaEffect(ctx, canvas.width, canvas.height);
     };
@@ -28,7 +28,8 @@ const StarBackground = () => {
         width * 0.3,
         height * 0.4,
         height * 0.7
-      );      gradient1.addColorStop(0, "rgba(50, 50, 50, 0.02)");
+      );
+      gradient1.addColorStop(0, "rgba(50, 50, 50, 0.02)");
       gradient1.addColorStop(0.5, "rgba(40, 40, 40, 0.01)");
       gradient1.addColorStop(1, "rgba(30, 30, 30, 0)");
 
@@ -52,40 +53,39 @@ const StarBackground = () => {
       const nebulaImage = new Image();
       nebulaImage.src = nebulaCanvas.toDataURL();
       return nebulaImage;
-    };    let lastMoveTime = 0;
+    };
+    let lastMoveTime = 0;
     const moveThrottle = 20;
-    
+
     const handleMouseMove = (event) => {
       const now = Date.now();
-      
-      // Throttle regular star interaction updates
       if (now - lastMoveTime > moveThrottle) {
         lastMoveTime = now;
         setMousePosition({ x: event.clientX, y: event.clientY });
         setIsMouseMoving(true);
-        
+
         clearTimeout(window.mouseTimeout);
         window.mouseTimeout = setTimeout(() => {
           setIsMouseMoving(false);
         }, 150);
       }
-    };    window.addEventListener("resize", handleResize);
+    };
+    window.addEventListener("resize", handleResize);
     window.addEventListener("mousemove", handleMouseMove);
     handleResize();
 
-    const nebulaImage = drawNebulaEffect(ctx, canvas.width, canvas.height); // Star properties
+    const nebulaImage = drawNebulaEffect(ctx, canvas.width, canvas.height);
     const stars = [];
     const starCount = 180;
     const maxSize = 3;
-
     const twinklingStars = [];
-    const twinkleStarCount = 50; 
+    const twinkleStarCount = 50;
     for (let i = 0; i < twinkleStarCount; i++) {
       twinklingStars.push({
-        x: Math.random() * canvas.width,
+        x: Math.random() * window.innerWidth,
         y: Math.random() * canvas.height,
         size: Math.random() * 1.5 + 0.2,
-        twinkleSpeed: Math.random() * 0.015 + 0.005, 
+        twinkleSpeed: Math.random() * 0.015 + 0.005,
         brightness: Math.random() * 0.7 + 0.3,
         maxBrightness: Math.random() * 0.7 + 0.3,
         minBrightness: Math.random() * 0.2,
@@ -95,37 +95,37 @@ const StarBackground = () => {
     }
     for (let i = 0; i < starCount; i++) {
       const angle = Math.random() * Math.PI * 2;
-      const speed = Math.random() * 0.2 + 0.05; 
+      const speed = Math.random() * 0.2 + 0.05;
 
       stars.push({
-        x: Math.random() * canvas.width,
+        x: Math.random() * window.innerWidth,
         y: Math.random() * canvas.height,
         size: Math.random() * maxSize + 0.5,
-        speed: speed, 
+        speed: speed,
         directionX: Math.cos(angle) * speed * 0.4,
-        directionY: Math.sin(angle) * speed * 0.4, 
+        directionY: Math.sin(angle) * speed * 0.4,
         wobble: Math.random() > 0.7,
-        wobbleIntensity: Math.random() * 0.15 + 0.05, 
-        wobbleSpeed: Math.random() * 0.01 + 0.005, 
+        wobbleIntensity: Math.random() * 0.15 + 0.05,
+        wobbleSpeed: Math.random() * 0.01 + 0.005,
         wobbleAngle: 0,
         brightness: Math.random() * 0.5 + 0.5,
-        originalSize: Math.random() * maxSize + 0.5, 
+        originalSize: Math.random() * maxSize + 0.5,
         color:
           Math.random() > 0.3
             ? "#ffffff"
             : Math.random() > 0.5
             ? "#88a9ff"
             : "#ffccaa",
-        pulsate: Math.random() > 0.7, 
+        pulsate: Math.random() > 0.7,
         pulsateSpeed: Math.random() * 0.02 + 0.005,
-        pulsateAmount: Math.random() * 0.4 + 0.4, 
+        pulsateAmount: Math.random() * 0.4 + 0.4,
         pulsateDirection: 1,
-        shape: Math.random() > 0.8 ? "circle" : "star", 
-        velocityX: 0, 
+        shape: Math.random() > 0.8 ? "circle" : "star",
+        velocityX: 0,
         velocityY: 0,
         mouseInteractionFactor: Math.random() * 0.5 + 0.5,
       });
-    } 
+    }
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -184,18 +184,17 @@ const StarBackground = () => {
         }
         star.velocityX *= 0.98;
         star.velocityY *= 0.98;
-
         if (star.y > canvas.height) {
           star.y = 0;
-          star.x = Math.random() * canvas.width;
+          star.x = Math.random() * window.innerWidth;
         } else if (star.y < 0) {
           star.y = canvas.height;
-          star.x = Math.random() * canvas.width;
+          star.x = Math.random() * window.innerWidth;
         }
 
         if (star.x < 0) {
-          star.x = canvas.width;
-        } else if (star.x > canvas.width) {
+          star.x = window.innerWidth;
+        } else if (star.x > window.innerWidth) {
           star.x = 0;
         }
 
@@ -217,8 +216,8 @@ const StarBackground = () => {
         } else {
           drawStar(ctx, star.x, star.y, star.size * 2);
         }
-      });      
-      
+      });
+
       ctx.globalAlpha = 1;
       requestAnimationFrame(animate);
     };
@@ -237,18 +236,20 @@ const StarBackground = () => {
       ctx.fill();
     };
 
-    animate();    return () => {
+    animate();
+    return () => {
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("mousemove", handleMouseMove);
       clearTimeout(window.mouseTimeout);
     };
-  }, []);  return (
+  }, []);
+  return (
     <canvas
       ref={canvasRef}
-      className="fixed top-0 left-0 w-full h-full z-0"
+      className="absolute inset-0 w-full h-full z-0"
       style={{
         background: "linear-gradient(to bottom, #050505, #0c0c0c 40%, #111111)",
-        pointerEvents: "none"
+        pointerEvents: "none",
       }}
     />
   );

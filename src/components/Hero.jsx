@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
+import StarBackground from "./StarBackground";
 
 const Hero = () => {
   const [text, setText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
-  const [typingSpeed, setTypingSpeed] = useState(150);
 
   const roles = [
     "Developer",
@@ -41,41 +41,28 @@ const Hero = () => {
     );
 
     return () => clearTimeout(timer);
-  }, [text, isDeleting, loopNum, roles, period]);
-  return (
-    <div className="min-h-screen w-full flex justify-center items-start pt-20 z-20 relative">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 mt-16 md:mt-0">
-        <div className="grid grid-cols-1 md:grid-cols-8 gap-5 items-center px-14">
-          <div className="text-center md:text-left px-4 md:col-span-4">
-            <h2 className="text-2xl py-5 tracking-wide">Hello, I am</h2>
-            <h1
-              className="sm:text-6xl font-italiana mb-6 font-extrabold text-custom-10xl lg:text-custom-12xl"
-              style={{ fontSize: "clamp(3rem, 10vw, 10rem)", fontWeight: 800 }}
-            >
-              Vivek Hipparkar
-            </h1>
-            <div className="min-h-16 mb-4">
-              <span className="text-xl sm:text-4xl md:text-xl lg:text-3xl text-gray-400 font-semibold">
-                {text}
-              </span>
-              <span className="text-xl sm:text-4xl md:text-xl lg:text-3xl cursor">
-                |
-              </span>{" "}
-            </div>{" "}
-          </div>
-
-          <div className="text-xl mt-8 md:mt-0 md:col-span-4 bg-black/20 backdrop-blur-sm p-8 rounded-lg shadow-lg tracking-wide">
-            Heyy there, I am Vivek Hipparkar a software Engineer currently
-            pursuing my B.Tech in Computer Science from IIIT, Gwalior '26. I am
-            an avid problem solver indulging deep into Data Structures and
-            Algorithms and Competitive Programming. As a passionate developer,
-            my expertise spans in various frameworks like React and Next.js in
-            creating intuitive and dynamic GUIs. Additionally, I am also well
-            versed in backend development using Node.js, Express.js, integrating
-            databases like MySQL, MongoDB and PostgreSQL.With a drive for continuous learning, I am willing to take
-            on any challenges that come my way. To get to know more about me,
-            keep scrolling or download the resume from the link below
-          </div>
+  }, [text, isDeleting, loopNum, roles, period]);  return (
+    <div className="h-screen w-full flex justify-around items-center z-20 relative pt-64 overflow-hidden">
+      <div className="absolute inset-0 w-screen h-full z-0" style={{ left: "calc(-1 * (100vw - 100%)/2)" }}>
+        <StarBackground />
+      </div>
+      <div className="container mx-auto px-8 flex items-center justify-around relative z-30">
+        <div className="ml-20 text-left mb-20 flex flex-col justify-center">
+          <h2 className="text-2xl py-3 tracking-wide text-white">
+            Hello, I am
+          </h2>
+          <h1
+            className="text-8xl font-italiana mb-4 text-white"
+            style={{ fontWeight: 800, fontSize: "5rem" }}
+          >
+            Vivek Hipparkar
+          </h1>
+          <div className="min-h-16 mb-2">
+            <span className="text-3xl text-gray-400 font-semibold">{text}</span>
+            <span className="text-3xl cursor text-white">|</span>          </div>{" "}
+        </div>
+        <div className="relative z-30 flex items-end justify-center">
+          <img src="/ghibli-1.png" className="w-11/20 pb-40" />
         </div>
       </div>
     </div>

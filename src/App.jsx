@@ -2,8 +2,9 @@ import { useState, useRef } from "react";
 import Greeting from "./components/Greeting";
 import SocialSidebar from "./components/SocialSidebar";
 import Navbar from "./components/Navbar";
-import StarBackground from "./components/StarBackground";
+import SubtleSpaceBackground from "./components/SubtleSpaceBackground";
 import Hero from "./components/Hero";
+import About from "./components/About";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -26,42 +27,25 @@ function App() {
         mainContentRef.current.style.transform = "translateY(0)";
       }, 100);
     }
-  };
-
-  return (
+  };  return (
     <>
-      <StarBackground />
-      {showGreeting && <Greeting onComplete={handleGreetingComplete} />}
-
-      <div
-        className={`top-5 left-2 right-0 w-full px-12 py-6 z-50 transition-opacity duration-500 ${
-          !showGreeting ? "opacity-100" : "opacity-0"
+      <SubtleSpaceBackground />
+      {showGreeting && <Greeting onComplete={handleGreetingComplete} />}      <div
+        className={`fixed top-5 left-2 right-0 w-full px-12 py-4 z-50 transition-opacity duration-500 ${
+          !showGreeting ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
       >
         <Navbar />
-      </div>
-      <div
+      </div><div
+        ref={mainContentRef}
         className={`w-full transition-opacity duration-500 ${
           !showGreeting ? "opacity-100" : "opacity-0"
         }`}
         style={{ marginRight: "calc(var(--sidebar-width, 100px))" }}
       >
         <Hero />
+        <About />
       </div>
-
-      <div
-        ref={mainContentRef}
-        className={`max-w-7xl mx-auto p-8 pt-24 text-center transition-all duration-700 ease-out relative z-20
-          ${
-            !showGreeting
-              ? "opacity-100 translate-y-0 pointer-events-auto"
-              : "opacity-0 translate-y-5 pointer-events-none"
-          }`}
-        style={{
-          transitionDelay: !showGreeting ? "200ms" : "0ms",
-          transitionTimingFunction: "cubic-bezier(0.33, 1, 0.68, 1)",
-        }}
-      ></div>
 
       <div
         className={`fixed bottom-0 right-0 px-8 transition-all duration-700 ease-out z-50 pointer-events-auto
