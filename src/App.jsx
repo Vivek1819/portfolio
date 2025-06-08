@@ -8,6 +8,7 @@ import About from "./components/About";
 import Work from "./components/Work";
 import { motion } from "framer-motion";
 import TechStack from "./components/TechStack";
+import Projects from "./components/Projects";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -91,6 +92,7 @@ function App() {
         >
           <Work />
         </motion.div>
+        <Projects />
       </div>
       <div
         className={`fixed bottom-0 right-0 px-8 transition-all duration-700 ease-out z-50 pointer-events-auto
