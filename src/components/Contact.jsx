@@ -47,7 +47,8 @@ const Contact = () => {
           <span className="bg-gradient-to-r from-cyan-300 via-blue-400 to-fuchsia-400 bg-clip-text text-transparent animate-gradient-x">
             Contact
           </span>
-          <span className="absolute left-1/2 -translate-x-1/2 bottom-0 w-2/3 h-1 bg-gradient-to-r from-cyan-400 via-blue-400 to-fuchsia-400 rounded-full blur-sm opacity-30" />        </h1>
+          <span className="absolute left-1/2 -translate-x-1/2 bottom-0 w-2/3 h-1 bg-gradient-to-r from-cyan-400 via-blue-400 to-fuchsia-400 rounded-full blur-sm opacity-30" />{" "}
+        </h1>
       </div>{" "}
       <div className="max-w-5xl mx-auto">
         <div className="grid md:grid-cols-5 gap-12 items-start">
@@ -134,7 +135,7 @@ const Contact = () => {
                 </div>{" "}
               </motion.div>
             </div>
-          </motion.div>{" "}
+          </motion.div>
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -253,7 +254,9 @@ const Contact = () => {
             </div>
           </motion.div>
         </div>
-        <div className="mt-24 text-center text-xl mb-10">Made with ❤️ by Vivek</div>
+        <div className="mt-24 text-center text-xl mb-10">
+          Made with ❤️ by Vivek
+        </div>
       </div>
     </div>
   );
