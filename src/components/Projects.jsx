@@ -110,7 +110,6 @@ const Projects = () => {
       year: "2024",
     },
   ];
-
   const containerVariants = {
     hidden: { opacity: 0 },
     show: {
@@ -122,14 +121,13 @@ const Projects = () => {
   };
 
   const itemVariants = {
-    hidden: { y: 40, opacity: 0 },
+    hidden: { opacity: 0, y: 20 },
     show: {
-      y: 0,
       opacity: 1,
+      y: 0,
       transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 15,
+        duration: 0.5,
+        ease: "easeOut",
       },
     },
   };
@@ -146,15 +144,16 @@ const Projects = () => {
         <p className="text-gray-300 text-xl mt-6 max-w-2xl mx-auto">
           Here are some of the projects I've worked on.
         </p>
-      </div>{" "}
+      </div>
       <motion.div
         variants={containerVariants}
         initial="hidden"
-        animate="show"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.1 }}
         className="flex flex-wrap justify-center gap-8 max-w-7xl mx-auto"
       >
         {" "}
-        {projects.map((project) => (
+        {projects.map((project, index) => (
           <motion.div
             key={project.id}
             variants={itemVariants}
