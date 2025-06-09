@@ -23,13 +23,13 @@ const Navbar = () => {
           Work
           <span className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-1.5 h-1.5 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
         </a>
-        <a
+        {/* <a
           href="#projects"
           className="!text-white transition-colors relative group px-2 nav-shake"
         >
           Projects
           <span className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-1.5 h-1.5 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-        </a>
+        </a> */}
         <a
           href="#"
           className="!text-white transition-colors relative group px-2 nav-shake"

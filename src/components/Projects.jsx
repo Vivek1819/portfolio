@@ -158,9 +158,16 @@ const Projects = () => {
           <motion.div
             key={project.id}
             variants={itemVariants}
-            className="group relative overflow-hidden rounded-3xl bg-white/5 backdrop-blur-lg border border-white/10 hover:border-cyan-400/50 transition-all duration-500 hover:scale-105 hover:shadow-[0_20px_60px_0_rgba(34,211,238,0.3)] w-full max-w-sm flex-shrink-0"
+            className={`group relative overflow-hidden rounded-3xl bg-white/5 backdrop-blur-lg border border-white/10 hover:border-cyan-400/50 transition-all duration-500 hover:scale-105 hover:shadow-[0_20px_60px_0_rgba(34,211,238,0.3)] w-full max-w-sm flex-shrink-0 ${
+              project.liveDemo ? "cursor-pointer" : "cursor-default"
+            }`}
             onMouseEnter={() => setHoveredProject(project.id)}
             onMouseLeave={() => setHoveredProject(null)}
+            onClick={() => {
+              if (project.liveDemo) {
+                window.open(project.liveDemo, "_blank", "noopener,noreferrer");
+              }
+            }}
           >
             <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/10 via-transparent to-fuchsia-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="absolute top-4 right-4 z-10">
@@ -175,7 +182,7 @@ const Projects = () => {
               </span>
             </div>
 
-            <div className="relative h-48 overflow-hidden">
+            <div className="relative h-50 overflow-hidden">
               <img
                 src={project.image}
                 alt={project.title}
@@ -188,28 +195,17 @@ const Projects = () => {
                   hoveredProject === project.id ? "opacity-100" : "opacity-0"
                 }`}
               >
+                {" "}
                 <div className="flex gap-4">
-                  {project.liveDemo && (
-                    <motion.a
-                      href={project.liveDemo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-4 py-2 bg-cyan-500 text-black rounded-lg font-bold hover:bg-cyan-400 transition-colors"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      Live Demo
-                    </motion.a>
-                  )}
                   <motion.a
                     href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 py-2 border-2 border-white text-white rounded-lg font-bold hover:bg-white hover:text-black transition-colors"
+                    className="px-4 py-2 border-2 border-white text-white rounded-lg font-bold hover:bg-gray-800 hover:border-gray-600 transition-colors flex items-center gap-2"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    View Code
+                    <img src="/github.png" className="w-8" />
                   </motion.a>
                 </div>
               </div>
@@ -239,7 +235,7 @@ const Projects = () => {
                 >
                   {project.category}
                 </span>
-              </div>{" "}
+              </div>
               <div className="flex flex-wrap gap-2">
                 {project.technologies.map((tech, techIndex) => (
                   <span
