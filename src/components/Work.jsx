@@ -76,7 +76,7 @@ const Work = () => {
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
           >
-            <div className="date-transition text-transparent bg-clip-text bg-gradient-to-r from-slate-200 to-slate-50 font-mono text-xl whitespace-nowrap flex items-center h-full transition-transform transition-colors duration-300 group-hover:scale-110 hover:from-cyan-400 hover:to-fuchsia-300 hover:drop-shadow-[0_50px_38px_rgba(34,211,238,0.5)]">
+            <div className="date-transition text-transparent bg-clip-text bg-gradient-to-r from-slate-200 to-slate-50 font-mono text-xl whitespace-nowrap flex items-center h-full transition-transform duration-300 group-hover:scale-110 hover:from-cyan-400 hover:to-fuchsia-300 hover:drop-shadow-[0_50px_38px_rgba(34,211,238,0.5)]">
               June 2024 - July 2024
             </div>
           </motion.div>
@@ -89,7 +89,7 @@ const Work = () => {
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
           >
-            <div className="date-transition text-transparent bg-clip-text bg-gradient-to-r from-slate-200 to-slate-50 font-mono text-xl whitespace-nowrap flex items-center h-full transition-transform transition-colors duration-300 group-hover:scale-110 hover:from-fuchsia-400 hover:to-cyan-300 hover:drop-shadow-[0_2px_24px_rgba(236,72,153,0.5)]">
+            <div className="date-transition text-transparent bg-clip-text bg-gradient-to-r from-slate-200 to-slate-50 font-mono text-xl whitespace-nowrap flex items-center h-full transition-transform duration-300 group-hover:scale-110 hover:from-fuchsia-400 hover:to-cyan-300 hover:drop-shadow-[0_2px_24px_rgba(236,72,153,0.5)]">
               May 2024 - Nov 2024
             </div>
           </motion.div>

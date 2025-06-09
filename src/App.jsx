@@ -104,9 +104,21 @@ function App() {
           viewport={{ once: true, amount: 0.1 }}
           style={{ width: "100%" }}
         >
-          <Projects />
+          <Projects />        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 80, scale: 0.95 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ 
+            type: "spring", 
+            stiffness: 50, 
+            damping: 20,
+            duration: 1.4 
+          }}
+          viewport={{ once: true, amount: 0.1 }}
+          style={{ width: "100%" }}
+        >
+          <Contact />
         </motion.div>
-        <Contact />
       </div>
       <div
         className={`fixed bottom-0 right-0 px-8 transition-all duration-700 ease-out z-50 pointer-events-auto
