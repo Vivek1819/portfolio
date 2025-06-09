@@ -82,8 +82,7 @@ function App() {
           style={{ width: "100%" }}
         >
           <TechStack />
-        </motion.div>
-        <motion.div
+        </motion.div>        <motion.div
           initial={{ opacity: 0, x: 50, scale: 0.95 }}
           whileInView={{ opacity: 1, x: 0, scale: 1 }}
           transition={{ type: "spring", stiffness: 70, damping: 14 }}
@@ -92,7 +91,20 @@ function App() {
         >
           <Work />
         </motion.div>
-        <Projects />
+        <motion.div
+          initial={{ opacity: 0, y: 60, scale: 0.9 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ 
+            type: "spring", 
+            stiffness: 60, 
+            damping: 15,
+            duration: 1.2 
+          }}
+          viewport={{ once: true, amount: 0.1 }}
+          style={{ width: "100%" }}
+        >
+          <Projects />
+        </motion.div>
       </div>
       <div
         className={`fixed bottom-0 right-0 px-8 transition-all duration-700 ease-out z-50 pointer-events-auto
