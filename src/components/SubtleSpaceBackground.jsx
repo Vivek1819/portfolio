@@ -20,14 +20,15 @@ const SubtleSpaceBackground = () => {
         });
       }
       starsRef.current = stars;
-    };
-
-    const handleResize = () => {
+    };    const handleResize = () => {
       canvas.width = window.innerWidth;
       canvas.height = Math.max(
         document.documentElement.scrollHeight,
         window.innerHeight * 3
       );
+      if (canvas.width > document.documentElement.clientWidth) {
+        canvas.width = document.documentElement.clientWidth;
+      }
       draw();
     };
 
@@ -102,15 +103,16 @@ const SubtleSpaceBackground = () => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
-  return (
+  }, []);  return (
     <canvas
       ref={canvasRef}
       className="fixed top-0 left-0 w-full"
       style={{
         zIndex: -2,
         pointerEvents: "none",
-        height: "500vh",
+        height: "100%",
+        maxWidth: "100vw",
+        overflow: "hidden"
       }}
     />
   );

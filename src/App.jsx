@@ -49,7 +49,10 @@ function App() {
         className={`w-screen flex flex-col items-center justify-center transition-opacity duration-500 ${
           !showGreeting ? "opacity-100" : "opacity-0"
         }`}
-        style={{ marginRight: "calc(var(--sidebar-width, 100px))" }}
+        style={{ 
+          marginRight: "calc(var(--sidebar-width, 100px))",
+          overflowX: "hidden" 
+        }}
       >
         <motion.div
           key={showGreeting ? "greeting" : "hero"}
