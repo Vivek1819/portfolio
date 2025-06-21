@@ -20,7 +20,8 @@ const SubtleSpaceBackground = () => {
         });
       }
       starsRef.current = stars;
-    };    const handleResize = () => {
+    };
+    const handleResize = () => {
       canvas.width = window.innerWidth;
       canvas.height = Math.max(
         document.documentElement.scrollHeight,
@@ -103,7 +104,8 @@ const SubtleSpaceBackground = () => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);  return (
+  }, []);
+  return (
     <canvas
       ref={canvasRef}
       className="fixed top-0 left-0 w-full"
@@ -112,7 +114,7 @@ const SubtleSpaceBackground = () => {
         pointerEvents: "none",
         height: "100%",
         maxWidth: "100vw",
-        overflow: "hidden"
+        overflow: "hidden",
       }}
     />
   );

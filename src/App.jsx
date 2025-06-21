@@ -49,9 +49,9 @@ function App() {
         className={`w-screen flex flex-col items-center justify-center transition-opacity duration-500 ${
           !showGreeting ? "opacity-100" : "opacity-0"
         }`}
-        style={{ 
+        style={{
           marginRight: "calc(var(--sidebar-width, 100px))",
-          overflowX: "hidden" 
+          overflowX: "hidden",
         }}
       >
         <motion.div
@@ -86,7 +86,8 @@ function App() {
           style={{ width: "100%" }}
         >
           <TechStack />
-        </motion.div>        <motion.div
+        </motion.div>{" "}
+        <motion.div
           initial={{ opacity: 0, x: 50, scale: 0.95 }}
           whileInView={{ opacity: 1, x: 0, scale: 1 }}
           transition={{ type: "spring", stiffness: 70, damping: 14 }}
@@ -98,24 +99,25 @@ function App() {
         <motion.div
           initial={{ opacity: 0, y: 60, scale: 0.9 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ 
-            type: "spring", 
-            stiffness: 60, 
+          transition={{
+            type: "spring",
+            stiffness: 60,
             damping: 15,
-            duration: 1.2 
+            duration: 1.2,
           }}
           viewport={{ once: true, amount: 0.1 }}
           style={{ width: "100%" }}
         >
-          <Projects />        </motion.div>
+          <Projects />{" "}
+        </motion.div>
         <motion.div
           initial={{ opacity: 0, y: 80, scale: 0.95 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ 
-            type: "spring", 
-            stiffness: 50, 
+          transition={{
+            type: "spring",
+            stiffness: 50,
             damping: 20,
-            duration: 1.4 
+            duration: 1.4,
           }}
           viewport={{ once: true, amount: 0.1 }}
           style={{ width: "100%" }}

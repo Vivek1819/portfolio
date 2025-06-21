@@ -42,8 +42,8 @@ const About = () => {
             enthusiastic sportsperson and reader.
           </p>
         </div>{" "}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-4xl mx-auto">
-          <div className="relative flex flex-col items-center text-center rounded-3xl p-8 overflow-hidden group hover:scale-105 hover:shadow-cyan-300/30 transition-transform duration-300">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-4xl mx-auto pt-8 pb-4">
+          <div className="relative flex flex-col items-center text-center rounded-3xl p-8 group hover:scale-105 hover:shadow-cyan-300/30 transition-transform duration-300">
             <div className="absolute top-4 left-1/2 -translate-x-1/2 w-28 h-28 bg-cyan-300/15 rounded-full blur-2xl group-hover:scale-110 transition-transform duration-300" />
             <div className="text-6xl mb-3 z-10 transition-transform duration-300 group-hover:scale-125 group-hover:drop-shadow-[0_6px_32px_rgba(34,211,238,0.7)]">
               🎓
@@ -55,7 +55,7 @@ const About = () => {
               IIIT Gwalior '26
             </div>
           </div>
-          <div className="relative flex flex-col items-center text-center rounded-3xl p-8 overflow-hidden group hover:scale-105 transition-transform duration-300">
+          <div className="relative flex flex-col items-center text-center rounded-3xl p-8 group hover:scale-105 transition-transform duration-300">
             <div className="absolute top-4 left-1/2 -translate-x-1/2 w-28 h-28 bg-pink-300/15 rounded-full blur-2xl group-hover:scale-110 transition-transform duration-300" />
             <div className="text-6xl mb-3 z-10 transition-transform duration-300 group-hover:scale-125 group-hover:drop-shadow-[0_6px_32px_rgba(244,114,182,0.7)]">
               💻
@@ -68,7 +68,7 @@ const About = () => {
             </div>
           </div>
           {/* Problem Solver Card */}
-          <div className="relative flex flex-col items-center text-center rounded-3xl p-8 overflow-hidden group hover:scale-105 hover:shadow-blue-400/30 transition-transform duration-300">
+          <div className="relative flex flex-col items-center text-center rounded-3xl p-8 group hover:scale-105 hover:shadow-blue-400/30 transition-transform duration-300">
             <div className="absolute top-4 left-1/2 -translate-x-1/2 w-28 h-28 bg-blue-300/15 rounded-full blur-2xl group-hover:scale-110 transition-transform duration-300" />
             <div className="text-6xl mb-3 z-10 transition-transform duration-300 group-hover:scale-125 group-hover:drop-shadow-[0_6px_32px_rgba(96,165,250,0.7)]">
               🏆
