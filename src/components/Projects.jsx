@@ -133,15 +133,15 @@ const Projects = () => {
   };
 
   return (
-    <div className="px-4 md:px-28 pt-14 relative z-10 mt-18" id="projects">
-      <div className="text-center mb-20">
-        <h1 className="text-5xl text-white mt-2 font-extrabold tracking-tighter relative inline-block drop-shadow-[0_2px_24px_rgba(34,211,238,0.25)]">
+    <div className="px-6 sm:px-10 md:px-28 pt-8 md:pt-14 relative z-10 mt-12 md:mt-18" id="projects">
+      <div className="text-center mb-10 md:mb-20">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl text-white mt-2 font-extrabold tracking-tighter relative inline-block drop-shadow-[0_2px_24px_rgba(34,211,238,0.25)]">
           <span className="bg-gradient-to-r from-cyan-300 via-blue-400 to-fuchsia-400 bg-clip-text text-transparent animate-gradient-x">
             Projects
           </span>
           <span className="absolute left-1/2 -translate-x-1/2 bottom-0 w-2/3 h-1 bg-gradient-to-r from-cyan-400 via-blue-400 to-fuchsia-400 rounded-full blur-sm opacity-30" />
         </h1>
-        <p className="text-gray-300 text-xl mt-6 max-w-2xl mx-auto">
+        <p className="text-gray-300 text-base sm:text-lg md:text-xl mt-4 md:mt-6 max-w-2xl mx-auto px-4">
           Here are some of the projects I've worked on.
         </p>
       </div>
@@ -150,7 +150,7 @@ const Projects = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.1 }}
-        className="flex flex-wrap justify-center gap-8 max-w-7xl mx-auto"
+        className="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8 max-w-7xl mx-auto"
       >
         {" "}
         {projects.map((project, index) => (

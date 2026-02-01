@@ -71,14 +71,12 @@ const Greeting = ({ onComplete }) => {
           backgroundColor: "#0f0f0f",
         }}
       >
-        <div className="p-4 rounded-lg max-w-[95%] min-h-[200px] flex items-center justify-center">
-          {" "}
+        <div className="p-4 rounded-lg max-w-[95%] min-h-[120px] sm:min-h-[160px] md:min-h-[200px] flex items-center justify-center">
           <h1
             key={currentWord.id}
-            className="m-0 px-4 py-2 inline-block relative antialiased leading-tight"
+            className="m-0 px-2 sm:px-4 py-2 inline-block relative antialiased leading-tight text-3xl sm:text-5xl md:text-6xl lg:text-7xl"
             style={{
               fontFamily: "'Neue Montreal', sans-serif",
-              fontSize: "4.5rem",
               color: "white",
               animation:
                 currentIndex === 0 ? "firstWordAppear 0.4s ease-out" : "none",
@@ -87,7 +85,7 @@ const Greeting = ({ onComplete }) => {
             }}
           >
             {currentWord.text}
-          </h1>{" "}
+          </h1>
         </div>
       </div>
     </>

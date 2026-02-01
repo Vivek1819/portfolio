@@ -116,27 +116,27 @@ const techStack = [
 ];
 
 const TechStack = () => (
-  <div className="mt-16 pt-8">
-    <div className="mb-12 text-center">
-      <span className="block text-lg text-white uppercase tracking-widest font-medium mb-2">
+  <div className="mt-8 md:mt-16 pt-4 md:pt-8 px-6 sm:px-10 md:px-12">
+    <div className="mb-6 md:mb-12 text-center">
+      <span className="block text-sm sm:text-base md:text-lg text-white uppercase tracking-widest font-medium mb-2">
         Tech Stack
       </span>
-      <h2 className="text-5xl text-white mt-2 font-extrabold tracking-tighter relative inline-block drop-shadow-[0_2px_24px_rgba(34,211,238,0.25)]">
+      <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-white mt-2 font-extrabold tracking-tighter relative inline-block drop-shadow-[0_2px_24px_rgba(34,211,238,0.25)]">
         <span className="bg-gradient-to-r from-cyan-300 via-blue-400 to-fuchsia-400 bg-clip-text text-transparent animate-gradient-x">
           Technologies I Work With
         </span>
         <span className="absolute left-1/2 -translate-x-1/2 bottom-0 w-2/3 h-1 bg-gradient-to-r from-cyan-400 via-blue-400 to-fuchsia-400 rounded-full blur-sm opacity-30" />
       </h2>
     </div>
-    <div className="flex flex-wrap items-center justify-center gap-4 max-w-5xl mx-auto">
+    <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 md:gap-4 max-w-5xl mx-auto">
       {techStack.map((tech, index) => (
         <div
           key={index}
           className="icon-container relative flex-shrink-0 group"
-          style={{ flexBasis: "calc(12.5% - 1rem)" }}
+          style={{ flexBasis: "calc(20% - 0.5rem)" }}
         >
-          <div className="rounded-2xl p-6 cursor-pointer bg-white/0 backdrop-blur-sm shadow-lg card-shake transition-all duration-300 flex flex-col items-center">
-            <img className="w-16 h-16" src={tech.icon} alt={tech.name} />
+          <div className="rounded-xl sm:rounded-2xl p-2 sm:p-4 md:p-6 cursor-pointer bg-white/0 backdrop-blur-sm shadow-lg card-shake transition-all duration-300 flex flex-col items-center">
+            <img className="w-8 h-8 sm:w-12 sm:h-12 md:w-16 md:h-16" src={tech.icon} alt={tech.name} />
             <span
               className={`
                 absolute left-1/2 -translate-x-1/2 mt-6 px-3 py-1 rounded-xl text-xs font-bold pointer-events-none

@@ -38,7 +38,7 @@ function App() {
       <SubtleSpaceBackground />
       {showGreeting && <Greeting onComplete={handleGreetingComplete} />}{" "}
       <div
-        className={`fixed top-5 left-2 right-0 w-full px-12 py-4 z-50 transition-opacity duration-500 ${
+        className={`fixed top-0 left-0 right-0 w-full px-2 sm:px-4 md:px-12 py-2 md:py-4 z-50 transition-opacity duration-500 bg-black/30 backdrop-blur-md ${
           !showGreeting ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
       >
@@ -50,7 +50,7 @@ function App() {
           !showGreeting ? "opacity-100" : "opacity-0"
         }`}
         style={{
-          marginRight: "calc(var(--sidebar-width, 100px))",
+          marginRight: "0",
           overflowX: "hidden",
         }}
       >
@@ -126,7 +126,7 @@ function App() {
         </motion.div>
       </div>
       <div
-        className={`fixed bottom-0 right-0 px-8 transition-all duration-700 ease-out z-50 pointer-events-auto
+        className={`fixed bottom-0 right-0 px-4 md:px-8 hidden md:block transition-all duration-700 ease-out z-50 pointer-events-auto
         ${
           !showGreeting
             ? "opacity-100 translate-y-0"

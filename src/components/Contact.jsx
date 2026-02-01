@@ -41,30 +41,30 @@ const Contact = () => {
   };
 
   return (
-    <div className="px-4 md:px-28 pt-14 relative z-10 mt-18" id="contact">
-      <div className="text-center mb-20">
-        <h1 className="text-5xl text-white mt-2 font-extrabold tracking-tighter relative inline-block drop-shadow-[0_2px_24px_rgba(34,211,238,0.25)]">
+    <div className="px-6 sm:px-10 md:px-28 pt-8 md:pt-14 relative z-10 mt-12 md:mt-18" id="contact">
+      <div className="text-center mb-10 md:mb-20">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl text-white mt-2 font-extrabold tracking-tighter relative inline-block drop-shadow-[0_2px_24px_rgba(34,211,238,0.25)]">
           <span className="bg-gradient-to-r from-cyan-300 via-blue-400 to-fuchsia-400 bg-clip-text text-transparent animate-gradient-x">
             Contact
           </span>
-          <span className="absolute left-1/2 -translate-x-1/2 bottom-0 w-2/3 h-1 bg-gradient-to-r from-cyan-400 via-blue-400 to-fuchsia-400 rounded-full blur-sm opacity-30" />{" "}
+          <span className="absolute left-1/2 -translate-x-1/2 bottom-0 w-2/3 h-1 bg-gradient-to-r from-cyan-400 via-blue-400 to-fuchsia-400 rounded-full blur-sm opacity-30" />
         </h1>
-      </div>{" "}
+      </div>
       <div className="max-w-5xl mx-auto">
-        <div className="grid md:grid-cols-5 gap-12 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-12 items-start">
           {" "}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="space-y-8 md:col-span-2"
+            className="space-y-6 md:space-y-8 md:col-span-2"
           >
             <div>
-              <h2 className="text-3xl font-bold text-white mb-6 tracking-tight">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-4 md:mb-6 tracking-tight">
                 Get In Touch
               </h2>
-              <p className="text-gray-300 text-lg leading-relaxed">
+              <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
                 I'm always interested in hearing about new opportunities,
                 creative projects, or just having a chat about technology and
                 development.
@@ -254,7 +254,7 @@ const Contact = () => {
             </div>
           </motion.div>
         </div>
-        <div className="mt-24 text-center text-xl mb-10">
+        <div className="mt-16 md:mt-24 text-center text-base sm:text-lg md:text-xl mb-8 md:mb-10 pb-8 md:pb-0">
           Made with ❤️ by Vivek
         </div>
       </div>
