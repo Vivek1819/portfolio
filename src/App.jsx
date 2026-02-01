@@ -10,6 +10,8 @@ import { motion } from "framer-motion";
 import TechStack from "./components/TechStack";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
+import ScrollProgress from "./components/ScrollProgress";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -35,6 +37,7 @@ function App() {
   };
   return (
     <>
+      <ScrollProgress />
       <SubtleSpaceBackground />
       {showGreeting && <Greeting onComplete={handleGreetingComplete} />}{" "}
       <div
@@ -139,6 +142,7 @@ function App() {
       >
         <SocialSidebar />
       </div>
+      <ScrollToTop />
     </>
   );
 }

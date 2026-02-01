@@ -67,15 +67,15 @@ const Hero = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <button className="resume-button px-6 sm:px-8 md:px-10 py-2 md:py-3 !text-white hover:!text-black text-xs sm:text-sm font-medium tracking-widest transition-all duration-300 ease-out">
+                <button className="resume-button magnetic-btn px-6 sm:px-8 md:px-10 py-2 md:py-3 !text-white hover:!text-black text-xs sm:text-sm font-medium tracking-widest transition-all duration-300 ease-out">
                   RESUME
                 </button>
               </a>
             </div>
           </div>
         </div>
-        <div className="relative z-30 hidden md:flex items-end justify-center">
-          <img src="/ghibli-1.png" className="w-64 lg:w-80 xl:w-96 pb-10 md:pb-20 lg:pb-40" />
+        <div className="relative z-30 hidden md:flex items-end justify-center animate-float">
+          <img src="/ghibli-1.png" className="w-64 lg:w-80 xl:w-96 pb-10 md:pb-20 lg:pb-40 drop-shadow-[0_0_30px_rgba(34,211,238,0.3)]" />
         </div>
       </div>
     </div>

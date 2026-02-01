@@ -12,14 +12,14 @@ const Navbar = () => {
       <div className="flex gap-3 sm:gap-5 md:gap-8 mr-2 sm:mr-4 md:mr-10 text-sm sm:text-base md:text-xl">
         <a
           href="#about"
-          className="!text-white transition-colors relative group px-1 sm:px-2 nav-shake"
+          className="!text-white transition-all relative group px-1 sm:px-2 nav-shake glow-text"
         >
           About
           <span className="absolute -bottom-2 md:-bottom-3 left-1/2 transform -translate-x-1/2 w-1 md:w-1.5 h-1 md:h-1.5 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
         </a>
         <a
           href="#work"
-          className="!text-white transition-colors relative group px-1 sm:px-2 nav-shake"
+          className="!text-white transition-all relative group px-1 sm:px-2 nav-shake glow-text"
         >
           Work
           <span className="absolute -bottom-2 md:-bottom-3 left-1/2 transform -translate-x-1/2 w-1 md:w-1.5 h-1 md:h-1.5 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
@@ -33,7 +33,7 @@ const Navbar = () => {
         </a> */}
         <a
           href="#contact"
-          className="!text-white transition-colors relative group px-1 sm:px-2 nav-shake"
+          className="!text-white transition-all relative group px-1 sm:px-2 nav-shake glow-text"
         >
           Contact
           <span className="absolute -bottom-2 md:-bottom-3 left-1/2 transform -translate-x-1/2 w-1 md:w-1.5 h-1 md:h-1.5 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
