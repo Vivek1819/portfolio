@@ -113,8 +113,8 @@ const StarBackground = () => {
           Math.random() > 0.3
             ? "#ffffff"
             : Math.random() > 0.5
-            ? "#88a9ff"
-            : "#ffccaa",
+              ? "#88a9ff"
+              : "#ffccaa",
         pulsate: Math.random() > 0.7,
         pulsateSpeed: Math.random() * 0.02 + 0.005,
         pulsateAmount: Math.random() * 0.4 + 0.4,
@@ -245,16 +245,10 @@ const StarBackground = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed top-0 left-0 w-full h-screen z-0"
+      className="absolute inset-0 w-full h-full z-[-1]"
       style={{
         background: "linear-gradient(to bottom, #050505, #0c0c0c 40%, #111111)",
         pointerEvents: "none",
-        width: "100%",
-        height: "100vh",
-        minHeight: 0,
-        minWidth: 0,
-        maxWidth: "100vw",
-        maxHeight: "100vh",
         display: "block",
       }}
     />
