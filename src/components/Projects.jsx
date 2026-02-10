@@ -27,7 +27,7 @@ const Projects = () => {
       technologies: ["Next.js", "Zustand", "Recharts", "Typescript"],
       link: "https://github.com/Vivek1819/FinBoard",
       liveDemo: "https://fin-board-chi.vercel.app/",
-      status: "Completed",
+      status: "Deployed",
       year: "2026",
     },
     {
@@ -40,7 +40,7 @@ const Projects = () => {
       technologies: ["Next.js", "Prisma", "Maplibre", "PostgreSQL"],
       link: "https://github.com/Vivek1819/Drone-ops",
       liveDemo: "https://flytbase-drone-ops.vercel.app/",
-      status: "Completed",
+      status: "Deployed",
       year: "2026",
     },
     {
@@ -95,7 +95,7 @@ const Projects = () => {
       ],
       link: "https://github.com/Vivek1819/portfolio",
       liveDemo: "https://portfolio-swart-chi-20.vercel.app",
-      status: "Completed",
+      status: "Deployed",
       year: "2025",
     },
     {
@@ -154,7 +154,7 @@ const Projects = () => {
         "HuggingFace",
       ],
       link: "https://github.com/Rahull004/Notify",
-      status: "Completed",
+      status: "Deployed",
       year: "2024",
     },
   ];
@@ -217,9 +217,11 @@ const Projects = () => {
             <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/10 via-transparent to-fuchsia-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="absolute top-4 right-4 z-10">
               <span
-                className={`px-3 py-1 rounded-full text-xs font-bold ${project.status === "Completed"
-                    ? "bg-green-500/20 text-green-300 border border-green-500/50"
-                    : "bg-yellow-500/20 text-yellow-300 border border-yellow-500/50"
+                className={`px-3 py-1 rounded-full text-xs font-bold ${project.status === "Deployed" || project.status === "Published"
+                    ? "bg-blue-500/20 text-blue-300 border border-blue-500/50"
+                    : project.status === "Completed"
+                      ? "bg-green-500/20 text-green-300 border border-green-500/50"
+                      : "bg-yellow-500/20 text-yellow-300 border border-yellow-500/50"
                   }`}
               >
                 {project.status}
@@ -270,10 +272,10 @@ const Projects = () => {
               <div className="mb-4">
                 <span
                   className={`px-3 py-1 rounded-full text-xs font-bold ${project.category === "Full Stack"
-                      ? "bg-purple-500/20 text-purple-300"
-                      : project.category === "Frontend"
-                        ? "bg-blue-500/20 text-blue-300"
-                        : "bg-green-500/20 text-green-300"
+                    ? "bg-purple-500/20 text-purple-300"
+                    : project.category === "Frontend"
+                      ? "bg-blue-500/20 text-blue-300"
+                      : "bg-green-500/20 text-green-300"
                     }`}
                 >
                   {project.category}
