@@ -7,6 +7,57 @@ const Projects = () => {
   const projects = [
     {
       id: 1,
+      title: "Bi-Sync",
+      description:
+        "A synchronization engine that keeps Google Sheets and MySQL in perfect harmony with 2-way sync, live schema updates, and conflict resolution.",
+      image: "/bisync.png",
+      category: "Full Stack",
+      technologies: ["Node.js", "MySQL", "Google APIs", "TypeScript"],
+      link: "https://github.com/Vivek1819/Bi-Sync",
+      status: "Completed",
+      year: "2026",
+    },
+    {
+      id: 2,
+      title: "FinBoard",
+      description:
+        "A customizable, real-time finance dashboard with dynamic widget configuration, multi-API integration, and persistent state management.",
+      image: "/finboard.png",
+      category: "Frontend",
+      technologies: ["Next.js", "Zustand", "Recharts", "Typescript"],
+      link: "https://github.com/Vivek1819/FinBoard",
+      liveDemo: "https://fin-board-chi.vercel.app/",
+      status: "Completed",
+      year: "2026",
+    },
+    {
+      id: 3,
+      title: "Drone Ops",
+      description:
+        "A comprehensive drone survey management system featuring mission planning, fleet coordination, and real-time monitoring with deterministic execution.",
+      image: "/drone-ops.png",
+      category: "Full Stack",
+      technologies: ["Next.js", "Prisma", "Maplibre", "PostgreSQL"],
+      link: "https://github.com/Vivek1819/Drone-ops",
+      liveDemo: "https://flytbase-drone-ops.vercel.app/",
+      status: "Completed",
+      year: "2026",
+    },
+    {
+      id: 4,
+      title: "ContextBridge",
+      description:
+        "A VS Code extension that bridges the gap between browser-based LLMs and local development environments with deterministic context synchronization.",
+      image: "/contextbridge.png",
+      category: "Extension",
+      technologies: ["VS Code API", "TypeScript", "React", "Node.js"],
+      link: "https://github.com/Vivek1819/ContextBridge",
+      liveDemo: "https://marketplace.visualstudio.com/items?itemName=vivek-hipparkar.contextbridge",
+      status: "Published",
+      year: "2026",
+    },
+    {
+      id: 5,
       title: "Leetcode Friends",
       description:
         "A Chrome extension that enhances the LeetCode experience by adding a social and collaborative layer for competitive programmers.",
@@ -18,7 +69,7 @@ const Projects = () => {
       year: "2025",
     },
     {
-      id: 2,
+      id: 6,
       title: "Repozy",
       description:
         "Repozy is an AI-powered GitHub insights platform that generates commit summaries and enables semantic codebase queries through vector embeddings.",
@@ -30,7 +81,7 @@ const Projects = () => {
       year: "2024",
     },
     {
-      id: 3,
+      id: 7,
       title: "Portfolio Website",
       description:
         "A modern, interactive portfolio website designed to showcase my projects and skills, featuring smooth animations, and an engaging user experience.",
@@ -38,7 +89,6 @@ const Projects = () => {
       category: "Frontend",
       technologies: [
         "React",
-        "Vite",
         "Tailwind CSS",
         "Framer Motion",
         "Vercel",
@@ -49,7 +99,7 @@ const Projects = () => {
       year: "2025",
     },
     {
-      id: 4,
+      id: 8,
       title: "Siftor",
       description:
         "Siftor is a real-time web scraping application that transforms website URLs into structured, readable content with live visual feedback as it crawls through pages.",
@@ -57,8 +107,7 @@ const Projects = () => {
       category: "Full Stack",
       technologies: [
         "React",
-        "Tailwind CSS",
-        "Websocket",
+        "Websockets",
         "Node.js",
         "Express",
       ],
@@ -68,7 +117,7 @@ const Projects = () => {
       year: "2024",
     },
     {
-      id: 5,
+      id: 9,
       title: "Ping",
       description:
         "A real-time chat application built with the MERN stack that enables users to send messages and images instantly, featuring user authentication and online status tracking.",
@@ -80,7 +129,7 @@ const Projects = () => {
       year: "2024",
     },
     {
-      id: 6,
+      id: 10,
       title: "Lexis",
       description:
         "Lexis is a web application that enables users to upload PDF documents and interact with them through a conversational interface, providing efficient document analysis and information extraction.",
@@ -92,7 +141,7 @@ const Projects = () => {
       year: "2024",
     },
     {
-      id: 7,
+      id: 11,
       title: "Notify",
       description:
         "Notify is a feature-rich note-taking web application with rich text editing capabilities, PDF viewing, authentication system, and AI-powered chatbot assistance for enhanced productivity.",
@@ -101,7 +150,6 @@ const Projects = () => {
       technologies: [
         "React",
         "Appwrite",
-        "Tailwind CSS",
         "Redux",
         "HuggingFace",
       ],
@@ -148,8 +196,7 @@ const Projects = () => {
       <motion.div
         variants={containerVariants}
         initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.1 }}
+        animate="show"
         className="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8 max-w-7xl mx-auto"
       >
         {" "}
@@ -157,9 +204,8 @@ const Projects = () => {
           <motion.div
             key={project.id}
             variants={itemVariants}
-            className={`group relative overflow-hidden rounded-3xl bg-white/5 backdrop-blur-lg border border-white/10 hover:border-cyan-400/50 transition-all duration-500 hover:scale-105 hover:shadow-[0_20px_60px_0_rgba(34,211,238,0.3)] w-full max-w-sm flex-shrink-0 ${
-              project.liveDemo ? "cursor-pointer" : "cursor-default"
-            }`}
+            className={`group relative overflow-hidden rounded-3xl bg-white/5 backdrop-blur-lg border border-white/10 hover:border-cyan-400/50 transition-all duration-500 hover:scale-105 hover:shadow-[0_20px_60px_0_rgba(34,211,238,0.3)] w-full max-w-sm flex-shrink-0 ${project.liveDemo ? "cursor-pointer" : "cursor-default"
+              }`}
             onMouseEnter={() => setHoveredProject(project.id)}
             onMouseLeave={() => setHoveredProject(null)}
             onClick={() => {
@@ -171,11 +217,10 @@ const Projects = () => {
             <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/10 via-transparent to-fuchsia-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="absolute top-4 right-4 z-10">
               <span
-                className={`px-3 py-1 rounded-full text-xs font-bold ${
-                  project.status === "Completed"
+                className={`px-3 py-1 rounded-full text-xs font-bold ${project.status === "Completed"
                     ? "bg-green-500/20 text-green-300 border border-green-500/50"
                     : "bg-yellow-500/20 text-yellow-300 border border-yellow-500/50"
-                }`}
+                  }`}
               >
                 {project.status}
               </span>
@@ -190,9 +235,8 @@ const Projects = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
               <div
-                className={`absolute inset-0 bg-black/70 flex items-center justify-center transition-opacity duration-300 ${
-                  hoveredProject === project.id ? "opacity-100" : "opacity-0"
-                }`}
+                className={`absolute inset-0 bg-black/70 flex items-center justify-center transition-opacity duration-300 ${hoveredProject === project.id ? "opacity-100" : "opacity-0"
+                  }`}
               >
                 {" "}
                 <div className="flex gap-4">
@@ -203,6 +247,7 @@ const Projects = () => {
                     className="px-4 py-2 border-2 border-white text-white rounded-lg font-bold hover:bg-gray-800 hover:border-gray-600 transition-colors flex items-center gap-2"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
+                    onClick={(e) => e.stopPropagation()}
                   >
                     <img src="/github.png" className="w-8" />
                   </motion.a>
@@ -224,13 +269,12 @@ const Projects = () => {
               </p>
               <div className="mb-4">
                 <span
-                  className={`px-3 py-1 rounded-full text-xs font-bold ${
-                    project.category === "Full Stack"
+                  className={`px-3 py-1 rounded-full text-xs font-bold ${project.category === "Full Stack"
                       ? "bg-purple-500/20 text-purple-300"
                       : project.category === "Frontend"
-                      ? "bg-blue-500/20 text-blue-300"
-                      : "bg-green-500/20 text-green-300"
-                  }`}
+                        ? "bg-blue-500/20 text-blue-300"
+                        : "bg-green-500/20 text-green-300"
+                    }`}
                 >
                   {project.category}
                 </span>
