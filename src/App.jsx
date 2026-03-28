@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import Greeting from "./components/Greeting";
 import SocialSidebar from "./components/SocialSidebar";
 import Navbar from "./components/Navbar";
-import SubtleSpaceBackground from "./components/SubtleSpaceBackground";
+import UniverseBackground from "./components/UniverseBackground";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Work from "./components/Work";
@@ -14,7 +14,6 @@ import ScrollProgress from "./components/ScrollProgress";
 import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
-  const [count, setCount] = useState(0);
   const [showGreeting, setShowGreeting] = useState(true);
   const mainContentRef = useRef(null);
   const handleGreetingComplete = () => {
@@ -38,7 +37,7 @@ function App() {
   return (
     <>
       <ScrollProgress />
-      <SubtleSpaceBackground />
+      <UniverseBackground />
       {showGreeting && <Greeting onComplete={handleGreetingComplete} />}{" "}
       <div
         className={`fixed top-0 left-0 right-0 w-full px-2 sm:px-4 md:px-12 py-2 md:py-4 z-50 transition-opacity duration-500 bg-black/30 backdrop-blur-md ${

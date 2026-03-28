@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import StarBackground from "./StarBackground";
 import { motion, AnimatePresence } from "framer-motion";
 
 const Hero = () => {
@@ -17,10 +16,9 @@ const Hero = () => {
     }, 2500);
     return () => clearInterval(interval);
   }, [roles.length]);
-
   return (
     <div className="h-screen w-full flex justify-center items-center relative overflow-hidden bg-black/10">
-      <StarBackground />
+      {/* Removed StarBackground */}
 
       {/* Subtle Radial Gradient for Depth */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(6,182,212,0.15)_0%,rgba(0,0,0,0)_70%)] pointer-events-none z-0" />
