@@ -5,6 +5,7 @@ import UniverseBackground from "./components/UniverseBackground";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import TechStack from "./components/TechStack";
+import Work from "./components/Work";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import ScrollToTop from "./components/ScrollToTop";
@@ -36,6 +37,7 @@ function App() {
         <main className="w-full pb-20 overflow-hidden pt-24 custom-scroll">
           <Hero />
           <About />
+          <Work />
           <Projects />
           <TechStack />
           <Contact />

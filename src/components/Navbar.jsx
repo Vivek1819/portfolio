@@ -15,6 +15,10 @@ const Navbar = () => {
            ABOUT
            <span className="absolute -bottom-2 left-0 w-0 h-px bg-supernova group-hover:w-full transition-all"></span>
         </a>
+        <a href="#work" className="hover:text-supernova text-starlight/40 transition-all relative group">
+           EXPERIENCE
+           <span className="absolute -bottom-2 left-0 w-0 h-px bg-supernova group-hover:w-full transition-all"></span>
+        </a>
         <a href="#projects" className="hover:text-supernova text-starlight/40 transition-all relative group">
            PROJECTS
            <span className="absolute -bottom-2 left-0 w-0 h-px bg-supernova group-hover:w-full transition-all"></span>

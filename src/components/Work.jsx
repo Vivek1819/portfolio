@@ -1,187 +1,222 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+
+const Waypoint = ({ exp, index }) => {
+  const isEven = index % 2 === 0;
+
+  return (
+    <div className="relative flex justify-end md:justify-center w-full min-h-[300px] md:min-h-[400px] group">
+      
+      {/* Node Marker on Path (Target Lock) */}
+      <div className="absolute left-8 md:left-1/2 -translate-x-1/2 top-10 flex items-center justify-center z-20">
+        <motion.div 
+          initial={{ scale: 0 }}
+          whileInView={{ scale: 1 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.5, type: "spring", bounce: 0.5 }}
+          className="w-4 h-4 md:w-6 md:h-6 group-hover:w-8 group-hover:h-8 md:group-hover:w-12 md:group-hover:h-12 rounded-full border border-neon-cyan/30 bg-void-900 shadow-[0_0_30px_rgba(6,182,212,0.4)] transition-all duration-300 cursor-crosshair flex items-center justify-center relative group-hover:border-supernova group-hover:shadow-[0_0_40px_rgba(251,191,36,0.6)] z-20"
+        >
+          {/* Inner core */}
+          <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-neon-cyan group-hover:bg-supernova animate-pulse-aura-slow relative z-10 transition-colors"></div>
+          
+          {/* Rotating Target Lock Ring */}
+          <div className="absolute w-[140%] h-[140%] border border-dashed border-starlight/20 rounded-full animate-[spin_6s_linear_infinite] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div className="absolute w-[180%] h-[180%] border-t border-b border-neon-cyan/40 rounded-full animate-[spin_4s_linear_infinite_reverse] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+          {/* Scanning radar outline */}
+          <div className="absolute w-full h-full rounded-full border border-neon-cyan opacity-0 group-hover:animate-ping z-0"></div>
+        </motion.div>
+      </div>
+
+      {/* Holographic Projection Card */}
+      <motion.div 
+        initial={{ opacity: 0, x: isEven ? -40 : 40, filter: "blur(8px)", skewX: -5 }}
+        whileInView={{ opacity: 1, x: 0, filter: "blur(0px)", skewX: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
+        className={`w-[calc(100%-4rem)] md:w-[42%] flex flex-col pt-4 md:pt-0 ${
+          isEven ? 'md:mr-auto md:pr-12 text-left md:text-right' : 'md:ml-auto md:pl-12 text-left'
+        } relative z-30`}
+      >
+        <div className="cosmic-glass border border-starlight/5 p-6 md:p-8 rounded-lg relative overflow-hidden transition-all duration-500 hover:border-neon-cyan/30 hover:bg-starlight-dim/5 group/card">
+          
+          {/* Top scanning line on hover */}
+          <div className={`absolute top-0 w-full h-[1px] bg-gradient-to-r ${isEven ? 'from-transparent via-supernova to-transparent origin-right right-0' : 'from-transparent via-supernova to-transparent origin-left left-0'} scale-x-0 group-hover:scale-x-100 transition-transform duration-700`}></div>
+          {/* Glitch Aberration Effect Line */}
+          <div className="absolute left-0 w-[2px] h-full bg-neon-purple opacity-0 group-hover:opacity-50 transition-opacity duration-300 pointer-events-none mix-blend-screen"></div>
+
+          {/* HUD Target Brackets */}
+          <div className="absolute top-3 left-3 w-3 h-3 border-t border-l border-starlight/30 group-hover:border-neon-cyan transition-colors"></div>
+          <div className="absolute bottom-3 right-3 w-3 h-3 border-b border-r border-starlight/30 group-hover:border-neon-cyan transition-colors"></div>
+          <div className="absolute top-3 right-3 w-3 h-3 border-t border-r border-starlight/30 group-hover:border-neon-cyan transition-colors"></div>
+          <div className="absolute bottom-3 left-3 w-3 h-3 border-b border-l border-starlight/30 group-hover:border-neon-cyan transition-colors"></div>
+
+          <div className={`micro-text text-supernova flex items-center gap-3 mb-4 ${isEven ? 'md:justify-end' : 'justify-start'}`}>
+            <span className="w-1.5 h-1.5 bg-supernova rounded-full blur-[1px] group-hover:animate-ping"></span>
+            JUMP DURATION: {exp.period}
+          </div>
+
+          <h3 className={`celestial-heading text-2xl md:text-4xl text-starlight mb-4 tracking-wider leading-tight group-hover:text-glow-starlight transition-all duration-300 relative inline-block`}>
+            {exp.title}
+          </h3>
+
+          <div className={`font-mono text-[10px] md:text-xs text-starlight/60 tracking-[0.2em] lg:tracking-[0.3em] uppercase flex items-center gap-3 ${isEven ? 'md:justify-end' : 'justify-start'}`}>
+            COORDINATE // <span className="text-neon-cyan font-bold group-hover:text-starlight transition-colors">{exp.company}</span>
+          </div>
+
+          {/* Tech Scan Data Expansion (reveals on hover) */}
+          <div className={`mt-8 overflow-hidden transition-all duration-500 max-h-0 opacity-0 group-hover:max-h-[100px] group-hover:opacity-100 flex flex-col gap-2 ${isEven ? 'md:items-end' : 'items-start'}`}>
+             <span className="micro-text text-[8px] text-starlight/40">SCAN DATA [MODULES]:</span>
+             <div className={`flex flex-wrap gap-2 ${isEven ? 'md:justify-end' : 'justify-start'}`}>
+               {exp.tech.map((t, i) => (
+                  <span key={i} className="px-2 py-1 text-[9px] font-mono border border-neon-cyan/20 bg-neon-cyan/5 text-neon-cyan/80 group-hover:border-neon-cyan/50 transition-colors duration-300">
+                    {t}
+                  </span>
+               ))}
+             </div>
+          </div>
+
+          <div className={`mt-6 flex gap-1.5 opacity-40 group-hover:opacity-80 transition-opacity ${isEven ? 'md:justify-end' : 'justify-start'}`}>
+            <div className="h-px w-8 bg-starlight group-hover:bg-neon-cyan"></div>
+            <div className="h-px w-2 bg-starlight group-hover:bg-neon-cyan"></div>
+            <div className="h-px w-1 bg-starlight group-hover:bg-neon-cyan"></div>
+          </div>
+        </div>
+        
+        {/* Animated Connector Beam from Node -> Card (desktop only) */}
+        <div className={`hidden md:block absolute top-[60px] w-12 h-[2px] bg-starlight/10 ${isEven ? 'right-0' : 'left-0'} z-10 pointer-events-none overflow-hidden`}>
+           <div className={`absolute top-0 h-full w-[200%] bg-gradient-to-r from-transparent via-supernova to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${isEven ? 'animate-[slideLeft_1s_ease-in-out_infinite]' : 'animate-[slideRight_1s_ease-in-out_infinite]'}`}></div>
+        </div>
+      </motion.div>
+    </div>
+  );
+};
 
 const Work = () => {
+  const containerRef = useRef(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start center", "end center"]
+  });
+
+  const pathHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+
+  const experiences = [
+    {
+      period: "APR 2026 — PRESENT",
+      title: "FOUNDING ENGINEER INTERN",
+      company: "FANTV",
+      tech: ["PYTHON", "LLMs", "AWS", "SYSTEM DESIGN"]
+    },
+    {
+      period: "MAY 2025 — JUL 2025",
+      title: "FULL STACK DEVELOPER",
+      company: "CAREASA HEALTHCARE",
+      tech: ["REACT", "NODE.JS", "GOOGLE WORKSPACE API", "POSTGRESQL"]
+    },
+    {
+      period: "JUN 2024 — NOV 2024",
+      title: "CAMPUS AMBASSADOR",
+      company: "EAZEPLACE",
+      tech: ["NODE.JS", "EXPRESS", "REACT.JS"]
+    }
+  ];
+
+  /* Generate random space dust particles for parallax depth */
+  const particles = Array.from({ length: 20 }).map((_, i) => ({
+    id: i,
+    size: Math.random() * 3 + 1,
+    left: Math.random() * 100,
+    top: Math.random() * 100,
+    animationDuration: Math.random() * 10 + 10,
+    delay: Math.random() * 5
+  }));
+
   return (
-    <div className="px-6 sm:px-10 md:px-28 pt-8 md:pt-16 relative z-10 mt-12 md:mt-26" id="work">
-      <div className="flex flex-col items-center mb-8 md:mb-14">
-        <h2 className="text-base sm:text-lg md:text-xl text-white tracking-widest mb-2">
-          WORK
-        </h2>
-        <h1 className="text-2xl sm:text-3xl md:text-4xl text-white tracking-tight relative inline-block font-extrabold drop-shadow-[0_2px_24px_rgba(34,211,238,0.25)]">
-          <span className="bg-gradient-to-r from-cyan-300 via-blue-400 to-fuchsia-400 bg-clip-text text-transparent animate-gradient-x">
-            Experience
-          </span>
-          <span className="absolute left-1/2 -translate-x-1/2 bottom-0 w-2/3 h-1 bg-gradient-to-r from-cyan-400 via-blue-400 to-fuchsia-400 rounded-full blur-sm opacity-30" />
-        </h1>
+    <section className="relative w-full py-40 overflow-hidden" id="work" ref={containerRef}>
+      
+      {/* Deep Space Parallax Dust */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+         {particles.map(p => (
+           <div 
+             key={p.id}
+             className="absolute bg-starlight rounded-full animate-float opacity-20"
+             style={{
+               width: `${p.size}px`,
+               height: `${p.size}px`,
+               left: `${p.left}%`,
+               top: `${p.top}%`,
+               animationDuration: `${p.animationDuration}s`,
+               animationDelay: `${p.delay}s`,
+             }}
+           />
+         ))}
       </div>
 
-      <div className="relative flex flex-col items-center w-full py-6 md:py-10">
-        {/* Center line - hidden on mobile */}
-        <div
-          className="absolute left-1/2 top-0 h-full w-1 bg-white shadow-[0_0_32px_8px_rgba(255,255,255,0.18)] opacity-90 z-0 hidden md:block"
-          style={{ transform: "translateX(-50%)" }}
-        />
-        {/* First Experience - Careasa */}
-        <div className="flex flex-col md:flex-row w-full justify-center md:justify-start mb-8 md:mb-16 relative z-10">
-          {/* Mobile: Show date above card */}
-          <div className="md:hidden text-center mb-4">
-            <div className="text-transparent bg-clip-text bg-gradient-to-r from-slate-200 to-slate-50 font-mono text-sm">
-              June 2024 - July 2024
-            </div>
-          </div>
-          
-          {/* Card Section */}
+      <div className="px-4 md:px-16 max-w-7xl mx-auto flex flex-col items-center relative z-10">
+        <style>
+          {`
+            @keyframes slideRight {
+              0% { transform: translateX(-100%); }
+              100% { transform: translateX(100%); }
+            }
+            @keyframes slideLeft {
+              0% { transform: translateX(50%); }
+              100% { transform: translateX(-100%); }
+            }
+          `}
+        </style>
+        {/* Section Heading */}
+        <div className="w-full text-center mb-32 flex flex-col items-center">
           <motion.div
-            className="w-full md:w-1/2 flex justify-center md:justify-end md:pr-18 items-center group"
-            initial={{ x: -80, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="micro-text text-neon-cyan mb-8 flex items-center gap-4 justify-center"
           >
-            <div className="relative bg-white/10 backdrop-blur-lg border-2 border-cyan-400/30 rounded-2xl md:rounded-3xl shadow-[0_8px_40px_0_rgba(34,211,238,0.18)] p-4 sm:p-6 md:p-8 w-full max-w-[440px] text-white flex flex-col justify-center cursor-pointer transition-all duration-300 group hover:scale-105 hover:shadow-[0_12px_48px_0_rgba(34,211,238,0.35)] hover:border-cyan-300/80 overflow-hidden">
-              <div className="absolute inset-0 rounded-2xl md:rounded-3xl bg-gradient-to-br from-cyan-400/20 via-white/5 to-fuchsia-400/20 opacity-80 pointer-events-none z-0" />
-              <div className="absolute -inset-1 rounded-[1.5rem] md:rounded-[2rem] border-2 border-cyan-400/40 opacity-0 group-hover:opacity-80 group-hover:blur-md transition-all duration-300 z-0" />
-              <div className="relative z-10">
-                <div className="text-lg sm:text-xl md:text-2xl font-extrabold mb-2 transition-transform duration-300 origin-left group-hover:scale-x-110 group-hover:scale-y-110 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-cyan-400 group-hover:to-fuchsia-300 group-hover:drop-shadow-[0_2px_24px_rgba(34,211,238,0.5)]">
-                  Full Stack Developer
-                </div>
-                <div className="text-cyan-300 font-bold mb-2 md:mb-3 tracking-wide text-sm sm:text-base">
-                  Careasa Healthcare
-                </div>
-                <ul className="list-disc ml-4 md:ml-6 text-sm md:text-base text-blue-100/90 space-y-1 md:space-y-2">
-                  <li>
-                    Built and deployed a clinical CRM platform with intuitive
-                    workflows, improving coordination and easing adoption across
-                    clinical teams.
-                  </li>
-                  <li>
-                    Integrated automated Google Meet scheduling, enhancing
-                    virtual consultation workflows and reducing operational
-                    overhead.
-                  </li>
-                </ul>
-              </div>
-            </div>
+            <span className="w-12 h-px bg-neon-cyan/30"></span>
+            02 // NAVIGATIONAL LOG
+            <span className="w-12 h-px bg-neon-cyan/30"></span>
           </motion.div>
-          
-          {/* Center Icon - hidden on mobile */}
-          <motion.div
-            className="hidden md:flex flex-col items-center w-0 justify-center group:"
-            initial={{ scale: 0.7, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.6, ease: "backOut" }}
-          >
-            <div className="w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center border-4 border-white shadow-lg z-10 bg-black transition-transform duration-300 group-hover:scale-110 group-hover:shadow-[0_4px_32px_0_rgba(34,211,238,0.25)]">
-              <img
-                src="/careasa.png"
-                alt="Careasa"
-                className="w-10 h-8 md:w-14 md:h-12 object-contain transition-transform duration-300"
-              />
-            </div>
-          </motion.div>
-          
-          {/* Date - only on desktop */}
-          <motion.div
-            className="hidden md:flex w-1/2 items-center pl-22 min-h-[128px] group"
-            initial={{ x: 80, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-          >
-            <div className="date-transition text-transparent bg-clip-text bg-gradient-to-r from-slate-200 to-slate-50 font-mono text-lg md:text-xl whitespace-nowrap flex items-center h-full transition-transform duration-300 group-hover:scale-110 hover:from-cyan-400 hover:to-fuchsia-300 hover:drop-shadow-[0_50px_38px_rgba(34,211,238,0.5)]">
-              June 2024 - July 2024
-            </div>
-          </motion.div>
+          <h2 className="celestial-heading text-6xl md:text-8xl text-starlight">
+            MISSION<br />
+            <span className="text-neon-cyan">HISTORY</span>
+          </h2>
         </div>
-        {/* Second Experience - Eazeplace */}
-        <div className="flex flex-col md:flex-row w-full justify-center md:justify-end mb-8 md:mb-16 relative z-10">
-          {/* Mobile: Show date above card */}
-          <div className="md:hidden text-center mb-4">
-            <div className="text-transparent bg-clip-text bg-gradient-to-r from-slate-200 to-slate-50 font-mono text-sm">
-              May 2024 - Nov 2024
-            </div>
-          </div>
-          
-          {/* Date - only on desktop (left side) */}
-          <motion.div
-            className="hidden md:flex w-1/2 items-center justify-end pr-22 min-h-[128px] group"
-            initial={{ x: 80, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-          >
-            <div className="date-transition text-transparent bg-clip-text bg-gradient-to-r from-slate-200 to-slate-50 font-mono text-lg md:text-xl whitespace-nowrap flex items-center h-full transition-transform duration-300 group-hover:scale-110 hover:from-fuchsia-400 hover:to-cyan-300 hover:drop-shadow-[0_2px_24px_rgba(236,72,153,0.5)]">
-              May 2024 - Nov 2024
-            </div>
-          </motion.div>
-          
-          {/* Center Icon - hidden on mobile */}
-          <motion.div
-            className="hidden md:flex flex-col items-center w-0 justify-center"
-            initial={{ scale: 0.7, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.6, ease: "backOut" }}
-          >
-            <div className="w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center border-4 border-white shadow-lg z-10 bg-black transition-transform duration-300 group-hover:scale-110 group-hover:shadow-[0_4px_32px_0_rgba(236,72,153,0.25)]">
-              <img
-                src="/eazeplace.png"
-                alt="Eazeplace"
-                className="w-10 h-10 md:w-12 md:h-12 object-contain transition-transform duration-300"
-              />
-            </div>
-          </motion.div>
-          
-          {/* Card Section */}
-          <motion.div
-            className="w-full md:w-1/2 flex justify-center md:justify-start md:pl-18 items-center"
-            initial={{ x: -80, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-          >
-            <div className="relative bg-white/10 backdrop-blur-lg border-2 border-fuchsia-400/30 rounded-2xl md:rounded-3xl shadow-[0_8px_40px_0_rgba(236,72,153,0.18)] p-4 sm:p-6 md:p-8 w-full max-w-[440px] text-white flex flex-col justify-center group cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-[0_12px_48px_0_rgba(236,72,153,0.35)] hover:border-fuchsia-300/80 overflow-hidden">
-              <div className="absolute inset-0 rounded-2xl md:rounded-3xl bg-gradient-to-br from-fuchsia-400/20 via-white/5 to-cyan-400/20 opacity-80 pointer-events-none z-0" />
-              <div className="absolute -inset-1 rounded-[1.5rem] md:rounded-[2rem] border-2 border-fuchsia-400/40 opacity-0 group-hover:opacity-80 group-hover:blur-md transition-all duration-300 z-0" />
-              <div className="relative z-10">
-                <div className="text-lg sm:text-xl md:text-2xl font-extrabold mb-2 transition-transform duration-300 origin-left group-hover:scale-x-110 group-hover:scale-y-110 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-fuchsia-400 group-hover:to-cyan-300 group-hover:drop-shadow-[0_2px_24px_rgba(236,72,153,0.5)]">
-                  Campus Ambassador
-                </div>
-                <div className="text-fuchsia-300 font-bold mb-2 md:mb-3 tracking-wide text-sm sm:text-base">
-                  Eazeplace
-                </div>
-                <ul className="list-disc ml-4 md:ml-6 text-sm md:text-base text-pink-100/90 space-y-1 md:space-y-2">
-                  <li>
-                    Contributed to platform improvement through UI refinement,
-                    bug resolution, and testing, helping enhance both design and
-                    functionality.
-                  </li>
-                  <li>
-                    Collaborated with the product team to expand hiring platform
-                    reach, contributing to strategic promotion and
-                    diversification initiatives.
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </motion.div>
+
+        {/* The Interstellar Timeline */}
+        <div className="relative w-full max-w-5xl mx-auto pt-10">
+           
+           {/* Structural Background Track */}
+           <div className="absolute left-8 md:left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-starlight/5 pointer-events-none"></div>
+
+           {/* The Ship / Energy Pulse chasing scroll */}
+           <motion.div 
+             className="absolute left-8 md:left-1/2 -translate-x-1/2 top-0 w-[4px] blur-[1px] bg-gradient-to-b from-transparent via-supernova to-neon-cyan shadow-[0_0_20px_#06b6d4,0_0_40px_#fbbf24] pointer-events-none mix-blend-screen"
+             style={{ height: pathHeight }}
+           />
+
+           {/* Timeline Waypoints */}
+           <div className="flex flex-col gap-12 md:gap-4 lg:gap-0">
+             {experiences.map((exp, index) => (
+                <Waypoint key={index} exp={exp} index={index} />
+             ))}
+           </div>
+           
+           {/* Destination Target Marker */}
+           <motion.div 
+             initial={{ opacity: 0 }}
+             whileInView={{ opacity: 1 }}
+             viewport={{ once: true, margin: "0px" }}
+             transition={{ delay: 0.5, duration: 1 }}
+             className="absolute left-8 md:left-1/2 -translate-x-1/2 bottom-0 w-6 h-6 border-2 border-starlight/30 rotate-45 flex items-center justify-center bg-void-900 shadow-[0_0_15px_rgba(255,255,255,0.1)]"
+           >
+             <div className="w-1.5 h-1.5 bg-starlight/50 rounded-full animate-ping"></div>
+           </motion.div>
+
         </div>
       </div>
-      <style>
-        {`
-.bg-[#18192b].group:hover ~ .date-transition,
-.bg-[#18192b].group:focus ~ .date-transition {
-  background: linear-gradient(90deg, var(--tw-gradient-from, #06b6d4), var(--tw-gradient-to, #ec4899));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  opacity: 0.7;
-  transition: all 0.3s;
-}
-`}
-      </style>
-    </div>
+    </section>
   );
 };
 
