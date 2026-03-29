@@ -1,10 +1,20 @@
-import React from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 
 const Hero = () => {
   const { scrollY } = useScroll();
   const yParallax = useTransform(scrollY, [0, 500], [0, 100]);
   const opacityFade = useTransform(scrollY, [0, 200], [1, 0]);
+
+  const roles = ["CREATIVE ENGINEER", "FULL STACK DEVELOPER", "SYSTEM ARCHITECT", "CODE ARTIST"];
+  const [roleIndex, setRoleIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setRoleIndex((prev) => (prev + 1) % roles.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-4 md:px-8">
@@ -28,31 +38,44 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.5, ease: "easeOut" }}
-          className="celestial-heading text-[12vw] sm:text-[10vw] md:text-9xl xl:text-[12rem] animate-float"
+          className="celestial-heading text-[12vw] sm:text-[10vw] md:text-9xl xl:text-[12rem] animate-float animate-color-flash font-bold"
         >
           VIVEK
         </motion.h1>
         
-        <motion.h2
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 2, delay: 0.5 }}
-          className="text-starlight/60 font-cinematic text-lg md:text-2xl tracking-[0.3em] -mt-2 md:-mt-6 flex items-center gap-12"
+          className="text-starlight/60 font-cinematic text-lg md:text-2xl tracking-[0.3em] mt-2 md:mt-0 flex items-center justify-center"
         >
-          <span className="w-12 h-px bg-starlight/20"></span>
-          CREATIVE ENGINEER
-          <span className="w-12 h-px bg-starlight/20"></span>
-        </motion.h2>
+          <span className="w-8 md:w-12 h-px bg-starlight/20 shrink-0" />
+          <div className="relative h-[2em] w-[280px] md:w-[500px] flex items-center justify-center overflow-hidden mx-6 md:mx-8">
+            <AnimatePresence>
+               <motion.div
+                 key={roleIndex}
+                 initial={{ opacity: 0, y: 40 }}
+                 animate={{ opacity: 1, y: 0 }}
+                 exit={{ opacity: 0, y: -40 }}
+                 transition={{ duration: 0.6, ease: "anticipate" }}
+                 className="absolute inset-x-0 w-full text-center whitespace-nowrap"
+               >
+                 {roles[roleIndex]}
+               </motion.div>
+            </AnimatePresence>
+          </div>
+          <span className="w-8 md:w-12 h-px bg-starlight/20 shrink-0" />
+        </motion.div>
 
         <div className="mt-16 flex flex-col sm:flex-row gap-8 items-center micro-text text-starlight/50">
           <div className="flex flex-col gap-2 items-center">
-            <span className="text-supernova font-bold">2.4Y+</span>
+            <span className="text-supernova font-bold">3.4Y+</span>
             <span>EXPANSION TIME</span>
           </div>
           <div className="w-px h-8 bg-starlight/10 hidden sm:block"></div>
           <div className="flex flex-col gap-2 items-center">
-             <span className="text-neon-purple font-bold">15+</span>
-             <span>STELLAR DEPLOYS</span>
+             <span className="text-neon-purple font-bold">20+</span>
+             <span>STELLAR PROJECTS</span>
           </div>
         </div>
       </motion.div>
