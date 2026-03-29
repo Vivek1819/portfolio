@@ -1,43 +1,36 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 const Navbar = () => {
   return (
-    <nav className="w-full flex items-center py-2 md:py-4 relative z-50 pointer-events-auto justify-between md:justify-around">
-      <a
-        href="/"
-        className="text-xl font-semibold !text-white transition-opacity"
-      >
-        <img src="/logo.png" className="w-10 sm:w-12 md:w-14 ml-2 sm:ml-4 md:ml-10" />
-      </a>
-      <div className="flex gap-3 sm:gap-5 md:gap-8 mr-2 sm:mr-4 md:mr-10 text-sm sm:text-base md:text-xl">
-        <a
-          href="#about"
-          className="!text-white transition-all relative group px-1 sm:px-2 nav-shake glow-text"
-        >
-          About
-          <span className="absolute -bottom-2 md:-bottom-3 left-1/2 transform -translate-x-1/2 w-1 md:w-1.5 h-1 md:h-1.5 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+    <nav className="fixed top-0 left-0 w-full flex items-center justify-between py-8 px-4 md:px-16 z-50 pointer-events-none">
+      <div className="pointer-events-auto">
+        <a href="/" className="celestial-heading text-4xl text-glow-starlight hover:text-supernova transition-all">
+          V.
         </a>
-        <a
-          href="#work"
-          className="!text-white transition-all relative group px-1 sm:px-2 nav-shake glow-text"
-        >
-          Work
-          <span className="absolute -bottom-2 md:-bottom-3 left-1/2 transform -translate-x-1/2 w-1 md:w-1.5 h-1 md:h-1.5 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+      </div>
+      
+      <div className="hidden md:flex gap-16 micro-text font-bold pointer-events-auto items-center">
+        <a href="#about" className="hover:text-supernova text-starlight/40 transition-all relative group">
+           ABOUT
+           <span className="absolute -bottom-2 left-0 w-0 h-px bg-supernova group-hover:w-full transition-all"></span>
         </a>
-        <a
-          href="#projects"
-          className="!text-white transition-colors relative group px-1 sm:px-2 nav-shake"
-        >
-          Projects
-          <span className="absolute -bottom-2 md:-bottom-3 left-1/2 transform -translate-x-1/2 w-1 md:w-1.5 h-1 md:h-1.5 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+        <a href="#projects" className="hover:text-supernova text-starlight/40 transition-all relative group">
+           PROJECTS
+           <span className="absolute -bottom-2 left-0 w-0 h-px bg-supernova group-hover:w-full transition-all"></span>
         </a>
-        <a
-          href="#contact"
-          className="!text-white transition-all relative group px-1 sm:px-2 nav-shake glow-text"
-        >
-          Contact
-          <span className="absolute -bottom-2 md:-bottom-3 left-1/2 transform -translate-x-1/2 w-1 md:w-1.5 h-1 md:h-1.5 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+        <a href="#tech" className="hover:text-supernova text-starlight/40 transition-all relative group">
+           TECH
+           <span className="absolute -bottom-2 left-0 w-0 h-px bg-supernova group-hover:w-full transition-all"></span>
         </a>
+        
+        <a href="#contact" className="px-8 py-3 cosmic-glass rounded-full text-[10px] tracking-[0.3em] hover:bg-supernova hover:text-void-900 transition-all group">
+          INITIATE CONNECTION <span className="inline-block translate-x-1 group-hover:translate-x-3 transition-transform">→</span>
+        </a>
+      </div>
+
+      <div className="md:hidden pointer-events-auto">
+        <a href="#contact" className="px-6 py-2 cosmic-glass rounded-full micro-text">CONNECTION</a>
       </div>
     </nav>
   );

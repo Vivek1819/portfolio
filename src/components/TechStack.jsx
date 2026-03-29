@@ -1,171 +1,76 @@
 import React from "react";
+import { motion } from "framer-motion";
 
-const techStack = [
-  {
-    name: "HTML5",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
-  },
-  {
-    name: "CSS3",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
-  },
-  {
-    name: "JavaScript",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
-  },
-  {
-    name: "React",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-  },
-  {
-    name: "TailwindCSS",
-    icon: "/tailwind_css.png",
-  },
-  {
-    name: "MaterialUI",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/materialui/materialui-original.svg",
-  },
-  {
-    name: "Node.js",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
-  },
-  {
-    name: "NPM",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/npm/npm-original-wordmark.svg",
-  },
-  {
-    name: "MongoDB",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
-  },
-  {
-    name: "PostgreSQL",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
-  },
-  {
-    name: "MySQL",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
-  },
-  {
-    name: "Figma",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg",
-  },
-  {
-    name: "Git",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
-  },
-  {
-    name: "GitHub",
-    icon: "/github.png",
-  },
-  {
-    name: "Canva",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/canva/canva-original.svg",
-  },
-  {
-    name: "VSCode",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg",
-  },
-  {
-    name: "C++",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg",
-  },
-  {
-    name: "Java",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
-  },
-  {
-    name: "Python",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
-  },
-  {
-    name: "TypeScript",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
-  },
-  {
-    name: "Express.js",
-    icon: "/express.png",
-  },
-  {
-    name: "Next.js",
-    icon: "/nextjs.png",
-  },
-  {
-    name: "Vercel",
-    icon: "/vercel.png",
-  },
-  {
-    name: "Vite",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vitejs/vitejs-original.svg",
-  },
-  {
-    name: "Redux",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg",
-  },
-  {
-    name: "Postman",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg",
-  },
-  {
-    name: "ShadCN",
-    icon: "/shadcn.png",
-  },
-  {
-    name: "JWT",
-    icon: "/jwt.svg",
-  },
-];
+const TechItem = ({ name, icon, index }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      whileHover={{ scale: 1.1, rotate: 2 }}
+      transition={{ delay: index * 0.05 }}
+      className="group relative flex flex-col items-center justify-center p-6 aspect-square rounded-full cosmic-glass hover-lens cursor-pointer"
+    >
+      <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-500">{icon}</div>
+      <span className="micro-text text-[9px] text-starlight/40 group-hover:text-supernova transition-colors font-bold tracking-[0.2em]">{name}</span>
+      
+      {/* Orbital Aura */}
+      <div className="absolute inset-0 rounded-full border border-starlight/5 group-hover:border-supernova/40 group-hover:animate-ping -z-10"></div>
+    </motion.div>
+  );
+};
 
-const TechStack = () => (
-  <div className="mt-8 md:mt-16 pt-4 md:pt-8 px-6 sm:px-10 md:px-12">
-    <div className="mb-6 md:mb-12 text-center">
-      <span className="block text-sm sm:text-base md:text-lg text-white uppercase tracking-widest font-medium mb-2">
-        Tech Stack
-      </span>
-      <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-white mt-2 font-extrabold tracking-tighter relative inline-block drop-shadow-[0_2px_24px_rgba(34,211,238,0.25)]">
-        <span className="bg-gradient-to-r from-cyan-300 via-blue-400 to-fuchsia-400 bg-clip-text text-transparent animate-gradient-x">
-          Technologies I Work With
-        </span>
-        <span className="absolute left-1/2 -translate-x-1/2 bottom-0 w-2/3 h-1 bg-gradient-to-r from-cyan-400 via-blue-400 to-fuchsia-400 rounded-full blur-sm opacity-30" />
-      </h2>
-    </div>
-    <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 md:gap-4 max-w-5xl mx-auto">
-      {techStack.map((tech, index) => (
-        <div
-          key={index}
-          className="icon-container relative flex-shrink-0 group"
-          style={{ flexBasis: "calc(20% - 0.5rem)" }}
+const TechStack = () => {
+  const tech = [
+    { name: "REACT", icon: "⚛️" },
+    { name: "NEXT.JS", icon: "▲" },
+    { name: "TS", icon: "📘" },
+    { name: "NODE.JS", icon: "🟢" },
+    { name: "PRISMA", icon: "◭" },
+    { name: "TAILWIND", icon: "🌊" },
+    { name: "FRAMER", icon: "🪄" },
+    { name: "MYSQL", icon: "🐬" },
+    { name: "POSTGRES", icon: "🐘" },
+    { name: "DOCKER", icon: "🐳" },
+  ];
+
+  return (
+    <section className="relative w-full py-40 overflow-hidden" id="tech">
+      <div className="px-4 md:px-16 mb-24 max-w-7xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          className="micro-text text-neon-purple mb-8 flex items-center gap-4"
         >
-          <div className="rounded-xl sm:rounded-2xl p-2 sm:p-4 md:p-6 cursor-pointer bg-white/0 backdrop-blur-sm shadow-lg card-shake transition-all duration-300 flex flex-col items-center">
-            <img className="w-8 h-8 sm:w-12 sm:h-12 md:w-16 md:h-16" src={tech.icon} alt={tech.name} />
-            <span
-              className={`
-                absolute left-1/2 -translate-x-1/2 mt-6 px-3 py-1 rounded-xl text-xs font-bold pointer-events-none
-                opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300 z-20
-                ${
-                  index % 3 === 0
-                    ? "bg-cyan-900/90 text-cyan-200 shadow-cyan-400/20"
-                    : ""
-                }
-                ${
-                  index % 3 === 1
-                    ? "bg-fuchsia-900/90 text-fuchsia-200 shadow-fuchsia-400/20"
-                    : ""
-                }
-                ${
-                  index % 3 === 2
-                    ? "bg-blue-900/90 text-blue-200 shadow-blue-400/20"
-                    : ""
-                }
-              `}
-              style={{ top: "4.5rem" }}
-            >
-              {tech.name}
-            </span>
-          </div>
+          04 <span className="w-12 h-px bg-neon-purple/30"></span> CONSTELLATION MAPPING
+        </motion.div>
+        
+        <h2 className="celestial-heading text-6xl md:text-8xl text-starlight max-w-3xl">
+          THE ENGINE<br />
+          OF <span className="text-supernova">CREATION</span>
+        </h2>
+      </div>
+
+      <div className="relative max-w-5xl mx-auto px-4">
+        {/* The Grid / Cluster */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8">
+          {tech.map((item, index) => (
+            <TechItem key={item.name} {...item} index={index} />
+          ))}
         </div>
-      ))}
-    </div>
-  </div>
-);
+
+        {/* Decorative Orbital Paths */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full border border-starlight/5 rounded-full scale-125 -z-10 pointer-events-none opacity-20"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] border border-starlight/5 rounded-full scale-150 -z-10 pointer-events-none opacity-10"></div>
+      </div>
+
+      <div className="mt-40 text-center max-w-2xl mx-auto px-4">
+         <p className="font-sans text-starlight/40 text-sm leading-relaxed tracking-wider">
+           EACH COMPONENT REPRESENTS A NODE IN THE LARGER ARCHITECTURAL GALAXY. 
+           ENGINEERED FOR STABILITY, SCALABILITY, AND VISUAL ELEGANCE ACROSS THE DIGITAL VOID.
+         </p>
+      </div>
+    </section>
+  );
+};
 
 export default TechStack;

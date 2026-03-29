@@ -1,88 +1,154 @@
 import React from "react";
-import Card from "./Card";
-import TechStack from "./TechStack";
+import { motion } from "framer-motion";
+import { GraduationCap, Cpu, Laptop, Trophy, Activity, Globe, Briefcase, Mail } from "lucide-react";
 
 const About = () => {
   return (
-    <div className="px-6 sm:px-10 md:px-16 lg:px-28 pt-10 relative z-10" id="about">
-      <div className="text-center mb-8 md:mb-16">
-        <h2 className="text-sm sm:text-base md:text-lg text-white tracking-widest mb-2">
-          INTRODUCTION
-        </h2>
-        <h1 className="text-2xl sm:text-3xl md:text-4xl text-white tracking-tighter relative inline-block font-extrabold drop-shadow-[0_2px_24px_rgba(34,211,238,0.25)]">
-          <span className="bg-gradient-to-r from-cyan-300 via-blue-400 to-fuchsia-400 bg-clip-text text-transparent animate-gradient-x">
-            About Me
-          </span>
-          <span className="absolute left-1/2 -translate-x-1/2 bottom-0 w-2/3 h-1 bg-gradient-to-r from-cyan-400 via-blue-400 to-fuchsia-400 rounded-full blur-sm opacity-30" />
-        </h1>
-      </div>
-      <div className="max-w-4xl mx-auto mb-8 md:mb-16 text-center">
-        <div className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed mb-6 md:mb-12 px-0">
-          <p className="mb-6">
-            Hey there! I'm{" "}
-            <span className="text-white font-medium">Vivek Hipparkar</span>, a
-            software engineer currently pursuing my B.Tech in Computer Science
-            from <span className="text-blue-300">IIIT, Gwalior '26</span>.
-          </p>
-          <p className="mb-6">
-            I'm an avid problem solver, delving into{" "}
-            <span className="text-cyan-300">
-              Data Structures and Algorithms
-            </span>{" "}
-            and
-            <span className="text-cyan-300"> Competitive Programming</span>. As
-            a passionate developer, my expertise spans various frameworks like
-            React and Next.js in creating intuitive and dynamic GUIs.
-          </p>
-          <p className="mb-8">
-            Additionally, I'm well-versed in backend development using Node.js,
-            Express.js, integrating databases like MySQL, MongoDB and
-            PostgreSQL. With a drive for continuous learning, I'm willing to
-            take on any challenges that come my way. Beyond coding, I'm an
-            enthusiastic sportsperson and reader.
-          </p>
-        </div>{" "}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-4xl mx-auto pt-4 md:pt-8 pb-4">
-          <div className="relative flex flex-col items-center text-center rounded-3xl p-4 sm:p-6 md:p-8 group card-3d hover:shadow-cyan-300/30 transition-all duration-300">
-            <div className="absolute top-4 left-1/2 -translate-x-1/2 w-20 sm:w-24 md:w-28 h-20 sm:h-24 md:h-28 bg-cyan-300/15 rounded-full blur-2xl group-hover:scale-110 transition-transform duration-300" />
-            <div className="text-4xl sm:text-5xl md:text-6xl mb-3 z-10 transition-transform duration-300 group-hover:scale-125 group-hover:drop-shadow-[0_6px_32px_rgba(34,211,238,0.7)]">
-              🎓
+    <section className="relative w-full py-32 overflow-hidden stellar-mesh" id="about">
+      <div className="px-6 md:px-16 max-w-7xl mx-auto flex flex-col gap-20">
+        
+        {/* Tier 1: HUD Stats Bar */}
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="w-full flex flex-wrap justify-between items-end gap-8 pb-12 border-b border-void-line"
+        >
+          <div className="flex gap-12">
+            <div>
+              <div className="micro-text mb-2">EXPERIENCE</div>
+              <div className="text-3xl md:text-4xl font-cinematic text-starlight">2.5Y+</div>
             </div>
-            <div className="text-cyan-100 font-extrabold text-base sm:text-lg md:text-xl mb-1 z-10 tracking-wide transition-colors duration-300 group-hover:text-cyan-300 group-hover:drop-shadow-[0_2px_16px_rgba(34,211,238,0.7)]">
-              Student
+            <div>
+              <div className="micro-text mb-2">PROJECTS</div>
+              <div className="text-3xl md:text-4xl font-cinematic text-starlight">30+</div>
             </div>
-            <div className="text-gray-200 text-sm sm:text-base z-10 transition-colors duration-300 group-hover:text-cyan-100">
-              IIIT Gwalior '26
+            <div>
+              <div className="micro-text mb-2">COMMITS</div>
+              <div className="text-3xl md:text-4xl font-cinematic text-starlight">1k+</div>
             </div>
           </div>
-          <div className="relative flex flex-col items-center text-center rounded-3xl p-4 sm:p-6 md:p-8 group card-3d transition-all duration-300">
-            <div className="absolute top-4 left-1/2 -translate-x-1/2 w-20 sm:w-24 md:w-28 h-20 sm:h-24 md:h-28 bg-pink-300/15 rounded-full blur-2xl group-hover:scale-110 transition-transform duration-300" />
-            <div className="text-4xl sm:text-5xl md:text-6xl mb-3 z-10 transition-transform duration-300 group-hover:scale-125 group-hover:drop-shadow-[0_6px_32px_rgba(244,114,182,0.7)]">
-              💻
-            </div>
-            <div className="text-pink-100 font-extrabold text-base sm:text-lg md:text-xl mb-1 z-10 tracking-wide transition-colors duration-300 group-hover:text-pink-300 group-hover:drop-shadow-[0_2px_16px_rgba(244,114,182,0.7)]">
-              Developer
-            </div>
-            <div className="text-gray-200 text-sm sm:text-base z-10 transition-colors duration-300 group-hover:text-pink-100">
-              Full Stack
+
+          <div className="flex flex-col items-end">
+            <div className="micro-text mb-2">DEPLOYMENT STATUS</div>
+            <div className="px-6 py-2 border border-neon-cyan/30 rounded-sm status-pulse-cyan bg-neon-cyan/5">
+              <span className="text-neon-cyan font-mono font-bold tracking-widest text-sm flex items-center gap-2">
+                <span className="w-2 h-2 bg-neon-cyan rounded-full animate-pulse" />
+                STATUS: OPEN
+              </span>
             </div>
           </div>
-          {/* Problem Solver Card */}
-          <div className="relative flex flex-col items-center text-center rounded-3xl p-4 sm:p-6 md:p-8 group card-3d hover:shadow-blue-400/30 transition-all duration-300">
-            <div className="absolute top-4 left-1/2 -translate-x-1/2 w-20 sm:w-24 md:w-28 h-20 sm:h-24 md:h-28 bg-blue-300/15 rounded-full blur-2xl group-hover:scale-110 transition-transform duration-300" />
-            <div className="text-4xl sm:text-5xl md:text-6xl mb-3 z-10 transition-transform duration-300 group-hover:scale-125 group-hover:drop-shadow-[0_6px_32px_rgba(96,165,250,0.7)]">
-              🏆
+        </motion.div>
+
+        {/* Tier 2: Identity Registry (Pilot Cards) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+          {[
+            { label: "STUDENT REGISTRY", title: "IIIT Gwalior", sub: "Class of 2027", icon: GraduationCap, color: "text-supernova" },
+            { label: "PILOT DESIGNATION", title: "Full Stack Engineer", sub: "Digital Architectures", icon: Laptop, color: "text-neon-cyan" },
+            { label: "COMBAT STATS", title: "DSA & Problem Solving", sub: "Competitive Programming", icon: Trophy, color: "text-neon-purple" }
+          ].map((card, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              whileHover={{ y: -15, scale: 1.05 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4 }}
+              className="stellar-glass p-8 group cursor-pointer"
+            >
+              <div className="absolute hud-corner hud-corner-tl group-hover:w-4 group-hover:h-4 transition-all" />
+              <div className="absolute hud-corner hud-corner-tr group-hover:w-4 group-hover:h-4 transition-all" />
+              <div className="absolute hud-corner hud-corner-bl group-hover:w-4 group-hover:h-4 transition-all" />
+              <div className="absolute hud-corner hud-corner-br group-hover:w-4 group-hover:h-4 transition-all" />
+
+              <div className={`micro-text ${card.color} mb-6 flex items-center gap-3`}>
+                <card.icon size={14} />
+                {card.label}
+              </div>
+              <h3 className="text-xl font-bold text-starlight mb-1">{card.title}</h3>
+              <p className="text-starlight/50 text-sm italic">{card.sub}</p>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Tier 3: Data Core (Bio & Skills) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+          
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="lg:col-span-5 space-y-8"
+          >
+            <p className="text-2xl md:text-3xl text-starlight/90 leading-snug font-cinematic tracking-tight">
+              I'm a <span className="text-starlight font-bold border-b-2 border-neon-cyan">full-stack developer</span> who obsesses over load times, system design, and building products that feel as good as they perform.
+            </p>
+            <p className="text-starlight/60 text-lg leading-relaxed">
+              Currently engineering at <span className="text-starlight font-medium italic underline decoration-supernova decoration-2 underline-offset-4">IIIT Gwalior</span>. 
+              🌱 Diving deep into DevOps, Go & distributed systems. Every detail matters—every millisecond counts.
+            </p>
+            
+            <div className="flex gap-4 pt-4">
+              <a href="https://github.com/Vivek1819" target="_blank" rel="noreferrer" title="GitHub" className="p-3 bg-void-line hover:bg-neon-cyan/20 rounded-full transition-colors border border-white/5">
+                <Globe size={20} className="text-starlight" />
+              </a>
+              <a href="https://www.linkedin.com/in/vivekhipparkar/" target="_blank" rel="noreferrer" title="LinkedIn" className="p-3 bg-void-line hover:bg-neon-cyan/20 rounded-full transition-colors border border-white/5">
+                <Briefcase size={20} className="text-starlight" />
+              </a>
+              <a href="mailto:vivekhipparkar@gmail.com" title="Email" className="p-3 bg-void-line hover:bg-neon-cyan/20 rounded-full transition-colors border border-white/5">
+                <Mail size={20} className="text-starlight" />
+              </a>
             </div>
-            <div className="text-blue-100 font-extrabold text-base sm:text-lg md:text-xl mb-1 z-10 tracking-wide transition-colors duration-500 group-hover:text-blue-300 group-hover:drop-shadow-[0_2px_16px_rgba(96,165,250,0.7)]">
-              Problem Solver
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="lg:col-span-7"
+          >
+            <div className="stellar-glass p-1 h-full">
+              <div className="p-6 border-b border-void-line flex justify-between items-center bg-white/5">
+                <div className="flex items-center gap-3">
+                  <Cpu size={16} className="text-supernova" />
+                  <span className="micro-text text-starlight">SKILLS BREAKDOWN</span>
+                </div>
+                <div className="flex gap-1">
+                  <div className="w-1 h-1 bg-supernova rounded-full animate-ping" />
+                  <div className="w-1 h-1 bg-void-line rounded-full" />
+                  <div className="w-1 h-1 bg-void-line rounded-full" />
+                </div>
+              </div>
+              
+              <div className="divide-y divide-void-line font-mono text-xs">
+                {[
+                  { cat: "FRONTEND", stack: "React · Next.js · Framer Motion · Tailwind" },
+                  { cat: "BACKEND", stack: "Node.js · Express · Go · Prisma · REST : Fastify" },
+                  { cat: "DATABASE", stack: "PostgreSQL · MongoDB · Redis · MySQL" },
+                  { cat: "DEVOPS", stack: "Docker · Kubernetes · CI/CD · AWS" },
+                  { cat: "LANGUAGES", stack: "TypeScript · JavaScript · Python · Go · C++ · Java" }
+                ].map((row, i) => (
+                  <div key={i} className="flex grid grid-cols-4 p-5 group hover:bg-white/[0.02] transition-colors">
+                    <div className="col-span-1 text-starlight/40 font-bold">{row.cat}</div>
+                    <div className="col-span-3 text-starlight/80 group-hover:text-neon-cyan transition-colors">{row.stack}</div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Slanted Badges Footer */}
+              <div className="p-6 flex flex-wrap gap-4 bg-void-900/40">
+                {["REACT", "NODE.JS", "PYTHON", "GO", "DOCKER"].map((t, idx) => (
+                  <div key={idx} className="trapezoid-badge text-[10px] font-bold tracking-widest text-starlight/90">
+                    {t}
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="text-gray-200 text-sm sm:text-base z-10 transition-colors duration-300 group-hover:text-blue-200">
-              DSA & CP
-            </div>
-          </div>
+          </motion.div>
+
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
