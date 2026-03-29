@@ -1,7 +1,6 @@
 @import "tailwindcss";
 
 @theme {
-  /* Cosmic Palette */
   --color-void-900: #020204;
   --color-void-800: #08080c;
   --color-void-line: rgba(255, 255, 255, 0.03);
@@ -18,14 +17,12 @@
   --font-cinematic: "Space Grotesk", sans-serif;
   --font-sans: "Inter", sans-serif;
 
-  /* Animations as variable-style refs */
   --animate-float: float 8s ease-in-out infinite;
   --animate-orbit: orbit 20s linear infinite;
   --animate-pulse-aura: pulseAura 4s ease-in-out infinite;
   --animate-pulse-aura-slow: pulseAura 8s ease-in-out infinite;
 }
 
-/* Standalone Animations */
 @keyframes float {
   0%, 100% { transform: translateY(0) rotate(0deg); }
   50% { transform: translateY(-15px) rotate(1deg); }
@@ -49,14 +46,14 @@
 @layer base {
   body {
     cursor: crosshair;
-    background-color: var(--color-void-900);
-    color: var(--color-starlight);
-    @apply antialiased overflow-x-hidden;
+    background-color: #020204;
+    color: #ffffff;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
 }
 
 @layer utilities {
-  /* Stellar Glass (Holographic Panes) */
   .stellar-glass {
     background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
     backdrop-filter: blur(24px);
@@ -72,33 +69,21 @@
     pointer-events: none;
   }
 
-  /* HUD Details */
   .hud-corner {
-    @apply absolute w-2 h-2 border-starlight/20;
+    position: absolute;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-color: rgba(255, 255, 255, 0.2);
   }
-  .hud-corner-tl { @apply top-2 left-2 border-t border-l; }
-  .hud-corner-tr { @apply top-2 right-2 border-t border-r; }
-  .hud-corner-bl { @apply bottom-2 left-2 border-b border-l; }
-  .hud-corner-br { @apply bottom-2 right-2 border-b border-r; }
+  .hud-corner-tl { top: 0.5rem; left: 0.5rem; border-top-width: 1px; border-left-width: 1px; }
+  .hud-corner-tr { top: 0.5rem; right: 0.5rem; border-top-width: 1px; border-right-width: 1px; }
+  .hud-corner-bl { bottom: 0.5rem; left: 0.5rem; border-bottom-width: 1px; border-left-width: 1px; }
+  .hud-corner-br { bottom: 0.5rem; right: 0.5rem; border-bottom-width: 1px; border-right-width: 1px; }
 
-  /* Glow Effects */
-  .glow-purple {
-    box-shadow: 0 0 40px rgba(168, 85, 247, 0.15);
-  }
-  
-  .glow-gold {
-    box-shadow: 0 0 40px rgba(251, 191, 36, 0.15);
-  }
-
-  .text-glow-starlight {
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
-  }
-
-  /* Stellar Mesh (HUD Navigational Grid) */
   .stellar-mesh {
     background-image: 
-      linear-gradient(var(--color-void-line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--color-void-line) 1px, transparent 1px);
+      linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
     background-size: 40px 40px;
     position: relative;
   }
@@ -106,55 +91,48 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at center, transparent 30%, var(--color-void-900) 100%);
+    background: radial-gradient(circle at center, transparent 30%, #020204 100%);
     pointer-events: none;
   }
 
-  /* Trapezoid Badges (Slanted HUD badges) */
   .trapezoid-badge {
     clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
-    @apply px-6 py-2 bg-starlight/5 border-l-2 border-neon-cyan/40 transition-all duration-300;
+    padding: 0.5rem 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-left: 2px solid rgba(6, 182, 212, 0.4);
+    transition: all 0.3s;
   }
   .trapezoid-badge:hover {
-    @apply bg-neon-cyan/10 border-neon-cyan scale-105;
+    background: rgba(6, 182, 212, 0.1);
+    border-color: #06b6d4;
+    transform: scale(1.05);
   }
 
   .status-pulse-cyan {
     animation: pulseCyan 2.5s ease-in-out infinite;
   }
 
-  /* Micro-typography */
   .micro-text {
-    @apply font-mono text-[9px] md:text-[11px] tracking-[0.5em] uppercase text-starlight/50;
+    font-family: "Space Grotesk", monospace;
+    font-size: 11px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
   }
 
-  /* Celestial Heading */
   .celestial-heading {
-    @apply font-cinematic font-medium tracking-tight uppercase leading-[0.9] text-glow-starlight;
-  }
-
-  /* Hover distortions */
-  .hover-lens {
-    @apply relative; /* Removed CSS transitions to let Framer Motion handle motion purely */
-  }
-  .hover-lens:hover {
-    @apply scale-[1.02];
-    border-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 255, 255, 0.05);
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 500;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+    line-height: 0.9;
+    color: #ffffff;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
   }
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar { width: 3px; }
-::-webkit-scrollbar-track { background: var(--color-void-900); }
+::-webkit-scrollbar-track { background: #020204; }
 ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); }
-::-webkit-scrollbar-thumb:hover { background: var(--color-supernova); }
-
-/* Remove previous HUD fixed vignette if present in code */
-.global-vignette {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 100;
-  background: radial-gradient(circle at center, transparent 30%, rgba(0,0,0,0.9) 100%);
-}
+::-webkit-scrollbar-thumb:hover { background: #fbbf24; }

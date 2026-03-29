@@ -49,11 +49,11 @@ const About = () => {
           ].map((card, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              whileHover={{ y: -15, scale: 1.05 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              whileHover={{ y: -25, scale: 1.08, transition: { type: "spring", stiffness: 400, damping: 25 } }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4 }}
+              transition={{ duration: 0.6, delay: i * 0.1 }}
               className="stellar-glass p-8 group cursor-pointer"
             >
               <div className="absolute hud-corner hud-corner-tl group-hover:w-4 group-hover:h-4 transition-all" />
