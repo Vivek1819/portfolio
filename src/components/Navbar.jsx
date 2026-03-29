@@ -6,7 +6,7 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 w-full flex items-center justify-between py-8 px-4 md:px-16 z-50 pointer-events-none">
       <div className="pointer-events-auto">
         <a href="/" className="celestial-heading text-4xl text-glow-starlight hover:text-supernova transition-all">
-          V.
+          <img src="/logo.png" alt="Logo" className="w-10 h-10" />
         </a>
       </div>
       

@@ -34,7 +34,7 @@ function App() {
         <Navbar />
         <ScrollProgress />
 
-        <main className="w-full pb-20 overflow-hidden pt-24 custom-scroll">
+        <main className="w-full pb-20 pt-24 custom-scroll">
           <Hero />
           <About />
           <Work />

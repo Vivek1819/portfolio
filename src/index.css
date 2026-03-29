@@ -43,6 +43,17 @@
   50% { box-shadow: 0 0 30px rgba(6, 182, 212, 0.8); border-color: rgba(6, 182, 212, 1); }
 }
 
+@keyframes scanVertical {
+  0% { top: 0; opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+@keyframes scanSweep {
+  0% { transform: translateY(-100%); }
+  50% { transform: translateY(100%); }
+  100% { transform: translateY(-100%); }
+}
+
 @keyframes colorFlash {
   0%, 85% { 
     color: #ffffff;
