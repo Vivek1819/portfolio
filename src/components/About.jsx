@@ -7,6 +7,20 @@ const About = () => {
     <section className="relative w-full py-32 overflow-hidden stellar-mesh" id="about">
       <div className="px-6 md:px-16 max-w-7xl mx-auto flex flex-col gap-20">
         
+        <div className="w-full">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="micro-text text-neon-cyan mb-8 flex items-center gap-4"
+          >
+            01 <span className="w-12 h-px bg-neon-cyan/30"></span> PILOT IDENTITY
+          </motion.div>
+          <h2 className="celestial-heading text-6xl md:text-8xl text-starlight">
+            SYSTEM<br />
+            <span className="text-neon-cyan">ARCHITECT</span>
+          </h2>
+        </div>
+
         {/* Tier 1: HUD Stats Bar */}
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
@@ -17,7 +31,7 @@ const About = () => {
           <div className="flex gap-12">
             <div>
               <div className="micro-text mb-2">EXPERIENCE</div>
-              <div className="text-3xl md:text-4xl font-cinematic text-starlight">2.5Y+</div>
+              <div className="text-3xl md:text-4xl font-cinematic text-starlight">3.5Y+</div>
             </div>
             <div>
               <div className="micro-text mb-2">PROJECTS</div>
@@ -43,7 +57,7 @@ const About = () => {
         {/* Tier 2: Identity Registry (Pilot Cards) */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
           {[
-            { label: "STUDENT REGISTRY", title: "IIIT Gwalior", sub: "Class of 2027", icon: GraduationCap, color: "text-supernova" },
+            { label: "STUDENT REGISTRY", title: "IIIT Gwalior", sub: "Class of 2026", icon: GraduationCap, color: "text-supernova" },
             { label: "PILOT DESIGNATION", title: "Full Stack Engineer", sub: "Digital Architectures", icon: Laptop, color: "text-neon-cyan" },
             { label: "COMBAT STATS", title: "DSA & Problem Solving", sub: "Competitive Programming", icon: Trophy, color: "text-neon-purple" }
           ].map((card, i) => (
@@ -123,7 +137,7 @@ const About = () => {
               <div className="divide-y divide-void-line font-mono text-xs">
                 {[
                   { cat: "FRONTEND", stack: "React · Next.js · Framer Motion · Tailwind" },
-                  { cat: "BACKEND", stack: "Node.js · Express · Go · Prisma · REST : Fastify" },
+                  { cat: "BACKEND", stack: "Node.js · Express · Go · Prisma · REST · Fastify" },
                   { cat: "DATABASE", stack: "PostgreSQL · MongoDB · Redis · MySQL" },
                   { cat: "DEVOPS", stack: "Docker · Kubernetes · CI/CD · AWS" },
                   { cat: "LANGUAGES", stack: "TypeScript · JavaScript · Python · Go · C++ · Java" }

@@ -81,18 +81,20 @@
   .hud-corner-br { bottom: 0.5rem; right: 0.5rem; border-bottom-width: 1px; border-right-width: 1px; }
 
   .stellar-mesh {
+    position: relative;
+  }
+  .stellar-mesh::before {
+    content: "";
+    position: absolute;
+    inset: 0;
     background-image: 
       linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
       linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
     background-size: 40px 40px;
-    position: relative;
-  }
-  .stellar-mesh::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at center, transparent 30%, #020204 100%);
+    mask-image: radial-gradient(circle at center, black 30%, transparent 100%);
+    -webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 100%);
     pointer-events: none;
+    z-index: -1;
   }
 
   .trapezoid-badge {
