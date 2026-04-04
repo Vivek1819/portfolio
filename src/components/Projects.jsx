@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Terminal, ExternalLink, Activity } from "lucide-react";
+import DecipherText from "./common/DecipherText";
 
 const projectsData = [
   {
@@ -207,8 +208,8 @@ const Projects = () => {
                    03 <span className="w-12 h-px bg-neon-cyan/30"></span> DIRECTORY SCAN
                  </div>
                  <h2 className="celestial-heading text-5xl md:text-7xl text-starlight leading-tight">
-                   ORBITAL<br/>
-                   <span className="text-neon-cyan">HANGAR</span>
+                    <DecipherText text="ORBITAL" delay={0.4} /><br/>
+                    <span className="aurora-text"><DecipherText text="HANGAR" delay={0.7} /></span>
                  </h2>
                  <p className="mt-8 font-sans text-starlight/60 max-w-md text-base md:text-lg leading-relaxed">
                    Accessing the engineering databanks. Glide through this horizontal sector to inspect my deployed web applications, full-stack monoliths, and architectural blueprints.

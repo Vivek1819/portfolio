@@ -23,6 +23,13 @@
   --animate-pulse-aura-slow: pulseAura 8s ease-in-out infinite;
   --animate-marquee: marqueeText 40s linear infinite;
   --animate-marquee-reverse: marqueeReverse 50s linear infinite;
+  --animate-aurora: aurora 8s ease infinite;
+}
+
+@keyframes aurora {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 @keyframes float {
@@ -89,13 +96,22 @@
   }
 }
 
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 @layer base {
   body {
-    cursor: crosshair;
+    cursor: none; /* Hide default cursor for CustomCursor */
     background-color: #020204;
     color: #ffffff;
     -webkit-font-smoothing: antialiased;
@@ -188,6 +204,31 @@ html {
     line-height: 0.9;
     color: #ffffff;
     text-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+  }
+
+  .text-glow-starlight {
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+  }
+
+  .magnetic {
+    transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .aurora-text {
+    background: linear-gradient(
+      to right,
+      #06b6d4,
+      #a855f7,
+      #fbbf24,
+      #06b6d4
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: aurora 5s linear infinite;
+    display: inline-block;
+    line-height: 1.1; /* Slightly more than leading for stability */
   }
 }
 

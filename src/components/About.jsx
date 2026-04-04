@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { GraduationCap, Cpu, Laptop, Trophy, Activity, Globe, Briefcase, Mail } from "lucide-react";
+import DecipherText from "./common/DecipherText";
 
 const About = () => {
   return (
@@ -16,8 +17,8 @@ const About = () => {
             01 <span className="w-12 h-px bg-neon-cyan/30"></span> PILOT IDENTITY
           </motion.div>
           <h2 className="celestial-heading text-6xl md:text-8xl text-starlight">
-            SYSTEM<br />
-            <span className="text-neon-cyan">ARCHITECT</span>
+            <DecipherText text="SYSTEM" delay={0.4} /><br />
+            <span className="aurora-text"><DecipherText text="ARCHITECT" delay={0.7} /></span>
           </h2>
         </div>
 
@@ -63,12 +64,12 @@ const About = () => {
           ].map((card, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              whileHover={{ y: -25, scale: 1.08, transition: { type: "spring", stiffness: 400, damping: 25 } }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              whileHover={{ y: -5, transition: { type: "spring", stiffness: 400, damping: 25 } }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="stellar-glass p-8 group cursor-pointer"
+              className="stellar-glass p-8 group cursor-pointer h-full relative"
             >
               <div className="absolute hud-corner hud-corner-tl group-hover:w-4 group-hover:h-4 transition-all" />
               <div className="absolute hud-corner hud-corner-tr group-hover:w-4 group-hover:h-4 transition-all" />
@@ -79,7 +80,9 @@ const About = () => {
                 <card.icon size={14} />
                 {card.label}
               </div>
-              <h3 className="text-xl font-bold text-starlight mb-1">{card.title}</h3>
+              <h3 className="text-xl font-bold text-starlight mb-1">
+                {card.title}
+              </h3>
               <p className="text-starlight/50 text-sm italic">{card.sub}</p>
             </motion.div>
           ))}

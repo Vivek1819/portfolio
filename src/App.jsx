@@ -11,6 +11,8 @@ import Contact from "./components/Contact";
 import ScrollToTop from "./components/ScrollToTop";
 import ScrollProgress from "./components/ScrollProgress";
 import { AnimatePresence, motion } from "framer-motion";
+import GlobalHUD from "./components/common/GlobalHUD";
+import CustomCursor from "./components/common/CustomCursor";
 
 const QuantumShift = ({ isWarping }) => (
   <AnimatePresence>
@@ -60,6 +62,9 @@ function App() {
         
         {/* Full Immersion Background */}
         <UniverseBackground />
+        
+        <CustomCursor />
+        <GlobalHUD />
 
         {/* Global Atmospheric Effects */}
         <div className="global-vignette"></div>

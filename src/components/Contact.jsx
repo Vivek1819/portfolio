@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import DecipherText from "./common/DecipherText";
 
 const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -20,15 +21,15 @@ const Contact = () => {
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            className="micro-text text-supernova flex items-center gap-4"
+            className="micro-text text-neon-cyan flex items-center gap-4"
           >
-            05 <span className="w-12 h-px bg-supernova/30"></span> INITIATE CONNECTION
+            05 <span className="w-12 h-px bg-neon-cyan/30"></span> INITIATE CONNECTION
           </motion.div>
 
-          <h2 className="celestial-heading text-7xl md:text-8xl xl:text-[10rem] text-starlight leading-[0.8] tracking-tighter">
-            THE<br />
-            <span className="text-supernova">UNIVERSE</span><br />
-            AWAITS.
+          <h2 className="celestial-heading text-6xl md:text-8xl xl:text-9xl text-starlight leading-[0.95] tracking-tighter">
+            <DecipherText text="THE" delay={0.3} /><br />
+            <span className="aurora-text whitespace-nowrap"><DecipherText text="UNIVERSE" delay={0.6} /></span><br />
+            <DecipherText text="AWAITS." delay={0.9} />
           </h2>
 
           <div className="mt-12 flex flex-col gap-10">
@@ -55,7 +56,7 @@ const Contact = () => {
         </div>
 
         {/* Right Area - Form */}
-        <div className="lg:w-1/2 w-full cosmic-glass p-12 md:p-16 rounded-[3rem] relative z-10 hover-lens">
+        <div className="lg:w-1/2 w-full max-w-xl cosmic-glass p-8 md:p-16 rounded-[3rem] relative z-10 hover-lens">
           <form onSubmit={handleSubmit} className="flex flex-col gap-10">
             <div className="flex flex-col gap-2 group">
               <label className="micro-text text-starlight/30 group-focus-within:text-supernova transition-colors">YOUR DESIGNATION</label>

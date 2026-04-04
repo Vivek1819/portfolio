@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import DecipherText from "./common/DecipherText";
 
 // Custom Brand Assets (Using 100% Transparent Vector SVGs)
 const langchainLogo = "https://www.vectorlogo.zone/logos/langchain/langchain-icon.svg";
@@ -93,7 +94,7 @@ const TechStack = () => {
         </motion.div>
         
         <h2 className="celestial-heading text-4xl md:text-6xl text-starlight relative z-10 transition-all duration-700 font-light">
-          THE ENGINE OF <span className="text-transparent bg-clip-text bg-gradient-to-r from-starlight to-supernova/80 drop-shadow-[0_0_15px_rgba(251,191,36,0.2)]">CREATION</span>
+          <DecipherText text="THE ENGINE OF" delay={0.3} /> <span className="aurora-text drop-shadow-[0_0_15px_rgba(6,182,212,0.2)]"><DecipherText text="CREATION" delay={0.6} /></span>
         </h2>
        </div>
 

@@ -1,10 +1,28 @@
 import React, { useState, useEffect } from "react";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
+import DecipherText from "./common/DecipherText";
 
 const Hero = () => {
   const { scrollY } = useScroll();
   const yParallax = useTransform(scrollY, [0, 500], [0, 100]);
   const opacityFade = useTransform(scrollY, [0, 200], [1, 0]);
+
+  // Singularity Pull Effect
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const springX = useSpring(mouseX, { stiffness: 50, damping: 20 });
+  const springY = useSpring(mouseY, { stiffness: 50, damping: 20 });
+
+  const handleMouseMove = (e) => {
+    const { clientX, clientY } = e;
+    const { innerWidth, innerHeight } = window;
+    // Calculate distance from center (-0.5 to 0.5)
+    mouseX.set((clientX / innerWidth) - 0.5);
+    mouseY.set((clientY / innerHeight) - 0.5);
+  };
+
+  const pullX = useTransform(springX, [-0.5, 0.5], ["-20px", "20px"]);
+  const pullY = useTransform(springY, [-0.5, 0.5], ["-20px", "20px"]);
 
   const roles = ["CREATIVE ENGINEER", "FULL STACK DEVELOPER", "SYSTEM ARCHITECT", "CODE ARTIST"];
   const [roleIndex, setRoleIndex] = useState(0);
@@ -17,7 +35,11 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-4 md:px-8" id="hero">
+    <div 
+      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-4 md:px-8" 
+      id="hero"
+      onMouseMove={handleMouseMove}
+    >
       
       {/* The Celestial Singularity (Energy Core) */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40vw] h-[40vw] max-w-[600px] max-h-[600px] rounded-full animate-pulse-aura z-0 pointer-events-none" 
@@ -27,7 +49,7 @@ const Hero = () => {
 
       {/* Main Title Content */}
       <motion.div
-        style={{ y: yParallax, opacity: opacityFade }}
+        style={{ y: yParallax, opacity: opacityFade, x: pullX, y: pullY }}
         className="relative z-10 text-center flex flex-col items-center"
       >
         <div className="micro-text mb-8 tracking-[1em] text-starlight/30">
@@ -40,7 +62,7 @@ const Hero = () => {
           transition={{ duration: 1.5, ease: "easeOut" }}
           className="celestial-heading text-[12vw] sm:text-[10vw] md:text-9xl xl:text-[12rem] animate-float animate-color-flash font-bold"
         >
-          VIVEK
+          <DecipherText text="VIVEK" speed={50} delay={1.5} />
         </motion.h1>
         
         <motion.div

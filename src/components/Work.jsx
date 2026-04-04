@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import DecipherText from "./common/DecipherText";
 
 const Waypoint = ({ exp, index }) => {
   const isEven = index % 2 === 0;
@@ -38,19 +39,8 @@ const Waypoint = ({ exp, index }) => {
           isEven ? 'md:mr-auto md:pr-12 text-left md:text-right' : 'md:ml-auto md:pl-12 text-left'
         } relative z-30`}
       >
-        <div className="cosmic-glass border border-starlight/5 p-6 md:p-8 rounded-lg relative overflow-hidden transition-all duration-500 hover:border-neon-cyan/30 hover:bg-starlight-dim/5 group/card">
+        <div className="cosmic-glass border border-starlight/5 p-6 md:p-8 rounded-lg relative overflow-hidden transition-all duration-500 hover:border-neon-cyan/20 hover:bg-starlight-dim/5 group/card">
           
-          {/* Top scanning line on hover */}
-          <div className={`absolute top-0 w-full h-[1px] bg-gradient-to-r ${isEven ? 'from-transparent via-supernova to-transparent origin-right right-0' : 'from-transparent via-supernova to-transparent origin-left left-0'} scale-x-0 group-hover:scale-x-100 transition-transform duration-700`}></div>
-          {/* Glitch Aberration Effect Line */}
-          <div className="absolute left-0 w-[2px] h-full bg-neon-purple opacity-0 group-hover:opacity-50 transition-opacity duration-300 pointer-events-none mix-blend-screen"></div>
-
-          {/* HUD Target Brackets */}
-          <div className="absolute top-3 left-3 w-3 h-3 border-t border-l border-starlight/30 group-hover:border-neon-cyan transition-colors"></div>
-          <div className="absolute bottom-3 right-3 w-3 h-3 border-b border-r border-starlight/30 group-hover:border-neon-cyan transition-colors"></div>
-          <div className="absolute top-3 right-3 w-3 h-3 border-t border-r border-starlight/30 group-hover:border-neon-cyan transition-colors"></div>
-          <div className="absolute bottom-3 left-3 w-3 h-3 border-b border-l border-starlight/30 group-hover:border-neon-cyan transition-colors"></div>
-
           <div className={`micro-text text-supernova flex items-center gap-3 mb-4 ${isEven ? 'md:justify-end' : 'justify-start'}`}>
             <span className="w-1.5 h-1.5 bg-supernova rounded-full blur-[1px] group-hover:animate-ping"></span>
             JUMP DURATION: {exp.period}
@@ -64,22 +54,18 @@ const Waypoint = ({ exp, index }) => {
             COORDINATE // <span className="text-neon-cyan font-bold group-hover:text-starlight transition-colors">{exp.company}</span>
           </div>
 
-          {/* Tech Scan Data Expansion (reveals on hover) */}
-          <div className={`mt-8 overflow-hidden transition-all duration-500 max-h-0 opacity-0 group-hover:max-h-[100px] group-hover:opacity-100 flex flex-col gap-2 ${isEven ? 'md:items-end' : 'items-start'}`}>
-             <span className="micro-text text-[8px] text-starlight/40">SCAN DATA [MODULES]:</span>
-             <div className={`flex flex-wrap gap-2 ${isEven ? 'md:justify-end' : 'justify-start'}`}>
-               {exp.tech.map((t, i) => (
-                  <span key={i} className="px-2 py-1 text-[9px] font-mono border border-neon-cyan/20 bg-neon-cyan/5 text-neon-cyan/80 group-hover:border-neon-cyan/50 transition-colors duration-300">
-                    {t}
-                  </span>
-               ))}
-             </div>
+          <div className={`mt-6 flex flex-wrap gap-2 ${isEven ? 'md:justify-end' : 'justify-start'}`}>
+            {exp.tech.map((t, i) => (
+              <span key={i} className="px-2 py-1 text-[9px] font-mono border border-starlight/10 bg-white/5 text-starlight/60">
+                {t}
+              </span>
+            ))}
           </div>
 
           <div className={`mt-6 flex gap-1.5 opacity-40 group-hover:opacity-80 transition-opacity ${isEven ? 'md:justify-end' : 'justify-start'}`}>
-            <div className="h-px w-8 bg-starlight group-hover:bg-neon-cyan"></div>
-            <div className="h-px w-2 bg-starlight group-hover:bg-neon-cyan"></div>
-            <div className="h-px w-1 bg-starlight group-hover:bg-neon-cyan"></div>
+            <div className="h-px w-8 bg-starlight"></div>
+            <div className="h-px w-2 bg-starlight"></div>
+            <div className="h-px w-1 bg-starlight"></div>
           </div>
         </div>
         
@@ -179,8 +165,8 @@ const Work = () => {
             <span className="w-12 h-px bg-neon-cyan/30"></span>
           </motion.div>
           <h2 className="celestial-heading text-6xl md:text-8xl text-starlight">
-            MISSION<br />
-            <span className="text-neon-cyan">HISTORY</span>
+            <DecipherText text="MISSION" delay={0.5} /><br />
+            <span className="aurora-text"><DecipherText text="HISTORY" delay={0.8} /></span>
           </h2>
         </div>
 
