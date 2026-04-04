@@ -12,7 +12,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="relative w-full py-40 overflow-hidden" id="contact">
+    <section className="relative w-full py-40 overflow-hidden" id="contact">
       <div className="px-4 md:px-16 max-w-7xl mx-auto flex flex-col lg:flex-row gap-24 items-start">
         
         {/* Left Area - Identity */}
@@ -99,7 +99,7 @@ const Contact = () => {
 
       {/* Decorative Energy Field */}
       <div className="absolute top-[40%] left-[-10%] w-[50vw] h-[50vw] bg-supernova/5 blur-[150px] rounded-full pointer-events-none -z-10 animate-pulse-aura"></div>
-    </div>
+    </section>
   );
 };
 

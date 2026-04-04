@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useWarpDrive } from "../hooks/useWarpDrive";
 
 const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const { initiateJump } = useWarpDrive();
 
   useEffect(() => {
     const toggleVisibility = () => {
@@ -19,10 +21,8 @@ const ScrollToTop = () => {
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    // Assuming we add id="hero" to the first section
+    initiateJump("hero");
   };
 
   return (

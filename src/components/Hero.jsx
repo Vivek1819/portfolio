@@ -17,7 +17,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-4 md:px-8">
+    <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-4 md:px-8" id="hero">
       
       {/* The Celestial Singularity (Energy Core) */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40vw] h-[40vw] max-w-[600px] max-h-[600px] rounded-full animate-pulse-aura z-0 pointer-events-none" 

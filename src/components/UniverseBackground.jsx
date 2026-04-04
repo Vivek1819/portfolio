@@ -13,6 +13,8 @@ const UniverseBackground = () => {
     let animationFrameId;
     let width = window.innerWidth;
     let height = window.innerHeight;
+    let isWarping = false;
+    let warpFactor = 0; // 0 to 1
 
     // Celestial components
     let starsNear = [];
@@ -249,13 +251,16 @@ const UniverseBackground = () => {
 
     const animate = () => {
       ctx.globalCompositeOperation = 'source-over';
-      ctx.fillStyle = "rgba(4, 2, 8, 0.15)"; // Darkened for higher contrast
+      
+      // Dynamic motion blur based on warp
+      const clearOpacity = isWarping ? 0.35 : 0.15;
+      ctx.fillStyle = `rgba(4, 2, 8, ${clearOpacity})`; 
       ctx.fillRect(0, 0, width, height);
 
       // Galaxies (Subtle)
       galaxyCanvases.forEach(g => {
         if (!g.canvas) return;
-        ctx.globalAlpha = 0.4;
+        ctx.globalAlpha = 0.4 * (1 - warpFactor * 0.8); // Fade galaxies during warp
         ctx.drawImage(g.canvas, g.x - 600 * g.scale, g.y - 600 * g.scale, 1200 * g.scale, 1200 * g.scale);
         ctx.globalAlpha = 1;
       });
@@ -265,7 +270,7 @@ const UniverseBackground = () => {
         n.angle += n.velocity;
         ctx.save(); ctx.translate(n.x, n.y); ctx.rotate(n.angle);
         const grad = ctx.createRadialGradient(0, 0, 0, 0, 0, n.radius);
-        grad.addColorStop(0, `rgba(${n.color}, ${n.opacity})`);
+        grad.addColorStop(0, `rgba(${n.color}, ${n.opacity * (1 - warpFactor)})`);
         grad.addColorStop(1, 'transparent');
         ctx.fillStyle = grad; ctx.globalCompositeOperation = 'screen';
         ctx.beginPath(); ctx.arc(0, 0, n.radius, 0, Math.PI * 2); ctx.fill();
@@ -273,19 +278,64 @@ const UniverseBackground = () => {
       });
 
       if (Math.random() < 0.005) triggerShootingStar();
-      drawCinematicStars(starsFar);
-      drawCinematicStars(starsMid);
-      drawCinematicStars(starsNear);
-      drawVolumetricVortex();
-      drawShootingStars();
+
+      // Smooth warpFactor transition
+      if (isWarping) {
+        warpFactor = Math.min(1, warpFactor + 0.05);
+      } else {
+        warpFactor = Math.max(0, warpFactor - 0.03);
+      }
+
+      // Draw Stars with Stretching
+      const drawStretchedStars = (stars, stretchMult) => {
+        const now = Date.now();
+        stars.forEach(s => {
+          const twinkle = Math.sin(now * s.twinkleSpeed + s.twinklePhase) * 0.3 + 0.7;
+          ctx.globalAlpha = s.baseOpacity * twinkle;
+          
+          if (warpFactor > 0.01) {
+             const stretch = warpFactor * stretchMult * 40;
+             const grad = ctx.createLinearGradient(s.x, s.y, s.x, s.y + stretch);
+             grad.addColorStop(0, s.color);
+             grad.addColorStop(1, 'transparent');
+             ctx.strokeStyle = grad;
+             ctx.lineWidth = s.size;
+             ctx.beginPath();
+             ctx.moveTo(s.x, s.y);
+             ctx.lineTo(s.x, s.y + stretch);
+             ctx.stroke();
+          } else {
+             ctx.fillStyle = s.color;
+             ctx.beginPath(); ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2); ctx.fill();
+          }
+        });
+        ctx.globalAlpha = 1;
+      };
+
+      drawStretchedStars(starsFar, 1.2);
+      drawStretchedStars(starsMid, 2.5);
+      drawStretchedStars(starsNear, 4.5);
+
+      if (!isWarping) {
+        drawVolumetricVortex();
+        drawShootingStars();
+      }
 
       animationFrameId = requestAnimationFrame(animate);
     };
+
+    const handleWarpStart = () => { isWarping = true; };
+    const handleWarpEnd = () => { isWarping = false; };
+
+    window.addEventListener("warp-jump-start", handleWarpStart);
+    window.addEventListener("warp-jump-end", handleWarpEnd);
 
     window.addEventListener("resize", resize);
     resize(); animate();
     return () => {
       window.removeEventListener("resize", resize);
+      window.removeEventListener("warp-jump-start", handleWarpStart);
+      window.removeEventListener("warp-jump-end", handleWarpEnd);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
