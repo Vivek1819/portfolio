@@ -103,12 +103,12 @@ const Work = () => {
   const pathHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   const experiences = [
-    {
-      period: "APR 2026 — PRESENT",
-      title: "FOUNDING ENGINEER INTERN",
-      company: "FANTV",
-      tech: ["PYTHON", "LLMs", "AWS", "SYSTEM DESIGN"]
-    },
+    // {
+    //   period: "APR 2026 — PRESENT",
+    //   title: "FOUNDING ENGINEER INTERN",
+    //   company: "COVERTIGER",
+    //   tech: ["PYTHON", "LLMs", "AWS", "SYSTEM DESIGN"]
+    // },
     {
       period: "MAY 2025 — JUL 2025",
       title: "FULL STACK DEVELOPER",
