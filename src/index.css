@@ -111,7 +111,6 @@ html {
 
 @layer base {
   body {
-    cursor: none; /* Hide default cursor for CustomCursor */
     background-color: #020204;
     color: #ffffff;
     -webkit-font-smoothing: antialiased;

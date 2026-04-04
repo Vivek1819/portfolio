@@ -1,130 +1,121 @@
-import React, { useEffect, useState, useRef } from "react";
-import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
+import React, { useEffect, useRef, useState } from "react";
+
+const MAX_POINTS  = 24;
+const HEAD_RADIUS = 2;
 
 const CustomCursor = () => {
+  const canvasRef   = useRef(null);
+  const pointsRef   = useRef([]);
+  const currentPos  = useRef({ x: -200, y: -200 });
+  const rafRef      = useRef(null);
+  const hoveringRef = useRef(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [isHovering, setIsHovering] = useState(false);
-  const [coords, setCoords] = useState({ x: 0, y: 1 });
-
-  // Motion values for fluid movement
-  const cursorX = useMotionValue(-100);
-  const cursorY = useMotionValue(-100);
-
-  // Smooth springs for the outer ring
-  const springConfig = { damping: 20, stiffness: 250, mass: 0.5 };
-  const cursorSpringX = useSpring(cursorX, springConfig);
-  const cursorSpringY = useSpring(cursorY, springConfig);
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
-    const moveCursor = (e) => {
-      cursorX.set(e.clientX);
-      cursorY.set(e.clientY);
-      setCoords({ x: e.clientX, y: e.clientY });
+  useEffect(() => {
+    if (isMobile) return;
+
+    const canvas = canvasRef.current;
+
+    const resize = () => {
+      canvas.width  = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    resize();
+    window.addEventListener("resize", resize);
+
+    const onMove = (e) => {
+      currentPos.current = { x: e.clientX, y: e.clientY };
+      pointsRef.current.push({ x: e.clientX, y: e.clientY });
+      if (pointsRef.current.length > MAX_POINTS) pointsRef.current.shift();
     };
 
-    const handleMouseOver = (e) => {
-      const target = e.target;
-      if (
-        target.tagName === "BUTTON" ||
-        target.tagName === "A" ||
-        target.closest(".magnetic") ||
-        target.closest("button") ||
-        target.closest("a")
-      ) {
-        setIsHovering(true);
-      } else {
-        setIsHovering(false);
+    const onOver = (e) => {
+      const t = e.target;
+      hoveringRef.current =
+        t.tagName === "BUTTON" || t.tagName === "A" ||
+        !!t.closest("button")  || !!t.closest("a");
+    };
+
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseover", onOver);
+
+    // helper — draws glowing head dot at any position
+    const drawHead = (ctx, pos, r, g, b) => {
+      const glow = ctx.createRadialGradient(pos.x, pos.y, 0, pos.x, pos.y, HEAD_RADIUS * 5);
+      glow.addColorStop(0,   `rgba(${r},${g},${b},0.3)`);
+      glow.addColorStop(0.5, `rgba(${r},${g},${b},0.08)`);
+      glow.addColorStop(1,   `rgba(${r},${g},${b},0)`);
+      ctx.beginPath();
+      ctx.arc(pos.x, pos.y, HEAD_RADIUS * 5, 0, Math.PI * 2);
+      ctx.fillStyle = glow;
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(pos.x, pos.y, HEAD_RADIUS, 0, Math.PI * 2);
+      ctx.fillStyle   = `rgba(${r},${g},${b},0.9)`;
+      ctx.shadowColor = `rgba(${r},${g},${b},0.7)`;
+      ctx.shadowBlur  = 7;
+      ctx.fill();
+      ctx.shadowBlur  = 0;
+    };
+
+    const draw = () => {
+      const ctx   = canvas.getContext("2d");
+      const pts   = pointsRef.current;
+      const isHov = hoveringRef.current;
+      const [r, g, b] = isHov ? [248, 161, 255] : [168, 100, 255];
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // ── smooth tapered trail ──────────────────────────────────
+      if (pts.length >= 2) {
+        for (let i = 1; i < pts.length; i++) {
+          const t       = i / (pts.length - 1);
+          const width   = 0.5 + 2.5 * (t * t);
+          const opacity = t * t * 0.45;
+
+          ctx.beginPath();
+          ctx.moveTo(pts[i - 1].x, pts[i - 1].y);
+          ctx.lineTo(pts[i].x,     pts[i].y);
+          ctx.strokeStyle = `rgba(${r},${g},${b},${opacity})`;
+          ctx.lineWidth   = width;
+          ctx.lineCap     = "round";
+          ctx.lineJoin    = "round";
+          ctx.stroke();
+        }
       }
+
+      // ── head — always visible at current position ─────────────
+      drawHead(ctx, currentPos.current, r, g, b);
+
+      rafRef.current = requestAnimationFrame(draw);
     };
 
-    window.addEventListener("mousemove", moveCursor);
-    window.addEventListener("mouseover", handleMouseOver);
+    rafRef.current = requestAnimationFrame(draw);
 
     return () => {
-      window.removeEventListener("resize", checkMobile);
-      window.removeEventListener("mousemove", moveCursor);
-      window.removeEventListener("mouseover", handleMouseOver);
+      cancelAnimationFrame(rafRef.current);
+      window.removeEventListener("resize", resize);
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseover", onOver);
     };
-  }, [cursorX, cursorY]);
+  }, [isMobile]);
 
   if (isMobile) return null;
 
   return (
-    <>
-      {/* Outer Ring (Magnetic Feel) */}
-      <motion.div
-        className="fixed top-0 left-0 w-8 h-8 border border-neon-cyan/40 rounded-full pointer-events-none z-[9999]"
-        style={{
-          x: cursorSpringX,
-          y: cursorSpringY,
-          translateX: "-50%",
-          translateY: "-50%",
-          scale: isHovering ? 1.5 : 1,
-          borderColor: isHovering ? "rgba(251, 191, 36, 0.4)" : "rgba(6, 182, 212, 0.4)",
-        }}
-      />
-
-      {/* Inner Dot (Target Point) */}
-      <motion.div
-        className="fixed top-0 left-0 w-1.5 h-1.5 bg-starlight rounded-full pointer-events-none z-[9999]"
-        style={{
-          x: cursorX,
-          y: cursorY,
-          translateX: "-50%",
-          translateY: "-50%",
-          backgroundColor: isHovering ? "#fbbf24" : "#ffffff",
-        }}
-      />
-
-      {/* HUD Coordinates Label */}
-      <AnimatePresence>
-        {!isHovering && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.4 }}
-            exit={{ opacity: 0 }}
-            className="fixed top-0 left-0 pointer-events-none z-[9999] ml-6 mt-6 font-mono text-[8px] text-starlight tracking-widest whitespace-nowrap"
-            style={{
-              x: cursorX,
-              y: cursorY,
-            }}
-          >
-            LOC: [{coords.x.toString().padStart(4, "0")}, {coords.y.toString().padStart(4, "0")}]<br />
-            STATUS: ACTIVE
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Magnified HUD Crosshair when hovering */}
-      <AnimatePresence>
-        {isHovering && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.5 }}
-            className="fixed top-0 left-0 pointer-events-none z-[9999]"
-            style={{
-               x: cursorX,
-               y: cursorY,
-               translateX: "-50%",
-               translateY: "-50%",
-            }}
-          >
-            <div className="w-12 h-12 flex items-center justify-center relative">
-               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1px] h-3 bg-supernova/60"></div>
-               <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[1px] h-3 bg-supernova/60"></div>
-               <div className="absolute left-0 top-1/2 -translate-y-1/2 h-[1px] w-3 bg-supernova/60"></div>
-               <div className="absolute right-0 top-1/2 -translate-y-1/2 h-[1px] w-3 bg-supernova/60"></div>
-               <div className="micro-text text-[6px] text-supernova absolute -top-4 font-bold">LOCK_ON</div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+    <canvas
+      ref={canvasRef}
+      className="fixed inset-0 pointer-events-none z-[9999]"
+      style={{ mixBlendMode: "screen" }}
+    />
   );
 };
 
