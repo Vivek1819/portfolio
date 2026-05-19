@@ -43,7 +43,7 @@ const Waypoint = ({ exp, index }) => {
           
           <div className={`micro-text text-supernova flex items-center gap-3 mb-4 ${isEven ? 'md:justify-end' : 'justify-start'}`}>
             <span className="w-1.5 h-1.5 bg-supernova rounded-full blur-[1px] group-hover:animate-ping"></span>
-            JUMP DURATION: {exp.period}
+            {exp.period}
           </div>
 
           <h3 className={`celestial-heading text-2xl md:text-4xl text-starlight mb-4 tracking-wider leading-tight group-hover:text-glow-starlight transition-all duration-300 relative inline-block`}>
@@ -89,12 +89,18 @@ const Work = () => {
   const pathHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   const experiences = [
-    // {
-    //   period: "APR 2026 — PRESENT",
-    //   title: "FOUNDING ENGINEER INTERN",
-    //   company: "COVERTIGER",
-    //   tech: ["PYTHON", "LLMs", "AWS", "SYSTEM DESIGN"]
-    // },
+    {
+      period: "APR 2026 — PRESENT",
+      title: "SOFTWARE ENGINEER INTERN",
+      company: "FLAGRIGHT",
+      tech: ["NEXT", "TYPESCRIPT", "LAMBDA"]
+    },
+    {
+      period: "JAN 2026 — APR 2026",
+      title: "FOUNDING ENGINEER INTERN",
+      company: "COVERTIGER",
+      tech: ["PYTHON", "NEXT.JS", "TYPESCRIPT"]
+    },
     {
       period: "MAY 2025 — JUL 2025",
       title: "FULL STACK DEVELOPER",
