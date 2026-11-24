@@ -16,7 +16,8 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full flex items-center justify-between px-4 md:px-16 z-50 pointer-events-none transition-all duration-500 ${
+      style={{ "--d": "0.5s" }}
+      className={`enter-down fixed top-0 left-0 w-full flex items-center justify-between px-4 md:px-16 z-50 pointer-events-none transition-all duration-500 ${
         scrolled
           ? "py-4 bg-void-900/50 backdrop-blur-xl border-b border-starlight/[0.06] shadow-[0_10px_40px_-20px_rgba(0,0,0,0.8)]"
           : "py-8 border-b border-transparent"

@@ -282,3 +282,23 @@ html {
     transition-duration: 0.01ms !important;
   }
 }
+
+
+/* ── Arrival sequence ─────────────────────────────────────────────
+   Elements tagged .enter-* animate in once the intro hands off (App adds
+   .arrived). fill-mode "backwards" hides them during their delay but releases
+   the element afterwards, so framer-motion transforms (parallax etc.) still work.
+   Set per-element delay with style={{ "--d": "0.4s" }}. */
+@keyframes enterUp    { from { opacity: 0; transform: translateY(18px); filter: blur(6px); } }
+@keyframes enterDown  { from { opacity: 0; transform: translateY(-18px); } }
+@keyframes enterLeft  { from { opacity: 0; transform: translateX(-28px); } }
+@keyframes enterRight { from { opacity: 0; transform: translateX(28px); } }
+@keyframes enterFocus { from { opacity: 0; transform: scale(1.06); filter: blur(14px); } }
+@keyframes enterZoom  { from { opacity: 0; transform: scale(1.08); } }
+
+.arrived .enter-up    { animation: enterUp    0.9s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s) backwards; }
+.arrived .enter-down  { animation: enterDown  0.9s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s) backwards; }
+.arrived .enter-left  { animation: enterLeft  1s   cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s) backwards; }
+.arrived .enter-right { animation: enterRight 1s   cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s) backwards; }
+.arrived .enter-focus { animation: enterFocus 1.3s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s) backwards; }
+.arrived .enter-zoom  { animation: enterZoom  2s   cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s) backwards; }

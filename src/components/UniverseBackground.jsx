@@ -340,7 +340,7 @@ const UniverseBackground = () => {
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="fixed inset-0 w-full h-full pointer-events-none" style={{ zIndex: -10 }} />;
+  return <canvas ref={canvasRef} className="enter-zoom fixed inset-0 w-full h-full pointer-events-none" style={{ zIndex: -10 }} />;
 };
 
 export default UniverseBackground;

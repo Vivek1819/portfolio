@@ -52,10 +52,11 @@ const Hero = () => {
         style={{ y: yParallax, opacity: opacityFade, x: pullX, y: pullY }}
         className="relative z-10 text-center flex flex-col items-center"
       >
-        <div className="micro-text mb-8 tracking-[1em] text-starlight/30">
+        <div className="micro-text mb-8 tracking-[1em] text-starlight/30 enter-up" style={{ "--d": "0.3s" }}>
           TRANSVERSING THE DIGITAL VACUUM
         </div>
 
+        <div className="enter-focus" style={{ "--d": "0.4s" }}>
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -64,12 +65,14 @@ const Hero = () => {
         >
           <DecipherText text="VIVEK" speed={50} delay={1.5} />
         </motion.h1>
+        </div>
         
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 2, delay: 0.5 }}
-          className="text-starlight/60 font-cinematic text-lg md:text-2xl tracking-[0.3em] mt-2 md:mt-0 flex items-center justify-center"
+          className="text-starlight/60 font-cinematic text-lg md:text-2xl tracking-[0.3em] mt-2 md:mt-0 flex items-center justify-center enter-up"
+          style={{ "--d": "0.75s" }}
         >
           <span className="w-8 md:w-12 h-px bg-starlight/20 shrink-0" />
           <div className="relative h-[2em] w-[280px] md:w-[500px] flex items-center justify-center overflow-hidden mx-6 md:mx-8">
@@ -89,7 +92,7 @@ const Hero = () => {
           <span className="w-8 md:w-12 h-px bg-starlight/20 shrink-0" />
         </motion.div>
 
-        <div className="mt-16 flex flex-col sm:flex-row gap-8 items-center micro-text text-starlight/50">
+        <div className="mt-16 flex flex-col sm:flex-row gap-8 items-center micro-text text-starlight/50 enter-up" style={{ "--d": "0.95s" }}>
           <div className="flex flex-col gap-2 items-center">
             <span className="text-supernova font-bold">1Y+</span>
             <span>EXPANSION TIME</span>
@@ -107,7 +110,8 @@ const Hero = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2 }}
-        className="absolute bottom-12 flex flex-col items-center gap-4 micro-text text-starlight/20"
+        className="absolute bottom-12 flex flex-col items-center gap-4 micro-text text-starlight/20 enter-up"
+        style={{ "--d": "1.3s" }}
       >
         <span>DESCEND INTO THE VOID</span>
         <div className="w-px h-16 bg-gradient-to-b from-starlight/20 to-transparent"></div>

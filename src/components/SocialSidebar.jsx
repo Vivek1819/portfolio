@@ -97,7 +97,8 @@ const SocialSidebar = () => {
 
   return (
     <motion.aside
-      className="fixed left-5 top-1/2 -translate-y-1/2 z-50 hidden md:block pointer-events-none"
+      className="enter-left fixed left-5 top-1/2 -translate-y-1/2 z-50 hidden md:block pointer-events-none"
+      style={{ "--d": "0.7s" }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8, delay: 1.4 }}

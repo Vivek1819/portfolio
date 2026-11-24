@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Greeting from "./components/Greeting";
+import LiftOff from "./components/LiftOff";
 import Navbar from "./components/Navbar";
 import UniverseBackground from "./components/UniverseBackground";
 import Hero from "./components/Hero";
@@ -50,16 +50,19 @@ function App() {
     };
   }, []);
 
-  const handleGreetingComplete = () => {
+  // site starts fading in underneath while the intro is still decelerating (cross-fade)
+  const [revealed, setRevealed] = useState(false);
+  const handleReveal = () => {
     window.scrollTo({ top: 0, behavior: "instant" });
-    setShowGreeting(false);
+    setRevealed(true);
   };
+  const handleGreetingComplete = () => setShowGreeting(false);
 
   return (
     <>
-      {showGreeting && <Greeting onComplete={handleGreetingComplete} />}
+      {showGreeting && <LiftOff onReveal={handleReveal} onComplete={handleGreetingComplete} />}
 
-      <div className={`min-h-screen bg-transparent w-full transition-opacity duration-1000 ${!showGreeting ? "opacity-100" : "opacity-0"}`}>
+      <div className={`min-h-screen bg-transparent w-full transition-opacity duration-[1100ms] ease-out ${revealed ? "opacity-100 arrived" : "opacity-0"}`}>
 
         {/* Full Immersion Background */}
         <UniverseBackground />
