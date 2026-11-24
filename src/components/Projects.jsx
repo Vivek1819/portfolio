@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { Terminal, ExternalLink, Activity } from "lucide-react";
+import React, { useState } from "react";
+import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
+import { ArrowUpRight, CodeXml } from "lucide-react";
 import DecipherText from "./common/DecipherText";
 
 const projectsData = [
@@ -61,174 +61,226 @@ const projectsData = [
   }
 ];
 
-const ProjectMonolith = ({ project, index }) => {
+// Projects shown as large featured rows, in this order. Everything else goes in the catalog list below.
+const FEATURED = ["CONTEXTBRIDGE", "REPOZY", "LEETCODE_FRIENDS", "SIFTOR"];
+const pad = (n) => String(n).padStart(2, "0");
+const hasDemo = (p) => p.demo && p.demo !== "#";
+
+/* Telescope-viewfinder corner brackets */
+const Viewfinder = () => (
+  <>
+    {["top-3 left-3 border-t border-l", "top-3 right-3 border-t border-r", "bottom-3 left-3 border-b border-l", "bottom-3 right-3 border-b border-r"].map((pos) => (
+      <span
+        key={pos}
+        className={`absolute ${pos} w-4 h-4 border-starlight/40 transition-all duration-500 group-hover:w-6 group-hover:h-6 group-hover:border-supernova/80 pointer-events-none z-10`}
+      />
+    ))}
+  </>
+);
+
+const ProjectLinks = ({ project, size = "md" }) => {
+  const base =
+    size === "md"
+      ? "inline-flex items-center gap-2 text-sm font-medium transition-colors"
+      : "inline-flex items-center gap-1.5 text-xs font-medium transition-colors";
+  const icon = size === "md" ? 16 : 14;
   return (
-    <div className="w-[85vw] md:w-[80vw] xl:w-[60vw] h-[65vh] md:h-[70vh] flex-shrink-0 group relative p-[1px] rounded-[2.5rem] mt-10 md:mt-0 perspective-1000">
-       
-       <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-neon-cyan/0 via-starlight/0 to-neon-purple/0 group-hover:from-neon-cyan/40 group-hover:via-supernova/10 group-hover:to-neon-purple/40 blur-2xl opacity-0 group-hover:opacity-100 transition-all duration-1000 z-0"></div>
-       
-       <div className="absolute inset-0 rounded-[2.5rem] border border-starlight/10 group-hover:border-neon-cyan/50 transition-colors duration-700 z-20 pointer-events-none"></div>
-
-       <div className="relative w-full h-full rounded-[2.5rem] overflow-hidden bg-void-950 flex flex-col md:flex-row shadow-2xl z-10 transition-transform duration-700 ease-out group-hover:scale-[1.01] group-hover:-translate-y-2">
-          
-          <div className="absolute inset-0 z-0 pointer-events-none">
-             <img src={project.image} alt="bg" className="w-full h-full object-cover opacity-[0.03] grayscale group-hover:grayscale-0 group-hover:opacity-[0.08] blur-xl saturate-200 transition-all duration-1000 scale-110 group-hover:scale-125" />
-             <div className="absolute inset-0 bg-void-950/80 backdrop-blur-[2px]"></div>
-             
-             <div className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity duration-1000 mix-blend-overlay" style={{ backgroundImage: "linear-gradient(rgba(0,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0,255,255,0.1) 1px, transparent 1px)", backgroundSize: "30px 30px" }}></div>
-          </div>
-
-          <div className="relative z-20 w-full md:w-[45%] h-full flex flex-col justify-center p-8 md:p-12 bg-gradient-to-r from-void-950/90 to-transparent">
-             
-             <div className="flex items-center justify-between mb-4 md:mb-8">
-                 <div className="flex items-center gap-4">
-                    <div className="px-3 md:px-4 py-1.5 bg-neon-cyan/5 border border-neon-cyan/30 rounded-full micro-text text-[9px] md:text-xs text-neon-cyan tracking-widest flex items-center gap-2 shadow-[0_0_20px_rgba(6,182,212,0.1)] relative overflow-hidden">
-                       <span className="w-2 h-2 rounded-full bg-neon-cyan animate-pulse"></span>
-                       {project.type.toUpperCase()}
-                       <div className="absolute top-0 left-0 w-full h-[1px] bg-neon-cyan/50 animate-scan-vertical"></div>
-                    </div>
-                 </div>
-                 <span className="text-starlight/20 font-mono text-xs md:text-sm tracking-widest bg-void-900 border border-starlight/5 px-3 py-1 rounded shadow-inner">{project.year}</span>
-             </div>
-             
-             <h3 className="celestial-heading text-4xl md:text-5xl lg:text-5xl xl:text-6xl text-starlight leading-tight mb-4 md:mb-6 group-hover:text-glow-starlight transition-all duration-500 relative">
-                {project.title}
-             </h3>
-             
-             <p className="text-starlight/60 text-sm md:text-base lg:text-lg font-sans leading-relaxed mb-6 md:mb-10 max-w-xl line-clamp-3 md:line-clamp-4 relative pl-4 border-l-2 border-starlight/10 group-hover:border-neon-cyan/50 transition-colors duration-500">
-                {project.description}
-             </p>
-             
-             <div className="flex flex-wrap gap-2 mb-6 md:mb-12">
-                {project.technologies.map((t, idx) => (
-                   <span key={idx} className="px-3 md:px-4 py-1.5 md:py-2 bg-void-900 border border-starlight/10 text-starlight/70 micro-text text-[9px] md:text-[11px] rounded-lg group-hover:border-neon-cyan/30 group-hover:bg-neon-cyan/5 group-hover:text-neon-cyan transition-colors duration-500 shadow-inner group-hover:shadow-[0_0_10px_rgba(6,182,212,0.2)]">
-                      {t}
-                   </span>
-                ))}
-             </div>
-             
-             <div className="mt-auto hidden md:flex items-center gap-4 border-t border-starlight/10 pt-6 group-hover:border-neon-cyan/20 transition-colors">
-                 {project.demo && project.demo !== "#" && (
-                   <a href={project.demo} target="_blank" rel="noreferrer" className="flex-1 px-4 lg:px-6 py-4 bg-void-800 hover:bg-neon-cyan/10 border border-starlight/10 hover:border-neon-cyan/50 text-starlight hover:text-neon-cyan font-mono text-[10px] lg:text-xs tracking-[0.2em] transition-all rounded-xl backdrop-blur-md flex items-center justify-center gap-3 group/btn hover:shadow-[0_0_30px_rgba(6,182,212,0.4)] relative overflow-hidden">
-                      <Activity size={16} className="text-neon-cyan opacity-70 group-hover/btn:opacity-100" />
-                      <span className="relative z-10">LIVE_SYSTEM</span>
-                      <div className="absolute inset-0 w-0 group-hover/btn:w-full bg-gradient-to-r from-neon-cyan/0 via-neon-cyan/10 to-neon-cyan/0 transition-all duration-500 ease-out z-0"></div>
-                   </a>
-                 )}
-                 {project.github && (
-                   <a href={project.github} target="_blank" rel="noreferrer" className="flex-1 px-4 lg:px-6 py-4 bg-void-900 hover:bg-starlight/5 border border-starlight/5 hover:border-starlight/30 text-starlight hover:text-white font-mono text-[10px] lg:text-xs tracking-[0.2em] transition-all rounded-xl backdrop-blur-md flex items-center justify-center gap-3 group/btn hover:shadow-lg relative overflow-hidden">
-                      <Terminal size={16} className="text-starlight opacity-50 group-hover/btn:opacity-100 transition-opacity" />
-                      <span className="relative z-10">SOURCE_ARCHIVE</span>
-                      <div className="absolute inset-0 w-0 group-hover/btn:w-full bg-gradient-to-r from-starlight/0 via-starlight/5 to-starlight/0 transition-all duration-500 ease-out z-0"></div>
-                   </a>
-                 )}
-             </div>
-          </div>
-
-          <div className="relative z-20 w-full md:w-[55%] h-[300px] md:h-full flex items-center justify-center p-6 md:p-12 group-hover:bg-starlight/[0.02] transition-colors duration-700">
-             
-             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[70%] bg-supernova/10 blur-[100px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none mix-blend-screen"></div>
-
-             <div className="w-full h-full relative border border-starlight/5 group-hover:border-supernova/30 rounded-2xl md:rounded-3xl bg-void-900/40 group-hover:bg-void-900/60 shadow-2xl p-4 md:p-6 lg:p-8 backdrop-blur-md transition-all duration-700 ease-out group-hover:shadow-[0_0_80px_rgba(251,191,36,0.15)] flex flex-col cosmic-glass overflow-hidden group-hover:-translate-y-2 group-hover:rotate-1">
-                 
-                 <div className="absolute -right-20 -top-20 w-64 h-64 border border-starlight/5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000 group-hover:animate-spin-slow pointer-events-none mix-blend-screen"></div>
-
-                 <div className="w-full flex items-center justify-between mb-4 border-b border-starlight/10 pb-4 opacity-70 group-hover:opacity-100 transition-opacity duration-500 z-10">
-                    <div className="flex gap-2">
-                       <div className="w-2.5 h-2.5 rounded-full bg-void-line group-hover:bg-[#ff5f56] shadow-[0_0_10px_rgba(255,95,86,0)] group-hover:shadow-[0_0_10px_rgba(255,95,86,0.5)] transition-all duration-500 delay-100"></div>
-                       <div className="w-2.5 h-2.5 rounded-full bg-void-line group-hover:bg-[#ffbd2e] shadow-[0_0_10px_rgba(255,189,46,0)] group-hover:shadow-[0_0_10px_rgba(255,189,46,0.5)] transition-all duration-500 delay-200"></div>
-                       <div className="w-2.5 h-2.5 rounded-full bg-void-line group-hover:bg-[#27c93f] shadow-[0_0_10px_rgba(39,201,63,0)] group-hover:shadow-[0_0_10px_rgba(39,201,63,0.5)] transition-all duration-500 delay-300"></div>
-                    </div>
-                    
-                    <div className="flex gap-4 items-center">
-                      <div className="micro-text text-[9px] text-supernova/80 font-mono tracking-widest hidden sm:flex items-center gap-2">
-                         <span className="w-1.5 h-1.5 bg-supernova/50 rounded-full animate-ping"></span>
-                         VISUAL_RENDER
-                      </div>
-                    </div>
-                 </div>
-
-                 <div className="w-full flex-1 relative flex items-center justify-center overflow-hidden mix-blend-screen group-hover:mix-blend-normal rounded-lg bg-black/40 border border-white/5 z-10 group/img">
-                     <img src={project.image} alt={project.title} className="max-w-full max-h-full object-contain filter grayscale-[70%] sepia-[20%] hue-rotate-180 opacity-60 group-hover:grayscale-0 group-hover:sepia-0 group-hover:hue-rotate-0 group-hover:opacity-100 transition-all duration-1000 ease-out transform group-hover:scale-105 drop-shadow-2xl" />
-                     {project.demo && project.demo !== "#" && (
-                         <div className="absolute inset-0 bg-void-950/60 opacity-0 group-hover/img:opacity-100 transition-opacity duration-500 flex items-center justify-center backdrop-blur-sm">
-                            <a href={project.demo} target="_blank" rel="noreferrer" className="w-16 h-16 rounded-full bg-supernova/20 border border-supernova flex items-center justify-center text-supernova hover:bg-supernova hover:text-void-950 hover:scale-110 transition-all duration-300 shadow-[0_0_30px_rgba(251,191,36,0.5)]">
-                               <ExternalLink size={24} />
-                            </a>
-                         </div>
-                     )}
-                 </div>
-                 
-                 <div className="absolute top-0 left-0 w-full h-[150%] bg-gradient-to-b from-transparent via-supernova/10 to-transparent -translate-y-[100%] group-hover:animate-scan-sweep pointer-events-none z-20"></div>
-             </div>
-
-             <div className="absolute bottom-4 left-0 w-full flex justify-center gap-4 md:hidden z-30">
-                 {project.demo && project.demo !== "#" && (
-                   <a href={project.demo} target="_blank" rel="noreferrer" className="px-5 py-2.5 bg-void-800 border border-neon-cyan/50 text-neon-cyan font-mono text-[10px] tracking-widest rounded-lg shadow-lg flex items-center gap-2">
-                      <Activity size={14} /> LIVE
-                   </a>
-                 )}
-                 {project.github && (
-                   <a href={project.github} target="_blank" rel="noreferrer" className="px-5 py-2.5 bg-void-900 border border-starlight/20 text-starlight font-mono text-[10px] tracking-widest rounded-lg shadow-lg flex items-center gap-2">
-                      <Terminal size={14} /> REPO
-                   </a>
-                 )}
-             </div>
-
-          </div>
-       </div>
+    <div className={`flex items-center ${size === "md" ? "gap-6" : "gap-4"}`}>
+      {hasDemo(project) && (
+        <a href={project.demo} target="_blank" rel="noreferrer" className={`${base} text-supernova hover:text-starlight`}>
+          Live <ArrowUpRight size={icon} />
+        </a>
+      )}
+      {project.github && (
+        <a href={project.github} target="_blank" rel="noreferrer" className={`${base} text-starlight/70 hover:text-starlight`}>
+          <CodeXml size={icon} /> Code
+        </a>
+      )}
     </div>
   );
 };
 
-const Projects = () => {
-  const targetRef = useRef(null);
-  
-  const { scrollYProgress } = useScroll({ target: targetRef });
+const FeaturedProject = ({ project, index }) => {
+  const flip = index % 2 === 1;
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+      className="group grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center"
+    >
+      {/* Screenshot */}
+      <a
+        href={hasDemo(project) ? project.demo : project.github}
+        target="_blank"
+        rel="noreferrer"
+        className={`relative block lg:col-span-7 ${flip ? "lg:order-2" : ""}`}
+        aria-label={`Open ${project.title}`}
+      >
+        <div className="absolute -inset-6 rounded-[2rem] bg-[radial-gradient(ellipse_at_center,rgba(168,85,247,0.18),transparent_70%)] opacity-60 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+        <div className="relative rounded-2xl overflow-hidden border border-starlight/10 group-hover:border-starlight/25 bg-void-900/60 transition-colors duration-500 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.8)]">
+          <div className="aspect-[16/9] overflow-hidden">
+            <img
+              src={project.image}
+              alt={`${project.title} screenshot`}
+              loading="lazy"
+              className="w-full h-full object-cover object-top transition-transform duration-[1.2s] ease-out group-hover:scale-[1.03]"
+            />
+          </div>
+          <div className="absolute inset-0 bg-gradient-to-t from-void-900/50 via-transparent to-transparent pointer-events-none" />
+          <Viewfinder />
+          <span className="absolute bottom-4 right-5 font-mono text-[10px] tracking-[0.2em] text-starlight/0 group-hover:text-starlight/70 transition-colors duration-500 z-10">
+            TARGET ACQUIRED
+          </span>
+        </div>
+      </a>
 
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-82%"]);
+      {/* Details */}
+      <div className={`lg:col-span-5 ${flip ? "lg:order-1" : ""}`}>
+        <div className="flex items-center gap-3 font-mono text-[11px] tracking-[0.2em] text-starlight/50 mb-5">
+          <span className="text-supernova">VH-{pad(project.id)}</span>
+          <span className="w-6 h-px bg-starlight/20" />
+          <span>{project.type.toUpperCase()}</span>
+          <span className="text-starlight/30">·</span>
+          <span>{project.year}</span>
+        </div>
+
+        <h3 className="font-cinematic text-3xl md:text-4xl xl:text-5xl font-medium tracking-tight text-starlight mb-5">
+          {project.title}
+        </h3>
+
+        <p className="text-starlight/70 text-base md:text-lg leading-relaxed mb-6 max-w-lg">
+          {project.description}
+        </p>
+
+        <ul className="flex flex-wrap gap-x-4 gap-y-2 font-mono text-xs text-starlight/55 mb-8">
+          {project.technologies.map((t) => (
+            <li key={t} className="flex items-center gap-2">
+              <span className="w-1 h-1 rounded-full bg-neon-cyan/70" />
+              {t}
+            </li>
+          ))}
+        </ul>
+
+        <ProjectLinks project={project} />
+      </div>
+    </motion.article>
+  );
+};
+
+/* Compact catalog row + cursor-following preview (desktop) */
+const CatalogRow = ({ project, onHover }) => (
+  <motion.li
+    initial={{ opacity: 0, y: 16 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: "-40px" }}
+    transition={{ duration: 0.5 }}
+    onMouseEnter={() => onHover(project)}
+    onMouseLeave={() => onHover(null)}
+    className="group relative grid grid-cols-12 gap-x-4 gap-y-2 items-center py-6 border-b border-starlight/15 hover:border-starlight/30 transition-colors"
+  >
+    <span className="absolute inset-y-0 -inset-x-4 rounded-xl bg-starlight/[0.03] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+    <span className="col-span-2 md:col-span-1 font-mono text-xs text-starlight/60 group-hover:text-supernova transition-colors">
+      VH-{pad(project.id)}
+    </span>
+    <div className="col-span-10 md:col-span-4">
+      <h4 className="font-cinematic text-lg md:text-xl text-starlight tracking-tight">{project.title}</h4>
+      <span className="font-mono text-[11px] text-starlight/55">{project.type} · {project.year}</span>
+    </div>
+    <p className="col-span-12 md:col-span-4 text-sm text-starlight/60 leading-relaxed md:line-clamp-2">
+      {project.description}
+    </p>
+    <div className="col-span-12 md:col-span-3 flex md:justify-end">
+      <ProjectLinks project={project} size="sm" />
+    </div>
+  </motion.li>
+);
+
+const Projects = () => {
+  const featured = FEATURED.map((t) => projectsData.find((p) => p.title === t)).filter(Boolean);
+  const catalog = projectsData.filter((p) => !FEATURED.includes(p.title));
+  const years = projectsData.map((p) => +p.year);
+
+  const [preview, setPreview] = useState(null);
+  const mx = useMotionValue(0);
+  const my = useMotionValue(0);
+  const x = useSpring(mx, { stiffness: 300, damping: 30 });
+  const y = useSpring(my, { stiffness: 300, damping: 30 });
 
   return (
-    <section ref={targetRef} className="relative h-[500vh] bg-void-950 w-full" id="projects">
-      
-      <div className="sticky top-0 h-screen flex items-center overflow-hidden bg-void-900/30 backdrop-blur-sm">
-         
-         <div className="absolute inset-0 pointer-events-none opacity-30" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0)', backgroundSize: '40px 40px' }}></div>
-         <div className="absolute top-1/2 left-0 w-full h-[1px] bg-starlight/5 pointer-events-none"></div>
+    <section className="relative w-full py-32 md:py-40" id="projects">
+      <div className="px-6 md:px-16 max-w-7xl mx-auto">
+        {/* Heading */}
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-20 md:mb-28">
+          <div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              className="micro-text text-neon-cyan mb-8 flex items-center gap-4"
+            >
+              03 <span className="w-12 h-px bg-neon-cyan/30"></span> MISSION ARCHIVE
+            </motion.div>
+            <h2 className="celestial-heading text-6xl md:text-8xl text-starlight">
+              <DecipherText text="ORBITAL" delay={0.4} />
+              <br />
+              <span className="aurora-text"><DecipherText text="HANGAR" delay={0.7} /></span>
+            </h2>
+          </div>
+          <p className="max-w-sm text-starlight/60 text-base leading-relaxed md:text-right">
+            {projectsData.length} missions launched between {Math.min(...years)} and {Math.max(...years)}: full-stack
+            systems, developer tools and experiments.
+          </p>
+        </div>
 
-         <motion.div style={{ x }} className="flex gap-16 md:gap-24 px-[5vw] xl:px-[10vw] relative z-20 items-center">
-             
-            <div className="w-[85vw] md:w-[35vw] flex-shrink-0 flex flex-col justify-center h-[70vh] relative pr-4 md:pr-10 lg:border-r border-starlight/10 mb-8 md:mb-0">
-               <motion.div 
-                 initial={{ opacity: 0, x: -50 }}
-                 whileInView={{ opacity: 1, x: 0 }}
-                 className="flex flex-col"
-               >
-                 <div className="micro-text text-neon-cyan mb-6 flex items-center gap-4">
-                   03 <span className="w-12 h-px bg-neon-cyan/30"></span> DIRECTORY SCAN
-                 </div>
-                 <h2 className="celestial-heading text-5xl md:text-7xl text-starlight leading-tight">
-                    <DecipherText text="ORBITAL" delay={0.4} /><br/>
-                    <span className="aurora-text"><DecipherText text="HANGAR" delay={0.7} /></span>
-                 </h2>
-                 <p className="mt-8 font-sans text-starlight/60 max-w-md text-base md:text-lg leading-relaxed">
-                   Accessing the engineering databanks. Glide through this horizontal sector to inspect my deployed web applications, full-stack monoliths, and architectural blueprints.
-                 </p>
-                 <div className="mt-12 flex items-center gap-4 micro-text text-starlight/30 animate-pulse">
-                   SCROLL TO INITIATE TRAVEL <span className="text-xl">→</span>
-                 </div>
-               </motion.div>
-            </div>
-             
-            {projectsData.map((project, i) => (
-                <ProjectMonolith key={project.id} project={project} index={i} />
+        {/* Featured */}
+        <div className="flex flex-col gap-28 md:gap-36">
+          {featured.map((p, i) => (
+            <FeaturedProject key={p.id} project={p} index={i} />
+          ))}
+        </div>
+
+        {/* Catalog */}
+        <div className="mt-32 md:mt-44">
+          <div className="flex items-center gap-4 mb-6 font-mono text-[11px] tracking-[0.25em] text-starlight/50">
+            <span>STAR CATALOG</span>
+            <span className="flex-1 h-px bg-starlight/10" />
+            <span>{catalog.length} ENTRIES</span>
+          </div>
+          <ul
+            className="relative"
+            onMouseMove={(e) => {
+              mx.set(e.clientX);
+              my.set(e.clientY);
+            }}
+          >
+            {catalog.map((p) => (
+              <CatalogRow key={p.id} project={p} onHover={setPreview} />
             ))}
-
-            <div className="w-[10vw] flex-shrink-0"></div>
-
-         </motion.div>
-         
+          </ul>
+        </div>
       </div>
+
+      {/* Floating preview */}
+      <motion.div
+        style={{ x, y }}
+        className="fixed top-0 left-0 z-40 pointer-events-none hidden lg:block"
+      >
+        <AnimatePresence>
+          {preview && (
+            <motion.div
+              key={preview.id}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.2 }}
+              className="relative w-72 aspect-[16/10] translate-x-6 -translate-y-1/2 rounded-xl overflow-hidden border border-starlight/20 shadow-[0_20px_60px_-10px_rgba(0,0,0,0.9)] bg-void-900"
+            >
+              <img src={preview.image} alt="" className="w-full h-full object-cover object-top" />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.div>
     </section>
   );
 };

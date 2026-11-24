@@ -75,7 +75,7 @@ function App() {
         <ScrollProgress />
         <QuantumShift isWarping={isWarping} />
 
-        <main className="w-full pb-20 pt-24 custom-scroll">
+        <main className="w-full pt-24 custom-scroll">
           <Hero />
           <About />
           <Work />
@@ -83,18 +83,6 @@ function App() {
           <TechStack />
           <Contact />
         </main>
-
-        <footer className="w-full py-20 px-4 md:px-16 border-t border-starlight/5 flex flex-col md:flex-row justify-between items-center gap-12 bg-void-900/80 backdrop-blur-md">
-          <div className="flex flex-col gap-4">
-            <div className="celestial-heading text-4xl text-glow-starlight">V.</div>
-            <div className="micro-text text-starlight/20">ESTABLISHED // SOL-2026 // NEBULA-01</div>
-          </div>
-          <div className="flex gap-12 micro-text font-bold text-starlight/40">
-            <a href="https://github.com/Vivek1819" target="_blank" rel="noreferrer" className="hover:text-supernova transition-colors">GITHUB</a>
-            <a href="https://linkedin.com/in/vivek-hipparkar" target="_blank" rel="noreferrer" className="hover:text-supernova transition-colors">LINKEDIN</a>
-            <a href="https://twitter.com" target="_blank" rel="noreferrer" className="hover:text-supernova transition-colors">X / TWITTER</a>
-          </div>
-        </footer>
 
         <ScrollToTop />
       </div>

@@ -91,7 +91,7 @@ const Hero = () => {
 
         <div className="mt-16 flex flex-col sm:flex-row gap-8 items-center micro-text text-starlight/50">
           <div className="flex flex-col gap-2 items-center">
-            <span className="text-supernova font-bold">3.4Y+</span>
+            <span className="text-supernova font-bold">1Y+</span>
             <span>EXPANSION TIME</span>
           </div>
           <div className="w-px h-8 bg-starlight/10 hidden sm:block"></div>

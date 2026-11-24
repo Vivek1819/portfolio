@@ -79,7 +79,7 @@ const TechNode = ({ name, src, delay }) => {
 
 const TechStack = () => {
   return (
-    <section className="relative w-full py-32 md:py-48 overflow-hidden bg-void-950" id="tech">
+    <section className="relative w-full py-32 md:py-48 overflow-hidden" id="tech">
        {/* Ambient Subtle Starmap Background */}
        <div className="absolute inset-0 z-0 pointer-events-none opacity-20" style={{ backgroundImage: "radial-gradient(circle at 50% 50%, rgba(255,255,255,0.02) 0%, transparent 60%)" }}></div>
        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[600px] border-t border-b border-starlight/5 opacity-30 rounded-full scale-[2] pointer-events-none -z-10"></div>

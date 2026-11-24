@@ -32,7 +32,7 @@ const About = () => {
           <div className="flex gap-12">
             <div>
               <div className="micro-text mb-2">EXPERIENCE</div>
-              <div className="text-3xl md:text-4xl font-cinematic text-starlight">3.5Y+</div>
+              <div className="text-3xl md:text-4xl font-cinematic text-starlight">1Y+</div>
             </div>
             <div>
               <div className="micro-text mb-2">PROJECTS</div>

@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-const LINKS = [
+export const LINKS = [
   {
     href: "https://github.com/Vivek1819",
     id: "01",
