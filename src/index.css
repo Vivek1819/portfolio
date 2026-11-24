@@ -272,3 +272,13 @@ html {
 ::-webkit-scrollbar-track { background: #020204; }
 ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); }
 ::-webkit-scrollbar-thumb:hover { background: #fbbf24; }
+
+/* Respect the OS "reduce motion" setting: stop looping/decorative animations */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

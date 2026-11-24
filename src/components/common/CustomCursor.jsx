@@ -12,7 +12,12 @@ const CustomCursor = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
+    const check = () =>
+      setIsMobile(
+        window.innerWidth < 768 ||
+        window.matchMedia("(pointer: coarse)").matches ||
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      );
     check();
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
@@ -32,8 +37,6 @@ const CustomCursor = () => {
 
     const onMove = (e) => {
       currentPos.current = { x: e.clientX, y: e.clientY };
-      pointsRef.current.push({ x: e.clientX, y: e.clientY });
-      if (pointsRef.current.length > MAX_POINTS) pointsRef.current.shift();
     };
 
     const onOver = (e) => {
@@ -73,6 +76,11 @@ const CustomCursor = () => {
       const [r, g, b] = isHov ? [248, 161, 255] : [168, 100, 255];
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // sample the head every frame so the trail shrinks back into the
+      // cursor when the mouse stops (instead of freezing on screen)
+      pts.push({ ...currentPos.current });
+      if (pts.length > MAX_POINTS) pts.shift();
 
       // ── smooth tapered trail ──────────────────────────────────
       if (pts.length >= 2) {

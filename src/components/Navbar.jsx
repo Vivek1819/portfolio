@@ -1,9 +1,11 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useWarpDrive } from "../hooks/useWarpDrive";
+import { useActiveSection } from "../hooks/useActiveSection";
 
 const Navbar = () => {
   const { initiateJump } = useWarpDrive();
+  const { active, scrolled } = useActiveSection();
 
   const navLinks = [
     { id: "about", label: "ABOUT" },
@@ -13,7 +15,13 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 w-full flex items-center justify-between py-8 px-4 md:px-16 z-50 pointer-events-none">
+    <nav
+      className={`fixed top-0 left-0 w-full flex items-center justify-between px-4 md:px-16 z-50 pointer-events-none transition-all duration-500 ${
+        scrolled
+          ? "py-4 bg-void-900/50 backdrop-blur-xl border-b border-starlight/[0.06] shadow-[0_10px_40px_-20px_rgba(0,0,0,0.8)]"
+          : "py-8 border-b border-transparent"
+      }`}
+    >
       <div className="pointer-events-auto">
         <button 
           onClick={() => initiateJump("hero")}
@@ -28,13 +36,21 @@ const Navbar = () => {
           <button
             key={link.id}
             onClick={() => initiateJump(link.id)}
-            className="hover:text-supernova text-starlight/40 transition-all relative group cursor-pointer"
+            className={`hover:text-supernova transition-all relative group cursor-pointer ${
+              active === link.id ? "!text-supernova" : "text-starlight/40"
+            }`}
+            aria-current={active === link.id ? "true" : undefined}
           >
             {link.label}
-            <motion.span 
-              className="absolute -bottom-2 left-0 w-0 h-px bg-supernova group-hover:w-full transition-all"
-              layoutId="nav-underline"
-            />
+            {active === link.id ? (
+              <motion.span
+                className="absolute -bottom-2 left-0 w-full h-px bg-supernova shadow-[0_0_8px_#fbbf24]"
+                layoutId="nav-underline"
+                transition={{ type: "spring", stiffness: 380, damping: 32 }}
+              />
+            ) : (
+              <span className="absolute -bottom-2 left-0 w-0 h-px bg-supernova/50 group-hover:w-full transition-all" />
+            )}
           </button>
         ))}
         

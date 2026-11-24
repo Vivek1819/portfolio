@@ -36,7 +36,7 @@ const About = () => {
             </div>
             <div>
               <div className="micro-text mb-2">PROJECTS</div>
-              <div className="text-3xl md:text-4xl font-cinematic text-starlight">30+</div>
+              <div className="text-3xl md:text-4xl font-cinematic text-starlight">20+</div>
             </div>
             <div>
               <div className="micro-text mb-2">COMMITS</div>
@@ -101,7 +101,7 @@ const About = () => {
               I'm a <span className="text-starlight font-bold border-b-2 border-neon-cyan">full-stack developer</span> who obsesses over load times, system design, and building products that feel as good as they perform.
             </p>
             <p className="text-starlight/60 text-lg leading-relaxed">
-              Currently engineering at <span className="text-starlight font-medium italic underline decoration-supernova decoration-2 underline-offset-4">IIIT Gwalior</span>. 
+              Currently a Software Engineer at <span className="text-starlight font-medium italic underline decoration-supernova decoration-2 underline-offset-4">AiPrise</span>, and an IIIT Gwalior class of 2026 grad. 
               🌱 Diving deep into DevOps, Go & distributed systems. Every detail matters—every millisecond counts.
             </p>
             

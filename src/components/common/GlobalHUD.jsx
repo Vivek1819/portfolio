@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { useActiveSection, SECTIONS } from "../../hooks/useActiveSection";
 
 const GlobalHUD = () => {
     const { scrollYProgress } = useScroll();
@@ -12,6 +13,9 @@ const GlobalHUD = () => {
     });
 
     const [percent, setPercent] = useState(0);
+    const { active } = useActiveSection();
+    const idx = SECTIONS.findIndex((s) => s.id === active);
+    const sector = SECTIONS[idx]?.label ?? "LAUNCH";
 
     const gaugeHeight = useTransform(scaleY, [0, 1], ["0%", "100%"]);
 
@@ -33,12 +37,13 @@ const GlobalHUD = () => {
 
             {/* Gauge Labels */}
             <div className="fixed right-10 top-1/2 -translate-y-1/2 flex flex-col justify-between h-[40vh] py-2 z-[49] pointer-events-none micro-text text-[8px] text-starlight/30 items-end">
-                <span>100% // JMP</span>
+                <span>DEST // CONTACT</span>
                 <div className="flex flex-col items-end gap-1">
                     <span className="text-supernova font-bold">{percent}%</span>
                     <span>FLIGHT PATH</span>
+                    <span className="text-neon-cyan/80">S{String(idx + 1).padStart(2, "0")} // {sector}</span>
                 </div>
-                <span>000% // VOID</span>
+                <span>ORIGIN // LAUNCH</span>
             </div>
         </>
     );
