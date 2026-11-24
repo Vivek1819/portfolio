@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 export const LINKS = [
@@ -33,7 +33,7 @@ export const LINKS = [
     ),
   },
   {
-    href: "mailto:vivekhipparkar19@gmail.com",
+    href: "mailto:vivekhipparkar@gmail.com",
     id: "04",
     label: "email",
     icon: (
@@ -45,102 +45,156 @@ export const LINKS = [
   },
 ];
 
+const EMAIL = LINKS.find((l) => l.label === "email").href.replace("mailto:", "");
+
+/* Tuner geometry: channels sit on a vertical dial, PAD from each end, GAP apart */
+const PAD = 28;
+const GAP = 60;
+const DIAL_H = PAD * 2 + GAP * (LINKS.length - 1);
+const FREQS = ["98.6", "101.2", "104.7", "107.9"];
+const chY = (i) => PAD + i * GAP;
+
+const SignalBars = ({ on }) => (
+  <span className="flex items-end gap-[2px] h-3">
+    {[4, 7, 10, 13].map((h, i) => (
+      <span
+        key={i}
+        className={`w-[3px] transition-colors duration-300 ${on ? "bg-neon-cyan" : "bg-starlight/20"}`}
+        style={{ height: h, transitionDelay: `${i * 60}ms` }}
+      />
+    ))}
+  </span>
+);
+
 const SocialSidebar = () => {
+  const [scan, setScan] = useState(0);       // channel the idle needle is passing
+  const [locked, setLocked] = useState(null); // channel under the cursor
+  const [copied, setCopied] = useState(false);
+  const timer = useRef(null);
+
+  // idle: needle sweeps from channel to channel like a radio seeking a station
+  useEffect(() => {
+    if (locked !== null) return;
+    const id = setInterval(() => setScan((s) => (s + 1) % LINKS.length), 1800);
+    return () => clearInterval(id);
+  }, [locked]);
+  useEffect(() => () => clearTimeout(timer.current), []);
+
+  const active = locked ?? scan;
+  const isLocked = locked !== null;
+
+  const copyEmail = async (e, href) => {
+    e.preventDefault();
+    try {
+      await navigator.clipboard.writeText(EMAIL);
+      setCopied(true);
+      clearTimeout(timer.current);
+      timer.current = setTimeout(() => setCopied(false), 2200);
+    } catch {
+      window.location.href = href;
+    }
+  };
+
   return (
     <motion.aside
-      className="fixed bottom-0 left-6 z-50 hidden md:flex flex-col items-center pointer-events-none"
-      initial={{ opacity: 0, x: -20 }}
-      animate={{ opacity: 1, x: 0 }}
+      className="fixed left-5 top-1/2 -translate-y-1/2 z-50 hidden md:block pointer-events-none"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       transition={{ duration: 0.8, delay: 1.4 }}
+      aria-label="Social links"
     >
-      {/* ── Active Rail with Signal Animation ────────────────── */}
-      <div className="relative flex flex-col items-center">
-        
-        {/* The Rail Line - Brighter default visibility */}
-        <div 
-          className="w-px h-[320px] bg-gradient-to-b from-transparent via-white/40 to-transparent relative"
+      {/* frequency readout (absolute, so it doesn't shift the dial off-centre) */}
+      <div className="absolute bottom-full mb-4 left-0 font-mono text-[10px] tracking-[0.25em] whitespace-nowrap">
+        <div className="text-starlight/35">FREQ</div>
+        <div className={`text-[12px] tracking-[0.15em] transition-colors duration-300 ${isLocked ? "text-supernova" : "text-neon-cyan/80"}`}>
+          {FREQS[active]} <span className="text-starlight/35">MHz</span>
+        </div>
+      </div>
+
+      {/* the dial */}
+      <div className="relative w-[64px]" style={{ height: DIAL_H }}>
+        {/* spine */}
+        <div className="absolute left-[6px] top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-starlight/25 to-transparent" />
+
+        {/* minor ticks */}
+        {Array.from({ length: Math.floor(DIAL_H / 10) + 1 }).map((_, i) => (
+          <span key={i} className="absolute left-[6px] h-px w-[5px] bg-starlight/15" style={{ top: i * 10 }} />
+        ))}
+
+        {/* needle */}
+        <motion.div
+          className="absolute left-0 -translate-y-1/2 flex items-center pointer-events-none"
+          animate={{ top: chY(active) }}
+          transition={{ type: "spring", stiffness: isLocked ? 380 : 90, damping: isLocked ? 28 : 18 }}
         >
-          {/* Numbered Indexing & Icons */}
-          <div className="absolute inset-0 flex flex-col items-center justify-between py-12">
-            {LINKS.map((link, i) => (
-              <div key={link.id} className="relative flex items-center group pointer-events-auto">
-                
-                {/* Numbered Marker (Brighter) */}
-                <span className="absolute -left-8 font-mono text-[9px] tracking-widest text-white/40 group-hover:text-white transition-colors duration-300">
-                  {link.id}
-                </span>
-
-                {/* Vertical Tick Mark (Brighter) */}
-                <div className="absolute -left-2 w-1.5 h-px bg-white/50 group-hover:bg-white group-hover:w-2.5 transition-all duration-300" />
-
-                <motion.a
-                  href={link.href}
-                  target={link.href.startsWith("mailto") ? undefined : "_blank"}
-                  rel="noopener noreferrer"
-                  className="relative z-10 transition-all duration-300"
-                  style={{
-                    color: "rgba(255,255,255,0.85)",
-                    filter: "drop-shadow(0 0 2px rgba(255,255,255,0.2))"
-                  }}
-                  whileHover={{ 
-                    scale: 1.25, 
-                    x: 4,
-                    color: "rgba(255,255,255,1)" 
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.filter = "drop-shadow(0 0 10px rgba(255,255,255,0.9))";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.filter = "drop-shadow(0 0 2px rgba(255,255,255,0.2))";
-                  }}
-                >
-                  {link.icon}
-                  
-                  {/* Subtle Label on Hover (Brighter) */}
-                  <span className="absolute left-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none uppercase font-mono text-[9px] tracking-[0.3em] text-white">
-                    {link.label}
-                  </span>
-                </motion.a>
-
-                {/* The "Starlight Bloom" – compact version */}
-                <div 
-                  className="absolute inset-0 -z-10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{
-                    background: "radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%)",
-                    transform: "scale(2.5)",
-                  }}
-                />
-              </div>
-            ))}
-          </div>
-
-          {/* Animated Signal Packet (Creativity!) - Brighter Pulse */}
-          <motion.div 
-            className="absolute top-0 left-1/2 -translate-x-1/2 w-[2px] h-10 bg-gradient-to-b from-transparent via-white to-transparent"
-            animate={{
-              top: ["0%", "100%"],
-              opacity: [0, 1, 0]
-            }}
-            transition={{
-              duration: 2.5,
-              repeat: Infinity,
-              ease: "linear"
-            }}
+          <span className={`w-0 h-0 border-y-[4px] border-y-transparent border-l-[6px] transition-colors duration-300 ${isLocked ? "border-l-supernova" : "border-l-neon-cyan"}`} />
+          <span
+            className={`h-[2px] w-[14px] transition-all duration-300 ${
+              isLocked ? "bg-supernova shadow-[0_0_10px_#fbbf24]" : "bg-neon-cyan shadow-[0_0_10px_#06b6d4]"
+            }`}
           />
-        </div>
+        </motion.div>
 
-        {/* Vertical Rail Label (Slightly Brighter) */}
-        <div className="mt-6 mb-8 overflow-hidden h-24 flex items-center">
-          <span 
-            className="font-mono text-[7px] tracking-[0.5em] text-white/20 uppercase"
-            style={{ 
-              writingMode: "vertical-rl", 
-              transform: "rotate(180deg)"
-            }}
-          >
-            comms link established
-          </span>
-        </div>
+        {/* channels */}
+        {LINKS.map((link, i) => {
+          const isEmail = link.label === "email";
+          const on = active === i;
+          const lockedHere = locked === i;
+          const showCopied = isEmail && copied;
+          return (
+            <div
+              key={link.id}
+              className="absolute left-[22px] -translate-y-1/2 flex items-center pointer-events-auto"
+              style={{ top: chY(i) }}
+              onMouseEnter={() => setLocked(i)}
+              onMouseLeave={() => setLocked(null)}
+            >
+              {/* major tick */}
+              <span className={`absolute -left-[16px] h-px transition-all duration-300 ${on ? "w-[12px] bg-starlight/70" : "w-[9px] bg-starlight/35"}`} />
+
+              <a
+                href={link.href}
+                onClick={isEmail ? (e) => copyEmail(e, link.href) : undefined}
+                onFocus={() => setLocked(i)}
+                onBlur={() => setLocked(null)}
+                target={isEmail ? undefined : "_blank"}
+                rel="noopener noreferrer"
+                aria-label={isEmail ? `Copy email ${EMAIL}` : link.label}
+                className={`relative w-10 h-10 rounded-full flex items-center justify-center border backdrop-blur-md transition-all duration-300 ${
+                  showCopied
+                    ? "border-neon-cyan/70 text-neon-cyan bg-neon-cyan/10 shadow-[0_0_18px_rgba(6,182,212,0.45)]"
+                    : lockedHere
+                      ? "border-supernova/60 text-supernova bg-supernova/10 shadow-[0_0_18px_rgba(251,191,36,0.35)] scale-110"
+                      : on
+                        ? "border-neon-cyan/40 text-starlight bg-white/[0.05]"
+                        : "border-starlight/10 text-starlight/55 bg-white/[0.02]"
+                }`}
+              >
+                {link.icon}
+              </a>
+
+              {/* locked-channel readout */}
+              <span
+                className={`absolute left-12 flex items-center gap-3 whitespace-nowrap px-3 py-1.5 border backdrop-blur-md font-mono text-[11px] tracking-[0.25em] pointer-events-none transition-all duration-300 ${
+                  lockedHere || showCopied
+                    ? "opacity-100 translate-x-0"
+                    : "opacity-0 -translate-x-2"
+                } ${showCopied ? "border-neon-cyan/40 bg-neon-cyan/10 text-neon-cyan" : "border-starlight/10 bg-void-900/75 text-starlight/85"}`}
+              >
+                <span className="text-supernova/80">CH-{link.id}</span>
+                <span className="text-starlight/40">{FREQS[i]}</span>
+                <span>{isEmail ? (copied ? "SIGNAL COPIED ✓" : "COPY EMAIL") : link.label.toUpperCase()}</span>
+                <SignalBars on={lockedHere || showCopied} />
+              </span>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* status (absolute below the dial) */}
+      <div className="absolute top-full mt-4 left-0 flex items-center gap-2 font-mono text-[10px] tracking-[0.25em] whitespace-nowrap">
+        <span className={`w-1.5 h-1.5 rounded-full ${isLocked ? "bg-supernova" : "bg-neon-cyan animate-pulse"}`} />
+        <span className={isLocked ? "text-supernova/90" : "text-starlight/40"}>{isLocked ? "LOCKED" : "SCANNING…"}</span>
       </div>
     </motion.aside>
   );
