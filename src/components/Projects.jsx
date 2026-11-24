@@ -81,8 +81,8 @@ const Viewfinder = () => (
 const ProjectLinks = ({ project, size = "md" }) => {
   const base =
     size === "md"
-      ? "inline-flex items-center gap-2 text-sm font-medium transition-colors"
-      : "inline-flex items-center gap-1.5 text-xs font-medium transition-colors";
+      ? "inline-flex items-center gap-2 text-base font-medium transition-colors"
+      : "inline-flex items-center gap-1.5 text-sm font-medium transition-colors";
   const icon = size === "md" ? 16 : 14;
   return (
     <div className={`flex items-center ${size === "md" ? "gap-6" : "gap-4"}`}>
@@ -130,7 +130,7 @@ const FeaturedProject = ({ project, index }) => {
           </div>
           <div className="absolute inset-0 bg-gradient-to-t from-void-900/50 via-transparent to-transparent pointer-events-none" />
           <Viewfinder />
-          <span className="absolute bottom-4 right-5 font-mono text-[10px] tracking-[0.2em] text-starlight/0 group-hover:text-starlight/70 transition-colors duration-500 z-10">
+          <span className="absolute bottom-4 right-5 font-mono text-[12px] tracking-[0.2em] text-starlight/0 group-hover:text-starlight/70 transition-colors duration-500 z-10">
             TARGET ACQUIRED
           </span>
         </div>
@@ -138,7 +138,7 @@ const FeaturedProject = ({ project, index }) => {
 
       {/* Details */}
       <div className={`lg:col-span-5 ${flip ? "lg:order-1" : ""}`}>
-        <div className="flex items-center gap-3 font-mono text-[11px] tracking-[0.2em] text-starlight/50 mb-5">
+        <div className="flex items-center gap-3 font-mono text-[12px] tracking-[0.2em] text-starlight/50 mb-5">
           <span className="text-supernova">VH-{pad(project.id)}</span>
           <span className="w-6 h-px bg-starlight/20" />
           <span>{project.type.toUpperCase()}</span>
@@ -154,7 +154,7 @@ const FeaturedProject = ({ project, index }) => {
           {project.description}
         </p>
 
-        <ul className="flex flex-wrap gap-x-4 gap-y-2 font-mono text-xs text-starlight/55 mb-8">
+        <ul className="flex flex-wrap gap-x-4 gap-y-2 font-mono text-sm text-starlight/55 mb-8">
           {project.technologies.map((t) => (
             <li key={t} className="flex items-center gap-2">
               <span className="w-1 h-1 rounded-full bg-neon-cyan/70" />
@@ -181,14 +181,14 @@ const CatalogRow = ({ project, onHover }) => (
     className="group relative grid grid-cols-12 gap-x-4 gap-y-2 items-center py-6 border-b border-starlight/15 hover:border-starlight/30 transition-colors"
   >
     <span className="absolute inset-y-0 -inset-x-4 rounded-xl bg-starlight/[0.03] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-    <span className="col-span-2 md:col-span-1 font-mono text-xs text-starlight/60 group-hover:text-supernova transition-colors">
+    <span className="col-span-2 md:col-span-1 font-mono text-sm text-starlight/60 group-hover:text-supernova transition-colors">
       VH-{pad(project.id)}
     </span>
     <div className="col-span-10 md:col-span-4">
       <h4 className="font-cinematic text-lg md:text-xl text-starlight tracking-tight">{project.title}</h4>
-      <span className="font-mono text-[11px] text-starlight/55">{project.type} · {project.year}</span>
+      <span className="font-mono text-[12px] text-starlight/55">{project.type} · {project.year}</span>
     </div>
-    <p className="col-span-12 md:col-span-4 text-sm text-starlight/60 leading-relaxed md:line-clamp-2">
+    <p className="col-span-12 md:col-span-4 text-base text-starlight/60 leading-relaxed md:line-clamp-2">
       {project.description}
     </p>
     <div className="col-span-12 md:col-span-3 flex md:justify-end">
@@ -242,7 +242,7 @@ const Projects = () => {
 
         {/* Catalog */}
         <div className="mt-32 md:mt-44">
-          <div className="flex items-center gap-4 mb-6 font-mono text-[11px] tracking-[0.25em] text-starlight/50">
+          <div className="flex items-center gap-4 mb-6 font-mono text-[12px] tracking-[0.25em] text-starlight/50">
             <span>STAR CATALOG</span>
             <span className="flex-1 h-px bg-starlight/10" />
             <span>{catalog.length} ENTRIES</span>

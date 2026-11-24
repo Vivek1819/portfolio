@@ -134,14 +134,14 @@ const LaunchButton = () => {
             )}
             {phase === "ready" && (
               <motion.span key="ready" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} className="flex flex-col items-center gap-2">
-                <span className="micro-text !text-[9px] !tracking-[0.4em] text-supernova/70">ALL SYSTEMS GO</span>
+                <span className="micro-text !text-[11px] !tracking-[0.4em] text-supernova/70">ALL SYSTEMS GO</span>
                 <span className="celestial-heading text-2xl !text-supernova">LAUNCH ▸</span>
               </motion.span>
             )}
             {phase === "sent" && (
               <motion.span key="sent" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex flex-col items-center gap-2">
                 <span className="celestial-heading text-lg !text-supernova">SIGNAL SENT</span>
-                <span className="micro-text !text-[9px] !tracking-[0.3em] text-starlight/60">EMAIL COPIED</span>
+                <span className="micro-text !text-[11px] !tracking-[0.3em] text-starlight/60">EMAIL COPIED</span>
               </motion.span>
             )}
           </AnimatePresence>
@@ -190,7 +190,7 @@ const Contact = () => {
         {/* Direct frequency + channels */}
         <div className="-mt-12 md:-mt-16 flex flex-col items-center gap-6">
           <a href={`mailto:${EMAIL}`} className="group flex flex-col items-center gap-2">
-            <span className="micro-text !text-[10px] text-starlight/40 group-hover:text-supernova transition-colors">DIRECT FREQUENCY</span>
+            <span className="micro-text !text-[12px] text-starlight/40 group-hover:text-supernova transition-colors">DIRECT FREQUENCY</span>
             <span className="font-cinematic text-lg md:text-xl text-starlight/80 group-hover:text-starlight tracking-wide transition-colors">{EMAIL}</span>
           </a>
 
