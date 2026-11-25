@@ -21,15 +21,6 @@ export const experiences = [
     tech: ["NEXT", "TYPESCRIPT", "AWS"],
   },
   {
-    period: "JAN 2026 — APR 2026",
-    title: "FOUNDING ENGINEER INTERN",
-    company: "COVERTIGER",
-    companyName: "CoverTiger",
-    type: "INTERNSHIP",
-    logo: "/covertiger.png",
-    tech: ["PYTHON", "NEXT.JS", "TYPESCRIPT"],
-  },
-  {
     period: "MAY 2025 — JUL 2025",
     title: "FULL STACK DEVELOPER",
     company: "CAREASA HEALTHCARE",
