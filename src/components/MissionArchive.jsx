@@ -29,7 +29,9 @@ const HudCorners = () => (
 );
 
 /* hologram rings + logo, drawn in when a record loads */
-const Hologram = ({ m }) => (
+const Hologram = ({ m }) => {
+  const [failed, setFailed] = useState(false);
+  return (
   <div className="relative w-40 h-40 md:w-48 md:h-48 shrink-0 flex items-center justify-center">
     <svg viewBox="0 0 200 200" className="absolute inset-0 w-full h-full -rotate-90" aria-hidden="true">
       {[96, 80, 62].map((r, i) => (
@@ -63,14 +65,15 @@ const Hologram = ({ m }) => (
       transition={{ duration: 0.7, delay: 0.35, ease }}
       className="relative w-20 h-20 md:w-24 md:h-24 rounded-full bg-white/[0.05] border border-white/15 flex items-center justify-center"
     >
-      {m.logo ? (
-        <img src={m.logo} alt="" className="w-11 h-11 md:w-12 md:h-12 object-contain" />
+      {m.logo && !failed ? (
+        <img src={m.logo} alt="" onError={() => setFailed(true)} className="w-11 h-11 md:w-12 md:h-12 object-contain" />
       ) : (
         <span className="font-editorial text-3xl text-starlight/85">{m.initials}</span>
       )}
     </motion.div>
   </div>
-);
+  );
+};
 
 const Readout = ({ label, value, accent }) => (
   <div className="flex flex-col gap-1.5 min-w-0">
@@ -104,7 +107,19 @@ const MissionArchive = ({ experiences }) => {
           : `${s.trim().split(" ")[1]}–${en.trim().split(" ")[1].slice(2)}`,
       };
     }),
-    { key: "origin", n: 0, origin: true, name: "IIIT Gwalior", title: "Launch pad", period: "CLASS OF 2026", launch: "—", ret: "CLASS OF 2026", type: "ACADEMY", initials: "IG", years: "'26" },
+    {
+      key: "origin", n: 0, origin: true,
+      name: "IIITM Gwalior",
+      title: "B.Tech · Computer Science & Engineering",
+      period: "NOV 2022 — MAY 2026",
+      launch: "NOV 2022",
+      ret: "MAY 2026",
+      months: toMonth("MAY 2026") - toMonth("NOV 2022") + 1,
+      type: "ACADEMY",
+      logo: "/iiitm-transparent.png",
+      initials: "IG",
+      years: "2022–26",
+    },
   ];
 
   const [sel, setSel] = useState(0);
@@ -159,9 +174,9 @@ const MissionArchive = ({ experiences }) => {
                     </span>
                     <span className="hidden sm:flex flex-col items-end gap-2 shrink-0">
                       <span className="font-mono text-[11px] tracking-[0.2em] text-starlight/45">{x.years}</span>
-                      {!x.origin && (
+                      {x.months > 0 && (
                         <span className="block w-16 h-[3px] bg-starlight/10 overflow-hidden">
-                          <span className={`block h-full ${on ? "bg-neon-cyan/80" : "bg-starlight/35"}`} style={{ width: `${Math.max(12, (x.months / maxMonths) * 100)}%` }} />
+                          <span className={`block h-full ${on ? "bg-neon-cyan/80" : "bg-starlight/35"}`} style={{ width: `${Math.max(12, Math.min(100, (x.months / maxMonths) * 100))}%` }} />
                         </span>
                       )}
                     </span>
@@ -222,7 +237,7 @@ const MissionArchive = ({ experiences }) => {
                   <div className="mt-8 py-4 border-y border-void-line grid grid-cols-3 gap-4">
                     <Readout label="LAUNCH" value={r.launch} />
                     <Readout label="RETURN" value={r.ret} accent={r.current} />
-                    <Readout label="DURATION" value={r.months ? fmtDur(r.months) : "4 YRS"} />
+                    <Readout label="DURATION" value={fmtDur(r.months)} />
                   </div>
 
                   {r.tech?.length > 0 && (
