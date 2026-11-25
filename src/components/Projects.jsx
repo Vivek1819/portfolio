@@ -6,57 +6,57 @@ import DecipherText from "./common/DecipherText";
 const projectsData = [
   {
     id: 1, title: "BI-SYNC", description: "Two-way sync between Google Sheets and a MySQL database: edit either side and the other updates in real time.",
-    image: "/bisync.png", technologies: ["Node.js", "MySQL", "Google APIs", "TypeScript"], 
+    image: "/bisync.webp", technologies: ["Node.js", "MySQL", "Google APIs", "TypeScript"], 
     demo: "#", github: "https://github.com/Vivek1819/Bi-Sync", year: "2026", type: "Full Stack"
   },
   {
     id: 2, title: "FINBOARD", description: "A customisable finance dashboard that pulls live data from multiple market APIs, with widgets and charts that persist between sessions.",
-    image: "/finboard.png", technologies: ["Next.js", "Zustand", "Recharts", "Typescript"], 
+    image: "/finboard.webp", technologies: ["Next.js", "Zustand", "Recharts", "Typescript"], 
     demo: "https://fin-board-chi.vercel.app/", github: "https://github.com/Vivek1819/FinBoard", year: "2026", type: "Frontend"
   },
   {
     id: 3, title: "DRONE OPS", description: "A fleet management dashboard for drones: plan missions, track the fleet on a live map and monitor telemetry.",
-    image: "/drone-ops.png", technologies: ["Next.js", "Prisma", "Maplibre", "PostgreSQL", "Typescript"], 
+    image: "/drone-ops.webp", technologies: ["Next.js", "Prisma", "Maplibre", "PostgreSQL", "Typescript"], 
     demo: "https://flytbase-drone-ops.vercel.app/dashboard", github: "https://github.com/Vivek1819/Drone-Ops", year: "2026", type: "Full Stack"
   },
   {
     id: 4, title: "CONTEXTBRIDGE", description: "A VS Code extension that syncs your local workspace context with browser-based LLM chats, so you stop copy-pasting code.",
-    image: "/contextbridge.png", technologies: ["VS Code API", "TypeScript", "React", "Node.js"], 
+    image: "/contextbridge.webp", technologies: ["VS Code API", "TypeScript", "React", "Node.js"], 
     demo: "https://marketplace.visualstudio.com/items?itemName=vivek-hipparkar.contextbridge", github: "https://github.com/Vivek1819/ContextBridge", year: "2026", type: "Extension"
   },
   {
     id: 5, title: "LEETCODE_FRIENDS", description: "A Chrome extension that adds social features to LeetCode, so you can keep up with friends right inside the site.",
-    image: "/lcfriends.png", technologies: ["Javascript", "Node.js", "MongoDB", "Express"], 
+    image: "/lcfriends.webp", technologies: ["Javascript", "Node.js", "MongoDB", "Express"], 
     demo: "#", github: "https://github.com/Vivek1819/LeetCode-Friends", year: "2025", type: "Extension"
   },
   {
     id: 6, title: "REPOZY", description: "An AI-powered GitHub explorer: point it at a repo and ask questions about the codebase, answered using vector embeddings.",
-    image: "/repozy.png", technologies: ["Next.js", "TypeScript", "tRPC", "Langchain","Prisma"], 
+    image: "/repozy.webp", technologies: ["Next.js", "TypeScript", "tRPC", "Langchain","Prisma"], 
     demo: "#", github: "https://github.com/Vivek1819/repozy", year: "2024", type: "Full Stack"
   },
   {
     id: 7, title: "PORTFOLIO", description: "This site: an interactive, space-themed portfolio built with React, Tailwind CSS and Framer Motion.",
-    image: "/portfolio.png", technologies: ["React", "Tailwind CSS", "Framer Motion", "Vercel"], 
+    image: "/portfolio.webp", technologies: ["React", "Tailwind CSS", "Framer Motion", "Vercel"], 
     demo: "https://vivek-hipparkar.vercel.app/", github: "https://github.com/Vivek1819/portfolio", year: "2025", type: "Frontend"
   },
   {
     id: 8, title: "SIFTOR", description: "A real-time web scraper that turns a website's structure into clean, structured data, with a live view of the crawl.",
-    image: "/siftor.png", technologies: ["React", "Websockets", "Node.js", "Express"], 
+    image: "/siftor.webp", technologies: ["React", "Websockets", "Node.js", "Express"], 
     demo: "#", github: "https://github.com/Vivek1819/siftor", year: "2024", type: "Full Stack"
   },
   {
     id: 9, title: "PING", description: "A real-time chat app with JWT-secured auth for fast messaging and image sharing.",
-    image: "/ping.png", technologies: ["React", "Socket.io", "MongoDB", "Cloudinary"], 
+    image: "/ping.webp", technologies: ["React", "Socket.io", "MongoDB", "Cloudinary"], 
     demo: "#", github: "https://github.com/Vivek1819/ping", year: "2024", type: "Full Stack"
   },
   {
     id: 10, title: "LEXIS", description: "Chat with your PDFs: upload a document and ask questions about it, powered by vector search.",
-    image: "/lexis.png", technologies: ["Next.js", "PostgreSQL", "Tailwind CSS", "UploadThing"], 
+    image: "/lexis.webp", technologies: ["Next.js", "PostgreSQL", "Tailwind CSS", "UploadThing"], 
     demo: "#", github: "https://github.com/Vivek1819/lexis", year: "2024", type: "Full Stack"
   },
   {
     id: 11, title: "NOTIFY", description: "A rich-text notes app with user authentication and AI-assisted writing.",
-    image: "/notify.png", technologies: ["React", "Appwrite", "Redux", "HuggingFace"], 
+    image: "/notify.webp", technologies: ["React", "Appwrite", "Redux", "HuggingFace"], 
     demo: "#", github: "https://github.com/Vivek1819/notify", year: "2024", type: "Frontend"
   }
 ];

@@ -5,7 +5,7 @@ const PILOT = {
   name: "VIVEK HIPPARKAR",
   role: "SOFTWARE ENGINEER",
   crewId: "VH-2026",
-  portrait: "/ghibli.png",
+  portrait: "/ghibli.webp",
   fields: [
     { label: "CURRENT MISSION", value: "AIPRISE", accent: true },
     { label: "HOME BASE", value: "BANGALORE" },

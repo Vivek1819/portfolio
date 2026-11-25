@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import LiftOff from "./components/LiftOff";
 import Navbar from "./components/Navbar";
-import UniverseBackground from "./components/UniverseBackground";
 import CosmosBackground from "./components/CosmosBackground";
-
-// background: "cosmos" (refined, noise nebula + parallax) or "universe" (original)
-const BACKGROUND = "cosmos";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import TechStack from "./components/TechStack";
@@ -69,7 +65,7 @@ function App() {
       <div className={`min-h-screen bg-transparent w-full transition-opacity duration-[1100ms] ease-out ${revealed ? "opacity-100 arrived" : "opacity-0"}`}>
 
         {/* Full Immersion Background */}
-        {BACKGROUND === "cosmos" ? <CosmosBackground /> : <UniverseBackground />}
+        <CosmosBackground />
 
         <CustomCursor />
         <GlobalHUD />

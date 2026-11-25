@@ -28,7 +28,7 @@ const Navbar = () => {
           onClick={() => initiateJump("hero")}
           className="celestial-heading text-4xl text-glow-starlight hover:text-supernova transition-all cursor-pointer"
         >
-          <img src="/logo.png" alt="Logo" className="w-10 h-10" />
+          <img src="/logo.webp" alt="Logo" className="w-10 h-10" />
         </button>
       </div>
       

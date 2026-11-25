@@ -7,7 +7,7 @@ export const experiences = [
     companyName: "AiPrise",
     type: "FULL-TIME",
     url: "https://www.aiprise.com",
-    logo: "/aiprise.png",
+    logo: "/aiprise.webp",
     tech: ["PYTHON", "TYPESCRIPT", "REACT"],
   },
   {
@@ -17,7 +17,7 @@ export const experiences = [
     companyName: "Flagright",
     type: "INTERNSHIP",
     url: "https://www.flagright.com",
-    logo: "/flagright.png",
+    logo: "/flagright.webp",
     tech: ["NEXT", "TYPESCRIPT", "AWS"],
   },
   {
@@ -26,7 +26,7 @@ export const experiences = [
     company: "CAREASA HEALTHCARE",
     companyName: "Careasa Healthcare",
     type: "INTERNSHIP",
-    logo: "/careasa.png",
+    logo: "/careasa.webp",
     tech: ["REACT", "NODE.JS", "GOOGLE WORKSPACE API", "POSTGRESQL"],
   },
   {
@@ -35,7 +35,7 @@ export const experiences = [
     company: "EAZEPLACE",
     companyName: "Eazeplace",
     type: "PROGRAM",
-    logo: "/eazeplace.png",
+    logo: "/eazeplace.webp",
     tech: ["NODE.JS", "EXPRESS", "REACT.JS"],
   },
 ];

@@ -116,7 +116,7 @@ const MissionArchive = ({ experiences }) => {
       ret: "MAY 2026",
       months: toMonth("MAY 2026") - toMonth("NOV 2022") + 1,
       type: "ACADEMY",
-      logo: "/iiitm-transparent.png",
+      logo: "/iiitm-transparent.webp",
       initials: "IG",
       years: "2022–26",
     },

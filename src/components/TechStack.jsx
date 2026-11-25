@@ -56,7 +56,7 @@ const CONSTELLATIONS = [
       ["MongoDB", devicon("mongodb/mongodb-original.svg"), 62, 20, true],
       ["Docker", devicon("docker/docker-original.svg"), 66, 72, true],
       ["Vercel", simple("vercel"), 87, 44],
-      ["AWS", "/aws.png", 88, 84, true, true],
+      ["AWS", "/aws.webp", 88, 84, true, true],
     ],
     links: [[0, 2], [1, 2], [2, 3], [2, 4], [4, 5], [3, 5], [4, 6]],
   },
