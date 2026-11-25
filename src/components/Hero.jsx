@@ -99,7 +99,7 @@ const Hero = () => {
           <span className="w-10 md:w-16 h-px bg-gradient-to-r from-transparent to-starlight/30" />
           <span className="font-mono text-[11px] tracking-[0.45em] text-starlight/40">NOW</span>
           <span className="font-editorial text-xl md:text-2xl text-starlight/85 tracking-wide">
-            engineering at <span className="text-starlight">AiPrise</span>
+            Engineering @ <span className="text-starlight">AiPrise</span>
           </span>
           <span className="w-10 md:w-16 h-px bg-gradient-to-l from-transparent to-starlight/30" />
         </div>
