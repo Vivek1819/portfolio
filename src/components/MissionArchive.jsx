@@ -135,16 +135,16 @@ const MissionArchive = ({ experiences }) => {
 
         <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.3fr)]">
           {/* record list */}
-          <ul className="border-b lg:border-b-0 lg:border-r border-void-line py-2">
+          <ul className="flex lg:block overflow-x-auto lg:overflow-visible snap-x border-b lg:border-b-0 lg:border-r border-void-line py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {records.map((x, i) => {
               const on = i === sel;
               return (
-                <li key={x.key}>
+                <li key={x.key} className="shrink-0 snap-start">
                   <button
                     type="button"
                     onClick={() => setSel(i)}
                     aria-pressed={on}
-                    className={`group relative w-full text-left px-6 md:px-8 py-4 flex items-center gap-5 transition-colors cursor-pointer ${on ? "bg-white/[0.045]" : "hover:bg-white/[0.02]"}`}
+                    className={`group relative w-auto lg:w-full text-left px-5 lg:px-8 py-3 lg:py-4 flex items-center gap-3 lg:gap-5 transition-colors cursor-pointer ${on ? "bg-white/[0.045]" : "hover:bg-white/[0.02]"}`}
                   >
                     {/* selection bar */}
                     <span className={`absolute left-0 top-2 bottom-2 w-[2px] transition-all duration-300 ${on ? "bg-neon-cyan" : "bg-transparent group-hover:bg-starlight/20"}`} />
@@ -152,10 +152,10 @@ const MissionArchive = ({ experiences }) => {
                       {String(x.n).padStart(2, "0")}
                     </span>
                     <span className="min-w-0 flex-1">
-                      <span className={`block font-cinematic text-base md:text-lg tracking-tight truncate transition-colors ${on ? "text-starlight" : "text-starlight/70 group-hover:text-starlight/90"}`}>
+                      <span className={`block font-cinematic text-base md:text-lg tracking-tight whitespace-nowrap lg:truncate transition-colors ${on ? "text-starlight" : "text-starlight/70 group-hover:text-starlight/90"}`}>
                         {x.name}
                       </span>
-                      <span className="block mt-0.5 font-mono text-[11px] tracking-[0.15em] text-starlight/40 truncate uppercase">{x.title}</span>
+                      <span className="hidden lg:block mt-0.5 font-mono text-[11px] tracking-[0.15em] text-starlight/40 truncate uppercase">{x.title}</span>
                     </span>
                     <span className="hidden sm:flex flex-col items-end gap-2 shrink-0">
                       <span className="font-mono text-[11px] tracking-[0.2em] text-starlight/45">{x.years}</span>

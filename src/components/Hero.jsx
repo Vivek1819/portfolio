@@ -54,7 +54,7 @@ const Hero = () => {
         style={{ y: titleY, opacity: opacityFade, x: pullX }}
         className="relative z-10 text-center flex flex-col items-center"
       >
-        <div className="micro-text mb-8 tracking-[1em] text-starlight/30 enter-up" style={{ "--d": "0.3s" }}>
+        <div className="micro-text mb-8 !tracking-[0.35em] sm:!tracking-[1em] !text-[10px] sm:!text-[11px] text-starlight/30 enter-up" style={{ "--d": "0.3s" }}>
           TRANSMITTING FROM BANGALORE, EARTH
         </div>
 
@@ -63,7 +63,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.5, ease: "easeOut" }}
-          className="celestial-heading text-[12vw] sm:text-[10vw] md:text-9xl xl:text-[12rem] animate-float animate-color-flash font-bold"
+          className="celestial-heading text-[22vw] sm:text-[14vw] md:text-9xl xl:text-[12rem] animate-float animate-color-flash font-bold"
         >
           <DecipherText text="VIVEK" speed={50} delay={1.5} />
         </motion.h1>

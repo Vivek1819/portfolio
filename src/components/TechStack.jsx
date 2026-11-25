@@ -159,7 +159,7 @@ const Constellation = ({ data, index }) => {
       </div>
 
       {/* chart */}
-      <div className="relative w-full aspect-[4/3]">
+      <div className="relative w-full aspect-[4/5] sm:aspect-[4/3]">
         {/* faint coordinate ring */}
         <div className={`absolute inset-[8%] rounded-full border border-dashed transition-colors duration-700 pointer-events-none ${hover ? "border-neon-cyan/15" : "border-starlight/[0.04]"}`} />
 

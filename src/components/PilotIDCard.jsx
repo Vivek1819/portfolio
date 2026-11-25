@@ -42,7 +42,7 @@ const Field = ({ label, value, accent, bars }) => (
         </span>
       </span>
     ) : (
-      <span className={`font-mono text-sm tracking-wider truncate ${accent ? "text-neon-cyan" : "text-starlight/85"}`}>{value}</span>
+      <span className={`font-mono text-[13px] sm:text-sm tracking-wider break-words sm:truncate ${accent ? "text-neon-cyan" : "text-starlight/85"}`}>{value}</span>
     )}
   </div>
 );
