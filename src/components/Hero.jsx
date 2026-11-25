@@ -21,10 +21,12 @@ const Hero = () => {
     mouseY.set((clientY / innerHeight) - 0.5);
   };
 
-  const pullX = useTransform(springX, [-0.5, 0.5], ["-20px", "20px"]);
-  const pullY = useTransform(springY, [-0.5, 0.5], ["-20px", "20px"]);
+  const pullX = useTransform(springX, [-0.5, 0.5], [-20, 20]);
+  const pullY = useTransform(springY, [-0.5, 0.5], [-20, 20]);
+  // combine scroll parallax + mouse pull into one y (setting `y` twice made one override the other)
+  const titleY = useTransform([yParallax, pullY], ([parallax, pull]) => parallax + pull);
 
-  const roles = ["CREATIVE ENGINEER", "FULL STACK DEVELOPER", "SYSTEM ARCHITECT", "CODE ARTIST"];
+  const roles = ["SOFTWARE ENGINEER", "BACKEND ASTRONAUT", "CAFFEINE → COMMITS", "PROFESSIONAL BUG HUNTER", "STARGAZER · BUILDER"];
   const [roleIndex, setRoleIndex] = useState(0);
 
   useEffect(() => {
@@ -45,15 +47,15 @@ const Hero = () => {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40vw] h-[40vw] max-w-[600px] max-h-[600px] rounded-full animate-pulse-aura z-0 pointer-events-none" 
            style={{ background: 'radial-gradient(circle, rgba(124, 58, 237, 0.2) 0%, rgba(30, 27, 75, 0) 70%)'}}></div>
       
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[2px] h-[2px] bg-starlight shadow-[0_0_80px_20px_rgba(251,191,36,0.3)] animate-pulse z-0"></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[2px] h-[2px] bg-starlight shadow-[0_0_80px_20px_rgba(251,191,36,0.3)] z-0"></div>
 
       {/* Main Title Content */}
       <motion.div
-        style={{ y: yParallax, opacity: opacityFade, x: pullX, y: pullY }}
+        style={{ y: titleY, opacity: opacityFade, x: pullX }}
         className="relative z-10 text-center flex flex-col items-center"
       >
         <div className="micro-text mb-8 tracking-[1em] text-starlight/30 enter-up" style={{ "--d": "0.3s" }}>
-          TRANSVERSING THE DIGITAL VACUUM
+          TRANSMITTING FROM BANGALORE, EARTH
         </div>
 
         <div className="enter-focus" style={{ "--d": "0.4s" }}>
@@ -71,11 +73,11 @@ const Hero = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 2, delay: 0.5 }}
-          className="text-starlight/60 font-cinematic text-lg md:text-2xl tracking-[0.3em] mt-2 md:mt-0 flex items-center justify-center enter-up"
+          className="text-starlight/60 font-cinematic text-base sm:text-lg md:text-2xl tracking-[0.15em] md:tracking-[0.3em] mt-2 md:mt-0 flex items-center justify-center enter-up"
           style={{ "--d": "0.75s" }}
         >
           <span className="w-8 md:w-12 h-px bg-starlight/20 shrink-0" />
-          <div className="relative h-[2em] w-[280px] md:w-[500px] flex items-center justify-center overflow-hidden mx-6 md:mx-8">
+          <div className="relative h-[2em] w-[min(72vw,560px)] flex items-center justify-center overflow-hidden mx-6 md:mx-8">
             <AnimatePresence>
                <motion.div
                  key={roleIndex}
@@ -92,16 +94,14 @@ const Hero = () => {
           <span className="w-8 md:w-12 h-px bg-starlight/20 shrink-0" />
         </motion.div>
 
-        <div className="mt-16 flex flex-col sm:flex-row gap-8 items-center micro-text text-starlight/50 enter-up" style={{ "--d": "0.95s" }}>
-          <div className="flex flex-col gap-2 items-center">
-            <span className="text-supernova font-bold">1Y+</span>
-            <span>EXPANSION TIME</span>
-          </div>
-          <div className="w-px h-8 bg-starlight/10 hidden sm:block"></div>
-          <div className="flex flex-col gap-2 items-center">
-             <span className="text-neon-purple font-bold">20+</span>
-             <span>STELLAR PROJECTS</span>
-          </div>
+        {/* editorial "now" line (replaces the stats, which live in the Captain's Log) */}
+        <div className="mt-14 flex items-center gap-5 enter-up" style={{ "--d": "0.95s" }}>
+          <span className="w-10 md:w-16 h-px bg-gradient-to-r from-transparent to-starlight/30" />
+          <span className="font-mono text-[11px] tracking-[0.45em] text-starlight/40">NOW</span>
+          <span className="font-editorial text-xl md:text-2xl text-starlight/85 tracking-wide">
+            engineering at <span className="text-starlight">AiPrise</span>
+          </span>
+          <span className="w-10 md:w-16 h-px bg-gradient-to-l from-transparent to-starlight/30" />
         </div>
       </motion.div>
 

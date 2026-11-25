@@ -17,6 +17,7 @@
 
   --font-cinematic: "Space Grotesk", sans-serif;
   --font-sans: "Inter", sans-serif;
+  --font-editorial: "Italiana", "Didot", "Bodoni MT", serif;
 
   --animate-float: float 8s ease-in-out infinite;
   --animate-orbit: orbit 20s linear infinite;

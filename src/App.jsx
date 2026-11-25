@@ -29,7 +29,7 @@ const QuantumShift = ({ isWarping }) => (
           background: "radial-gradient(circle at center, transparent 0%, rgba(6, 182, 212, 0.1) 100%)",
         }}
       >
-        <div className="absolute inset-0 animate-pulse bg-gradient-to-t from-transparent via-white/5 to-transparent h-[2px] w-full top-1/2 -translate-y-1/2 shadow-[0_0_50px_rgba(255,255,255,0.5)]"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-transparent via-white/5 to-transparent h-[2px] w-full top-1/2 -translate-y-1/2 shadow-[0_0_50px_rgba(255,255,255,0.5)]"></div>
       </motion.div>
     )}
   </AnimatePresence>

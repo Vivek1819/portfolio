@@ -105,7 +105,7 @@ const PilotIDCard = () => {
             <div className="absolute inset-0 opacity-50 [background-image:linear-gradient(rgba(6,182,212,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(6,182,212,0.08)_1px,transparent_1px)] [background-size:22px_22px] [mask-image:radial-gradient(circle_at_50%_40%,black,transparent_75%)]" />
             {/* tiny stars */}
             {[[18, 20], [78, 14], [64, 32], [24, 48], [86, 56]].map(([x, y], i) => (
-              <span key={i} className="absolute w-[3px] h-[3px] rounded-full bg-white/70 animate-pulse" style={{ left: `${x}%`, top: `${y}%`, animationDelay: `${i * 0.6}s` }} />
+              <span key={i} className="absolute w-[3px] h-[3px] rounded-full bg-white/60" style={{ left: `${x}%`, top: `${y}%` }} />
             ))}
             <img
               src={PILOT.portrait}
@@ -133,11 +133,9 @@ const PilotIDCard = () => {
                 <h3 className="celestial-heading text-3xl md:text-4xl lg:text-5xl text-starlight">{PILOT.name}</h3>
                 <div className="mt-3 font-cinematic text-sm md:text-base font-bold tracking-[0.3em] text-neon-cyan">{PILOT.role}</div>
               </div>
-              <div className="px-4 py-2 border border-neon-cyan/30 bg-neon-cyan/5 status-pulse-cyan">
-                <span className="text-neon-cyan font-mono font-bold tracking-widest text-sm flex items-center gap-2">
-                  <span className="w-2 h-2 bg-neon-cyan rounded-full animate-pulse" />
-                  STATUS: ACTIVE
-                </span>
+              <div className="text-right pl-6 border-l border-void-line">
+                <div className="font-mono text-[11px] tracking-[0.35em] text-starlight/40 mb-1.5">STATUS</div>
+                <div className="font-editorial text-2xl md:text-3xl text-starlight/90 leading-none">Active duty</div>
               </div>
             </div>
 

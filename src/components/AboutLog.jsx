@@ -84,7 +84,7 @@ export const CaptainsLog = () => {
                     )
                   : shown[i]}
                 {i === activeLine && (
-                  <span className="inline-block w-[0.55em] h-[1.1em] align-[-0.15em] ml-0.5 bg-neon-cyan/80 animate-pulse" />
+                  <span className="inline-block w-[0.55em] h-[1.1em] align-[-0.15em] ml-0.5 bg-neon-cyan/70" />
                 )}
               </span>
             </p>
@@ -131,10 +131,7 @@ const OrbitTile = ({ label, status, icon: Icon, children, delay }) => (
         <Icon size={14} className="text-neon-cyan/80" />
         {label}
       </span>
-      <span className={`flex items-center gap-2 font-mono text-[11px] tracking-[0.25em] ${status.color}`}>
-        <span className={`w-1.5 h-1.5 rounded-full ${status.dot} ${status.pulse ? "animate-pulse" : ""}`} />
-        {status.text}
-      </span>
+      <span className="font-editorial text-lg text-starlight/35 leading-none">{status.text}</span>
     </div>
     {children}
   </motion.div>
@@ -143,21 +140,21 @@ const OrbitTile = ({ label, status, icon: Icon, children, delay }) => (
 export const CurrentOrbit = () => (
   <div className="flex flex-col gap-4 h-full">
     <div className="flex items-center gap-3 font-mono text-[12px] tracking-[0.3em] text-starlight/50 mb-1">
-      <span className="text-neon-cyan">◉</span> CURRENT ORBIT
+      CURRENT ORBIT
       <span className="flex-1 h-px bg-starlight/10" />
     </div>
 
-    <OrbitTile label="NOW BUILDING" icon={Satellite} delay={0} status={{ text: "LIVE", color: "text-neon-cyan", dot: "bg-neon-cyan", pulse: true }}>
+    <OrbitTile label="NOW BUILDING" icon={Satellite} delay={0} status={{ text: "01" }}>
       <div className="font-cinematic text-lg md:text-xl text-starlight tracking-tight">Identity & compliance infra at AiPrise</div>
       <div className="mt-2 font-mono text-sm text-starlight/50 tracking-wider">KYC · KYB · FRAUD CHECKS</div>
     </OrbitTile>
 
-    <OrbitTile label="CHARTING" icon={Telescope} delay={0.1} status={{ text: "IN PROGRESS", color: "text-supernova/80", dot: "bg-supernova", pulse: true }}>
+    <OrbitTile label="CHARTING" icon={Telescope} delay={0.1} status={{ text: "02" }}>
       <div className="font-cinematic text-lg md:text-xl text-starlight tracking-tight">Backend systems & system design</div>
       <div className="mt-2 font-mono text-sm text-starlight/50 tracking-wider">APIS · DATABASES · CACHING · QUEUES</div>
     </OrbitTile>
 
-    <OrbitTile label="OFF-DUTY" icon={Gamepad2} delay={0.2} status={{ text: "RECHARGING", color: "text-neon-purple/80", dot: "bg-neon-purple", pulse: false }}>
+    <OrbitTile label="OFF-DUTY" icon={Gamepad2} delay={0.2} status={{ text: "03" }}>
       <div className="grid grid-cols-2 gap-2 mt-1">
         {HOBBIES.map(({ name, icon: I }) => (
           <span

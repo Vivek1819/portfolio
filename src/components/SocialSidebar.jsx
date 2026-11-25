@@ -194,7 +194,6 @@ const SocialSidebar = () => {
 
       {/* status (absolute below the dial) */}
       <div className="absolute top-full mt-4 left-0 flex items-center gap-2 font-mono text-[10px] tracking-[0.25em] whitespace-nowrap">
-        <span className={`w-1.5 h-1.5 rounded-full ${isLocked ? "bg-supernova" : "bg-neon-cyan animate-pulse"}`} />
         <span className={isLocked ? "text-supernova/90" : "text-starlight/40"}>{isLocked ? "LOCKED" : "SCANNING…"}</span>
       </div>
     </motion.aside>

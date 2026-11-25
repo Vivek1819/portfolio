@@ -87,14 +87,13 @@ const TimelineNode = ({ dashed = false }) => {
       >
         {!dashed && (
           <div
-            className={`w-2 h-2 md:w-3 md:h-3 rounded-full animate-pulse relative z-10 transition-colors duration-500 group-hover:bg-supernova ${
+            className={`w-2 h-2 md:w-3 md:h-3 rounded-full relative z-10 transition-colors duration-500 group-hover:bg-supernova ${
               passed ? "bg-supernova shadow-[0_0_10px_rgba(251,191,36,0.9)]" : "bg-neon-cyan shadow-[0_0_10px_rgba(6,182,212,0.9)]"
             }`}
           />
         )}
         <div className="absolute w-[140%] h-[140%] border border-dashed border-starlight/20 rounded-full animate-[spin_6s_linear_infinite] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         <div className="absolute w-[180%] h-[180%] border-t border-b border-neon-cyan/40 rounded-full animate-[spin_4s_linear_infinite_reverse] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-        {!dashed && <div className="absolute w-full h-full rounded-full border border-neon-cyan opacity-0 group-hover:animate-ping z-0" />}
       </motion.div>
     </div>
   );
@@ -150,7 +149,6 @@ const Waypoint = ({ exp, index, total }) => {
           </span>
           {isCurrent ? (
             <span className="flex items-center gap-2 font-mono text-[12px] tracking-[0.3em] text-neon-cyan">
-              <span className="w-1.5 h-1.5 rounded-full bg-neon-cyan animate-pulse" />
               IN FLIGHT
             </span>
           ) : (
